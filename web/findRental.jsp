@@ -1,7 +1,7 @@
 <%-- 
-    Document   : rentel.jsp
-    Created on : Jul 6, 2023, 3:21:40 PM
-    Author     : Tan Phat
+    Document   : findRental
+    Created on : Jul 8, 2023, 1:52:43 AM
+    Author     : kaiso
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -61,12 +61,26 @@
                 <!-- ***** Logo End ***** -->
 
                 <!-- ***** Menu Start ***** -->
+                <% 
+                    String user = null;
+                    HttpSession section = request.getSession(false);
+                    if (session != null) {
+                        user = (String) session.getAttribute("username");
+                    } 
+                %>
+
+                <!-- ***** Menu Start ***** -->
                 <ul class="nav" style="display: flex; align-items: center;">
-                    <li class="effect"><a href="./home" >Home</a></li>
-                    <li class="effect"><a href="./rental" class="active">Rental</a></li>
+                    <li class="effect"><a href="./home" class="active">Home</a></li>
+                    <li class="effect"><a href="./rental">Rental</a></li>
                     <li class="effect"><a href="./instruction">Instruction</a></li>
-                    <li class="effect"><a href="./register">Register</a></li>
-                    <li class="effect"><a href="./login">Login</a></li>
+                    <li class="effect"><a href="./post">Post</a></li>
+                    <li class="effect"><a href="./login">Logout</a></li>
+                    <li class="effect">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-user"></i> <%= user %>
+                        </a>
+                    </li>
                 </ul>
 
                 <a class='menu-trigger'>

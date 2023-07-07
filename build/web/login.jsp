@@ -47,7 +47,7 @@
         <header class="header-area">
             <nav class="container main-nav">
                 <!-- ***** Logo Start ***** -->
-                <a href="index.jsp" class="logo">
+                <a href="./home" class="logo">
                     <!--<img src="../src/java/imgs/logo2.jpg" alt="">-->
                     <img style="object-fit: contain;" src="./assets/images/logo3.png" alt="">
                 </a>
@@ -55,11 +55,11 @@
 
                 <!-- ***** Menu Start ***** -->
                 <ul class="nav" style="display: flex; align-items: center;">
-                    <li><a href="index.jsp" >Home</a></li>
-                    <li><a href="rental.jsp">Rental</a></li>
-                    <li><a href="instruction.jsp">Instruction</a></li>
-                    <li><a href="register.jsp">Register</a></li>
-                    <li><a href=""  class="active">Login</a></li>
+                    <li class="effect"><a href="./home" >Home</a></li>
+                    <li class="effect"><a href="./rental">Rental</a></li>
+                    <li class="effect"><a href="./instruction">Instruction</a></li>
+                    <li class="effect"><a href="./register">Register</a></li>
+                    <li class="effect"><a href="./login"  class="active">Login</a></li>
                 </ul>
 
                 <a class='menu-trigger'>
@@ -100,12 +100,12 @@
                                 </button>
                                 <p class="text-center mt-5">
                                     Don't have an account?
-                                    <a href="register.jsp" class="text-primary" style="cursor: pointer;">
+                                    <a href="./register" class="text-primary" style="cursor: pointer;">
                                         Sign Up
                                     </a>
                                 </p>
                                 <p class="text-center text-primary">
-                                    <a href="forgot.jsp" class="text-primary" style="cursor: pointer;">
+                                    <a href="./forgot" class="text-primary" style="cursor: pointer;">
                                         Forgot your password?
                                     </a>
                                 </p>

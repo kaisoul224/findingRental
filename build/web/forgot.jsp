@@ -56,18 +56,18 @@
         <header class="header-area">
             <nav class="container main-nav">
                 <!-- ***** Logo Start ***** -->
-                <a href="index.jsp" class="logo">
+                <a href="./home" class="logo">
                     <a href="index.html"><img style="object-fit: contain;" src="assets/images/logo3.png" alt="" class="footer-logo" /></a>
                 </a>
                 <!-- ***** Logo End ***** -->
 
                 <!-- ***** Menu Start ***** -->
                 <ul class="nav">
-                    <li><a href="index.jsp">Home</a></li>
-                    <li><a href="rental.jsp">Rental</a></li>
-                    <li><a href="" class="active">Instruction</a></li>
-                    <li><a href="register.jsp">Register</a></li>
-                    <li><a href="login.jsp">Login</a></li>
+                    <li class="effect"><a href="./home">Home</a></li>
+                    <li class="effect"><a href="./rental">Rental</a></li>
+                    <li class="effect"><a href="./instruction" class="active">Instruction</a></li>
+                    <li class="effect"><a href="./register">Register</a></li>
+                    <li class="effect"><a href="./login">Login</a></li>
                 </ul>
 
                 <a class='menu-trigger'>

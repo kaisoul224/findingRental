@@ -15,7 +15,7 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author Quoc Anh
  */
-public class HomeServlet extends HttpServlet {
+public class PostServlet extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -29,12 +29,7 @@ public class HomeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        if (request.getSession().getAttribute("username") != null) {
-            request.getRequestDispatcher("/home.jsp").forward(request, response);
-        } else {
-            request.getRequestDispatcher("/index.jsp").forward(request, response);
-        }
-        
+        request.getRequestDispatcher("/post.jsp").forward(request, response);
     }
 
     /**
@@ -48,6 +43,6 @@ public class HomeServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
     }
+
 }

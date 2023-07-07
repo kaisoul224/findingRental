@@ -9,15 +9,11 @@
 <html lang="en">
 
     <head>
-
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
               rel="stylesheet">
-
         <title>Instruction</title>
-
         <!-- Bootstrap core CSS -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -31,7 +27,11 @@
         <link rel="stylesheet" href="assets/css/animate.css">
         <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
 
-
+        <style>
+            .footer{
+                margin-top: 70px;
+            }
+        </style>
 
     </head>
 
@@ -54,18 +54,19 @@
         <header class="header-area">
             <nav class="container main-nav">
                 <!-- ***** Logo Start ***** -->
-                <a href="index.jsp" class="logo">
+                <a href="./home" class="logo">
+                    <!--<img src="../src/java/imgs/logo2.jpg" alt="">-->
                     <img style="object-fit: contain;" src="./assets/images/logo3.png" alt="">
                 </a>
                 <!-- ***** Logo End ***** -->
 
                 <!-- ***** Menu Start ***** -->
-                <ul class="nav">
-                    <li><a href="index.jsp">Home</a></li>
-                    <li><a href="rental.jsp">Rental</a></li>
-                    <li><a href="" class="active">Instruction</a></li>
-                    <li><a href="register.jsp">Register</a></li>
-                    <li><a href="login.jsp">Login</a></li>
+                <ul class="nav" style="display: flex; align-items: center;">
+                    <li class="effect"><a href="./home" class="active">Home</a></li>
+                    <li class="effect"><a href="./rental">Rental</a></li>
+                    <li class="effect"><a href="./instruction">Instruction</a></li>
+                    <li class="effect"><a href="./register">Register</a></li>
+                    <li class="effect"><a href="./login">Login</a></li>
                 </ul>
 
                 <a class='menu-trigger'>
@@ -75,11 +76,6 @@
             </nav>
         </header>
         <!-- ***** Header Area End ***** -->
-
-
-
-
-
 
         <div class="footer">
             <div class="container">

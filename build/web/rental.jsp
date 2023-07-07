@@ -54,7 +54,7 @@
         <header class="header-area">
             <nav class="container main-nav">
                 <!-- ***** Logo Start ***** -->
-                <a href="index.jsp" class="logo">
+                <a href="./home" class="logo">
                     <!--<img src="../src/java/imgs/logo2.jpg" alt="">-->
                     <img style="object-fit: contain;" src="./assets/images/logo3.png" alt="">
                 </a>
@@ -62,11 +62,11 @@
 
                 <!-- ***** Menu Start ***** -->
                 <ul class="nav" style="display: flex; align-items: center;">
-                    <li><a href="index.jsp" >Home</a></li>
-                    <li><a href="" class="active">Rental</a></li>
-                    <li><a href="instruction.jsp">Instruction</a></li>
-                    <li><a href="register.jsp">Register</a></li>
-                    <li><a href="login.jsp">Login</a></li>
+                    <li class="effect"><a href="./home" >Home</a></li>
+                    <li class="effect"><a href="./rental" class="active">Rental</a></li>
+                    <li class="effect"><a href="./instruction">Instruction</a></li>
+                    <li class="effect"><a href="./register">Register</a></li>
+                    <li class="effect"><a href="./login">Login</a></li>
                 </ul>
 
                 <a class='menu-trigger'>

@@ -22,7 +22,7 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-        
+
 
         <!-- Additional CSS Files -->
         <link rel="stylesheet" href="./assets/css/fontawesome.css">
@@ -59,31 +59,31 @@
         <header class="header-area">
             <nav class="container main-nav">
                 <!-- ***** Logo Start ***** -->
-                <a href="" class="logo">
+                <a href="./home" class="logo">
                     <!--<img src="../src/java/imgs/logo2.jpg" alt="">-->
                     <img style="object-fit: contain;" src="./assets/images/logo3.png" alt="">
                 </a>
                 <!-- ***** Logo End ***** -->
 
                 <!-- ***** Menu Start ***** -->
+                <% 
+                    String user = null;
+                    HttpSession section = request.getSession(false);
+                    if (session != null) {
+                        user = (String) session.getAttribute("username");
+                    } 
+                %>
                 <ul class="nav" style="display: flex; align-items: center;">
-                    <li><a href="" class="active">Home</a></li>
-                    <li><a href="rental.jsp">Rental</a></li>
-                    <li><a href="instruction.jsp">Instruction</a></li>
-                    <li><a href="register.jsp">Register</a></li>
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-user"></i> Username
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">Profile</a>
-                                <a class="dropdown-item" href="#">Settings</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Logout</a>
-                            </div>
-                        </li>
-                    </ul>
+                    <li class="effect"><a href="./home" class="active">Home</a></li>
+                    <li class="effect"><a href="./rental">Rental</a></li>
+                    <li class="effect"><a href="./instruction">Instruction</a></li>
+                    <li class="effect"><a href="./post">Post</a></li>
+                    <li class="effect"><a href="./login">Logout</a></li>
+                    <li class="effect">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-user"></i> <%= user %>
+                        </a>
+                    </li>
                 </ul>
 
                 <a class='menu-trigger'>

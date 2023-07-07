@@ -30,7 +30,7 @@
 
     <body>
 
-        
+
         <!-- ***** Preloader Start ***** -->
         <div id="js-preloader" class="js-preloader">
             <div class="preloader-inner">
@@ -48,7 +48,7 @@
         <header class="header-area">
             <nav class="container main-nav">
                 <!-- ***** Logo Start ***** -->
-                <a href="index.jsp" class="logo">
+                <a href="./home" class="logo">
                     <!--<img src="../src/java/imgs/logo2.jpg" alt="">-->
                     <img style="object-fit: contain;" src="./assets/images/logo3.png" alt="">
                 </a>
@@ -56,11 +56,11 @@
 
                 <!-- ***** Menu Start ***** -->
                 <ul class="nav" style="display: flex; align-items: center;">
-                    <li><a href="index.jsp" >Home</a></li>
-                    <li><a href="rental.jsp">Rental</a></li>
-                    <li><a href="instruction.jsp">Instruction</a></li>
-                    <li><a href="" class="active">Register</a></li>
-                    <li><a href="login.jsp">Login</a></li>
+                    <li class="effect"><a href="./home" >Home</a></li>
+                    <li class="effect"><a href="./rental">Rental</a></li>
+                    <li class="effect"><a href="./instruction">Instruction</a></li>
+                    <li class="effect"><a href="./register" class="active">Register</a></li>
+                    <li class="effect"><a href="./login">Login</a></li>
                 </ul>
 
                 <a class='menu-trigger'>
@@ -71,7 +71,7 @@
         </header>
         <!-- ***** Header Area End ***** -->
 
-        
+
         <div class="container-fluid vh-40" style="margin-top:150px">
             <div id="toast" style="z-index: 1;"></div>
             <div class="">
@@ -109,12 +109,12 @@
                                 <p class="text-center mt-5">
                                     Don't have an account?
                                     <!--<span class="text-primary">Sign In</span>-->
-                                    <a href="login.jsp" class="text-primary" style="cursor: pointer;">
+                                    <a href="./login" class="text-primary" style="cursor: pointer;">
                                         Sign In
                                     </a>
                                 </p>
                                 <p class="text-center text-primary">
-                                    <a href="forgot.jsp" class="text-primary" style="cursor: pointer;">
+                                    <a href="./forgot" class="text-primary" style="cursor: pointer;">
                                         Forgot your password?
                                     </a>
                                 </p>
@@ -184,62 +184,62 @@
         <script>
             if ("${requestScope.registrationStatus}" === "failure") {
                 showErrorRegister();
-                <%
-                    request.setAttribute("registrationStatus", null);
-                %>
+            <%
+                request.setAttribute("registrationStatus", null);
+            %>
             }
-            
+
             $(document).ready(function () {
-            $('#registerform').validate({
-                rules: {
-                    // Define validation rules for your form fields
-                    fullname: {
-                        required: true, // Field is required
-                        minlength: 5 // Minimum length of 5 characters
+                $('#registerform').validate({
+                    rules: {
+                        // Define validation rules for your form fields
+                        fullname: {
+                            required: true, // Field is required
+                            minlength: 5 // Minimum length of 5 characters
+                        },
+                        username: {
+                            required: true, // Field is required
+                            minlength: 5 // Minimum length of 5 characters
+                        },
+                        phoneNumber: {
+                            required: true, // Field is required
+                            number: true
+                        },
+                        email: {
+                            required: true, // Field is required
+                            email: true
+                        },
+                        password: {
+                            required: true, // Field is required
+                            minlength: 6 // Minimum length of 5 characters
+                        }
+                        // Add more fields and rules as needed
                     },
-                    username: {
-                        required: true, // Field is required
-                        minlength: 5 // Minimum length of 5 characters
-                    },
-                    phoneNumber: {
-                        required: true, // Field is required
-                        number: true
-                    },
-                    email: {
-                        required: true, // Field is required
-                        email: true
-                    },
-                    password: {
-                        required: true, // Field is required
-                        minlength: 6 // Minimum length of 5 characters
+                    messages: {
+                        // Define error messages for your form fields
+                        fullname: {
+                            required: 'Please enter a value for this field',
+                            minlength: 'Minimum length is 6 characters'
+                        },
+                        username: {
+                            required: 'Please enter a value for this field',
+                            minlength: 'Minimum length is 6 characters'
+                        },
+                        phoneNumber: {
+                            required: 'Please enter a value for this field',
+                            number: 'Please enter a valid number'
+                        },
+                        email: {
+                            required: 'Please enter a value for this field',
+                            email: 'Please enter a valid email'
+                        },
+                        password: {
+                            required: 'Please enter a value for this field',
+                            minlength: 'Minimum length is 6 characters'
+                        }
+                        // Add more fields and messages as needed
                     }
-            // Add more fields and rules as needed
-                },
-                messages: {
-                // Define error messages for your form fields
-                    fullname: {
-                        required: 'Please enter a value for this field',
-                        minlength: 'Minimum length is 6 characters'
-                    },
-                    username: {
-                        required: 'Please enter a value for this field',
-                        minlength: 'Minimum length is 6 characters'
-                    },
-                    phoneNumber: {
-                        required: 'Please enter a value for this field',
-                        number: 'Please enter a valid number'
-                    },
-                    email: {
-                        required: 'Please enter a value for this field',
-                        email: 'Please enter a valid email'
-                    },
-                    password: {
-                        required: 'Please enter a value for this field',
-                        minlength: 'Minimum length is 6 characters'
-                    }
-                    // Add more fields and messages as needed
-                }
-            });
+                });
             });
         </script>
     </body>

@@ -12,10 +12,26 @@
         <servlet-name>LoginServlet</servlet-name>
         <servlet-class>controller.LoginServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RentalServlet</servlet-name>
+        <servlet-class>controller.RentalServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ForgotServlet</servlet-name>
+        <servlet-class>controller.ForgotServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>InstructionServlet</servlet-name>
+        <servlet-class>controller.InstructionServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PostServlet</servlet-name>
+        <servlet-class>controller.PostServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
         <url-pattern>/home</url-pattern>
-        <url-pattern></url-pattern>
+        <url-pattern/>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ResgisterServlet</servlet-name>
@@ -24,6 +40,22 @@
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RentalServlet</servlet-name>
+        <url-pattern>/rental</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ForgotServlet</servlet-name>
+        <url-pattern>/forgot</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InstructionServlet</servlet-name>
+        <url-pattern>/instruction</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PostServlet</servlet-name>
+        <url-pattern>/post</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

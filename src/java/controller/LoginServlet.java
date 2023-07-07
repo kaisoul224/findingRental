@@ -34,11 +34,9 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
-            if(request.getSession().getAttribute("username") != null){
-                
-            } else {
-                
-            }
+            HttpSession session = request.getSession();
+            session.removeAttribute("username");
+            request.getRequestDispatcher("/login.jsp").forward(request, response);
     }
 
     /**
@@ -66,8 +64,9 @@ public class LoginServlet extends HttpServlet {
                 cookie.setMaxAge(3600 * 24 * 365); // Cookie expires in 1 year
                 cookie.setPath("/");    // Cookie is valid for the entire website
             }
-            request.getSession().setAttribute("userName", username);
-            response.sendRedirect("index.jsp");
+            request.getSession().setAttribute("username", username);
+//            request.getRequestDispatcher("/home.jsp").forward(request, response);
+            response.sendRedirect(request.getContextPath() + "/home");
 
         } else {
             System.out.println("Could not login");

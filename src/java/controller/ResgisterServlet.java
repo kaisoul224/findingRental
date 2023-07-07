@@ -11,6 +11,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import model.User;
 
 /**
@@ -31,7 +32,9 @@ public class ResgisterServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.sendRedirect("register.jsp");
+        HttpSession session = request.getSession();
+            session.removeAttribute("username");
+        request.getRequestDispatcher("/register.jsp").forward(request, response);
     }
 
     /**
@@ -56,7 +59,8 @@ public class ResgisterServlet extends HttpServlet {
             if (udb.getUserByUsername(username) == null){
                 User uNew = new User(0, fullname, username, password, usertype, phonenumber, email);
                 udb.insert_forUser(uNew);
-                response.sendRedirect("index.jsp");
+                request.getSession().setAttribute("username", username);
+                response.sendRedirect(request.getContextPath() + "/home");
             } else {
                 System.out.println("Could not send user register");
                 request.setAttribute("registrationStatus", "failure");

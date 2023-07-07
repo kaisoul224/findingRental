@@ -13,9 +13,9 @@ import jakarta.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Quoc Anh
+ * @author kaiso
  */
-public class HomeServlet extends HttpServlet {
+public class InstructionServlet extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -30,11 +30,10 @@ public class HomeServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         if (request.getSession().getAttribute("username") != null) {
-            request.getRequestDispatcher("/home.jsp").forward(request, response);
+            request.getRequestDispatcher("/help.jsp").forward(request, response);
         } else {
-            request.getRequestDispatcher("/index.jsp").forward(request, response);
+            request.getRequestDispatcher("/instruction.jsp").forward(request, response);
         }
-        
     }
 
     /**
@@ -48,6 +47,6 @@ public class HomeServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
     }
+
 }
