@@ -94,7 +94,7 @@
                         <div class="text-center">
                             <h3 class="text-primary">Post</h3>
                         </div>
-                        <form id="postform" method="POST" action="post">
+                        <form id="postform" method="POST" action="post" enctype="multipart/form-data">
                             <div class="p-4">
                                 <div class="row input-group mb-3">
                                     <input name="title" type="text" class="form-control" placeholder="Title">
@@ -109,12 +109,14 @@
                                     <input name="phoneNumber" type="text" class="form-control" placeholder="Phone Number">
                                 </div>
                                 <div class="row input-group mb-3">
+                                    <input name="area" type="text" class="form-control" placeholder="Area">
+                                </div>
+                                <div class="row input-group mb-3">
                                     <input name="numberOfRoom" type="text" class="form-control" placeholder="Number Of Room">
                                 </div>
                                 <div class="row input-group mb-3">
                                     <input name="availableRoom" type="text" class="form-control" placeholder="Available Room">
                                 </div> 
-                                
                                 <div class="row input-group mb-3">
                                     <input name="image" type="file" class="form-control">
                                 </div>
@@ -213,6 +215,10 @@
                             required: true, // Field is required
                             number: true
                         },
+                        area: {
+                            required: true,
+                            number: true
+                        },
                         numberOfRoom: {
                             required: true, // Field is required
                             number: true // Minimum length of 5 characters
@@ -221,6 +227,10 @@
                             required: true, // Field is required
                             number: true // Minimum length of 5 characters
                         },
+                        image: {
+                            required: true, // Field is required
+                        },
+                        
                         // Add more fields and rules as needed
                     },
                     messages: {
@@ -240,6 +250,10 @@
                             required: 'Please enter a value for this field',
                             number: 'Please enter a valid number'
                         },
+                        area: {
+                            required: 'Please enter a value for this field',
+                            number: 'Please enter a valid number'
+                        },
                         numberOfRoom: {
                             required: 'Please enter a value for this field',
                             number: 'Please enter a valid number'
@@ -247,6 +261,9 @@
                         availableRoom: {
                             required: 'Please enter a value for this field',
                             number: 'Please enter a valid number'
+                        },
+                        image: {
+                            required: 'Please enter a value for this field',
                         },
                         
                         // Add more fields and messages as needed

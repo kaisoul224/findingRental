@@ -13,15 +13,13 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import model.User;
 
 /**
  *
- * @author kaiso
+ * @author Quoc Anh
  */
-public class ForgotServlet extends HttpServlet {
+public class ChangePasswordServlet extends HttpServlet {
    
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 
      * Handles the HTTP <code>GET</code> method.
@@ -33,7 +31,7 @@ public class ForgotServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        request.getRequestDispatcher("/forgot.jsp").forward(request, response);
+        
     } 
 
     /** 
@@ -46,28 +44,20 @@ public class ForgotServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String username = request.getParameter("username");
-        String phoneNumber = request.getParameter("phoneNumber");
+               String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        String cfPassword = request.getParameter("cfpassword");
         UserDAO udb = new UserDAO();
-        User u = udb.getUserByUsername(username);
         HttpSession session = request.getSession();
-        try {
-            if (u != null) {
-                if (u.getPhoneNumber().equals(phoneNumber)) {
-                    session.setAttribute("username", username);
-                    request.getRequestDispatcher("changePassword.jsp").forward(request, response);
-                } else {
-                    request.setAttribute("forgetStatus", "warning");
-                    request.getRequestDispatcher("forget.jsp").forward(request, response);
-                }
-            } else {
-                request.setAttribute("forgetStatus", "failure");
-                request.getRequestDispatcher("forget.jsp").forward(request, response);
-            }
+        
+        if (password.equals(cfPassword)) {
+            udb.changePassWord(username, password);
+            session.setMaxInactiveInterval(Integer.MAX_VALUE);
+            session.setAttribute("username", username);
+            session.setAttribute("login", "true");
+            response.sendRedirect(request.getContextPath() + "/home");
 
-        } catch (ServletException | IOException e) {
-            System.out.println("Could not forget this username");
-            System.out.println(e);
         }
     }
+
 }

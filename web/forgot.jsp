@@ -57,17 +57,18 @@
             <nav class="container main-nav">
                 <!-- ***** Logo Start ***** -->
                 <a href="./home" class="logo">
-                    <a href="index.html"><img style="object-fit: contain;" src="assets/images/logo3.png" alt="" class="footer-logo" /></a>
+                    <!--<img src="../src/java/imgs/logo2.jpg" alt="">-->
+                    <img style="object-fit: contain;" src="./assets/images/logo3.png" alt="">
                 </a>
                 <!-- ***** Logo End ***** -->
 
                 <!-- ***** Menu Start ***** -->
-                <ul class="nav">
-                    <li class="effect"><a href="./home">Home</a></li>
+                <ul class="nav" style="display: flex; align-items: center;">
+                    <li class="effect"><a href="./home" >Home</a></li>
                     <li class="effect"><a href="./rental">Rental</a></li>
-                    <li class="effect"><a href="./instruction" class="active">Instruction</a></li>
+                    <li class="effect"><a href="./instruction">Instruction</a></li>
                     <li class="effect"><a href="./register">Register</a></li>
-                    <li class="effect"><a href="./login">Login</a></li>
+                    <li class="effect"><a href="./login"  class="active">Login</a></li>
                 </ul>
 
                 <a class='menu-trigger'>
@@ -86,11 +87,16 @@
                         <div class="text-center">
                             <h3 class="text-primary">Forgot Password</h3>
                         </div>
-                        <form id="loginform" method="POST" action="login">
+                        <form id="forgotform" method="POST" action="forgot">
                             <div class="p-4">
                                 <div class="row input-group mb-3">
-                                    <span class="col-1 input-group-text bg-primary"><i class="bi bi-person-plus-fill text-white"></i></span>
-                                    <input name="username" type="text" class="col-11 form-control" placeholder="Username">
+                                    <span class="input-group-text bg-primary" style="width: 36px;"><i class="bi bi-person-plus-fill text-white mr-auto"></i></span>
+                                    <input name="username" type="text" class="col-lg-10 col-md-10 col-sm-8 form-control" placeholder="Username">
+                                </div>
+                                
+                                <div class="row input-group mb-3">
+                                    <span class="input-group-text bg-primary" style="width: 36px;"><i class="bi bi-phone text-white"></i></span>
+                                    <input name="phoneNumber" type="text" class="form-control" placeholder="Phone Number">
                                 </div>
 
                                 <button class="w-50 mx-auto btn btn-primary text-center mt-2" style="display: flex; justify-content: center;" type="submit">
@@ -98,7 +104,7 @@
                                 </button>
                                 <p class="text-center mt-5">
                                     Don't have an account?
-                                    <a href="register.jsp" class="text-primary" style="cursor: pointer;">
+                                    <a href="/register" class="text-primary" style="cursor: pointer;">
                                         Sign Up
                                     </a>
                                 </p>
@@ -172,29 +178,27 @@
         <!--<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>-->
         <script>
             $(document).ready(function () {
-                $('#loginform').validate({
+                $('#forgotform').validate({
                     rules: {
                         // Define validation rules for your form fields
                         username: {
                             required: true, // Field is required
-                            minlength: 5, // Minimum length of 5 characters
                         },
-                        password: {
+                        phoneNumber: {
                             required: true, // Field is required
-                            minlength: 6, // Minimum length of 5 characters
-                        }
+                            number: true
+                        },
                         // Add more fields and rules as needed
                     },
                     messages: {
                         // Define error messages for your form fields
                         username: {
                             required: 'Please enter a value for this field',
-                            minlength: 'Minimum length is 6 characters',
                         },
-                        password: {
+                        phoneNumber: {
                             required: 'Please enter a value for this field',
-                            minlength: 'Minimum length is 6 characters',
-                        }
+                            number: 'Please enter a valid number'
+                        },
                         // Add more fields and messages as needed
                     }
                 });

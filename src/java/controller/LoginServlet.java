@@ -33,10 +33,14 @@ public class LoginServlet extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException {
-            HttpSession session = request.getSession();
-            session.removeAttribute("username");
-            request.getRequestDispatcher("/login.jsp").forward(request, response);
+            throws ServletException, IOException {
+        System.out.println("Don't have cookie account");
+        HttpSession session = request.getSession();
+        session.setMaxInactiveInterval(Integer.MAX_VALUE);
+        session.setAttribute("login", "false");
+        session.removeAttribute("username");
+        request.getRequestDispatcher("/login.jsp").forward(request, response);
+
     }
 
     /**
@@ -56,16 +60,20 @@ public class LoginServlet extends HttpServlet {
 
         UserDAO udb = new UserDAO();
         User u = udb.check(username, password);
-
         if (u != null) {
             if (remember != null && remember.equals("on")) {
-                Cookie cookie = new Cookie("accound", username + ":" + password);
-                // Set additional cookie attributes (optional)
+
+                Cookie cookie = new Cookie("account", username + ":" + password);
                 cookie.setMaxAge(3600 * 24 * 365); // Cookie expires in 1 year
                 cookie.setPath("/");    // Cookie is valid for the entire website
+                response.addCookie(cookie); // Set the cookie in the response
+                System.out.println("Have to save cookie");
+
             }
-            request.getSession().setAttribute("username", username);
-//            request.getRequestDispatcher("/home.jsp").forward(request, response);
+            HttpSession session = request.getSession();
+            session.setMaxInactiveInterval(Integer.MAX_VALUE);
+            session.setAttribute("username", username);
+            session.setAttribute("login", "true");
             response.sendRedirect(request.getContextPath() + "/home");
 
         } else {

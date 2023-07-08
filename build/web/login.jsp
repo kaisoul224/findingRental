@@ -90,7 +90,7 @@
                                     <input name="password" type="password" class="col-lg-10 col-md-10 col-sm-8 form-control" placeholder="password">
                                 </div>
                                 <div class="form-check">
-                                    <input name="remember" class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                    <input name="remember" class="form-check-input" type="checkbox" value="on" id="flexCheckDefault">
                                     <label class="form-check-label" for="flexCheckDefault">
                                         Remember Me
                                     </label>

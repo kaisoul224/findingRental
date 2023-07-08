@@ -59,7 +59,10 @@ public class ResgisterServlet extends HttpServlet {
             if (udb.getUserByUsername(username) == null){
                 User uNew = new User(0, fullname, username, password, usertype, phonenumber, email);
                 udb.insert_forUser(uNew);
-                request.getSession().setAttribute("username", username);
+                HttpSession session = request.getSession();
+                session.setMaxInactiveInterval(Integer.MAX_VALUE);
+                session.setAttribute("username", username);
+                session.setAttribute("login", "true");
                 response.sendRedirect(request.getContextPath() + "/home");
             } else {
                 System.out.println("Could not send user register");
