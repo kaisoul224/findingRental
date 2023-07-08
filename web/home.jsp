@@ -1,7 +1,7 @@
 <%-- 
     Document   : home
     Created on : Jul 7, 2023, 10:17:26 PM
-    Author     : kaiso
+    Author     : Quoc Anh
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -9,21 +9,16 @@
 <html lang="en">
 
     <head>
-
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
               rel="stylesheet">
-
         <title>Home</title>
 
         <!-- Bootstrap core CSS -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-
-
         <!-- Additional CSS Files -->
         <link rel="stylesheet" href="./assets/css/fontawesome.css">
         <link rel="stylesheet" href="./assets/css/style.css">
@@ -534,8 +529,6 @@
         <script src="./assets/js/custom.js"></script>
         <script src="./assets/js/selectBox.js"></script>
         <script src="./assets/js/checkBox.js"></script>
-
-
     </body>
 
 </html>
