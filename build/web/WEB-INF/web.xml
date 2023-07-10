@@ -37,6 +37,18 @@
         <servlet-name>ChangePasswordServlet</servlet-name>
         <servlet-class>controller.ChangePasswordServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ProfileServlet</servlet-name>
+        <servlet-class>controller.ProfileServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangeInfoServlet</servlet-name>
+        <servlet-class>controller.ChangeInfoServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FindRental</servlet-name>
+        <servlet-class>controller.FindRental</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -66,13 +78,25 @@
         <servlet-name>PostServlet</servlet-name>
         <url-pattern>/post</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
+    <!--    <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>
-    </servlet-mapping>
+    </servlet-mapping>-->
     <servlet-mapping>
         <servlet-name>ChangePasswordServlet</servlet-name>
         <url-pattern>/changePassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProfileServlet</servlet-name>
+        <url-pattern>/profile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangeInfoServlet</servlet-name>
+        <url-pattern>/changeInfo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FindRental</servlet-name>
+        <url-pattern>/find</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
@@ -80,7 +104,7 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>faces/index.xhtml</welcome-file>
+        <!--<welcome-file>faces/index.xhtml</welcome-file>-->
         <welcome-file>/index.jsp</welcome-file>
     </welcome-file-list>
 </web-app>

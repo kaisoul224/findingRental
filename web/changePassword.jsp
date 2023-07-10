@@ -27,13 +27,21 @@
         <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
 
         <style>
-            .footer {
-                position: fixed;
-                left: 0;
-                bottom: 0;
-                width: 100%;
-                background-color: #f8f8f8; /* Màu nền của footer */
-            }
+            @media screen and (min-width: 1920px) {
+               .footer {
+                   position: fixed;
+                   left: 0;
+                   bottom: 0;
+                   width: 100%;
+                   background-color: #f8f8f8; 
+               }
+           }
+           
+           @media screen and (max-width: 16in) {
+               .footer {
+                   margin-top: 70px;
+               }
+           }
         </style>
     </head>
 
@@ -109,8 +117,8 @@
                                 </button>
                                 <p class="text-center mt-5">
                                     Don't have an account?
-                                    <a href="/register" class="text-primary" style="cursor: pointer;">
-                                        Sign Up
+                                    <a href="./login" class="text-primary" style="cursor: pointer;">
+                                        Sign In
                                     </a>
                                 </p>
                             </div>

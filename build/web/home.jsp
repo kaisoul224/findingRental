@@ -73,12 +73,19 @@
                     <li class="effect"><a href="./rental">Rental</a></li>
                     <li class="effect"><a href="./instruction">Instruction</a></li>
                     <li class="effect"><a href="./post">Post</a></li>
-                    <li class="effect"><a href="./login">Logout</a></li>
-                    <li class="effect">
-                        <a class="nav-link" href="#">
+
+                    <li class="dropdown">
+                        <a class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-user"></i> <%= user %>
                         </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="./profile">Profile</a>
+                            <a class="dropdown-item" href="./post">Post</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="./login">Logout</a>
+                        </div>
                     </li>
+
                 </ul>
 
                 <a class='menu-trigger'>
@@ -111,8 +118,8 @@
 
                                 <div class="contain">
                                     <div class="search-bar">
-                                        <input class="input-content" type="text" placeholder="Search">
-                                        <i class="fa fa-search" style="color: #000000;"></i>
+                                        <input id="search_home" class="input-content" type="text" placeholder="Search">
+                                        <i class="fa fa-search" id="search_home-btn" style="color: #000000; cursor: pointer;"></i>
                                     </div>
 
 
@@ -134,7 +141,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="container-holder">
+                                                                               <div class="container-holder">
                                             <div class="select-button">
                                                 <span class="btn-text">Select Rental Price</span>
                                                 <span class="arrow-dwn">
@@ -144,58 +151,40 @@
 
                                             <ul class="list-items">
                                                 <li class="item">
-                                                    <span class="checkbox">
-                                                        <i class="fa-solid fa-check check-icon"></i>
-                                                    </span>
-                                                    <span class="item-text">Tất cả</span>
+                                                    <input type="radio" name="price" value="Tất cả" id="tat-ca">
+                                                    <label for="tat-ca">Tất cả</label>
                                                 </li>
                                                 <li class="item">
-                                                    <span class="checkbox">
-                                                        <i class="fa-solid fa-check check-icon"></i>
-                                                    </span>
-                                                    <span class="item-text">Dưới 1 triệu</span>
+                                                    <input type="radio" name="price" value="Dưới 1 triệu" id="duoi1trieu">
+                                                    <label for="duoi1trieu">Dưới 1 triệu</label>
                                                 </li>
                                                 <li class="item">
-                                                    <span class="checkbox">
-                                                        <i class="fa-solid fa-check check-icon"></i>
-                                                    </span>
-                                                    <span class="item-text">1 triệu - 2 triệu</span>
+                                                    <input type="radio" name="price" value="1 triệu - 2 triệu" id="1-2trieu">
+                                                    <label for="1-2trieu">1 triệu - 2 triệu </label>
                                                 </li>
                                                 <li class="item">
-                                                    <span class="checkbox">
-                                                        <i class="fa-solid fa-check check-icon"></i>
-                                                    </span>
-                                                    <span class="item-text">2 triệu - 3 triệu</span>
+                                                    <input type="radio" name="price" value="2 triệu - 3 triệu" id="2-3trieu">
+                                                    <label for="2-3trieu">2 triệu - 3 triệu</label> 
                                                 </li>
                                                 <li class="item">
-                                                    <span class="checkbox">
-                                                        <i class="fa-solid fa-check check-icon"></i>
-                                                    </span>
-                                                    <span class="item-text">3 triệu - 5 triệu</span>
+                                                    <input type="radio" name="price" value="3 triệu - 5 triệu" id="3-5trieu">
+                                                    <label for="3-5trieu">3 triệu - 5 triệu</label> 
                                                 </li>
                                                 <li class="item">
-                                                    <span class="checkbox">
-                                                        <i class="fa-solid fa-check check-icon"></i>
-                                                    </span>
-                                                    <span class="item-text">5 triệu - 7 triệu</span>
+                                                    <input type="radio" name="price" value="5 triệu - 7 triệu" id="5-7trieu">
+                                                    <label for="5-7trieu">5 triệu - 7 triệu</label> 
                                                 </li>
                                                 <li class="item">
-                                                    <span class="checkbox">
-                                                        <i class="fa-solid fa-check check-icon"></i>
-                                                    </span>
-                                                    <span class="item-text">7 triệu - 10 triệu</span>
+                                                    <input type="radio" name="price" value="7 triệu - 10 triệu" id="7-10trieu">
+                                                    <label for="7-10trieu">7 triệu - 10 triệu</label> 
                                                 </li>
                                                 <li class="item">
-                                                    <span class="checkbox">
-                                                        <i class="fa-solid fa-check check-icon"></i>
-                                                    </span>
-                                                    <span class="item-text">10 triệu - 15 triệu</span>
+                                                    <input type="radio" name="price" value="10 triệu - 15 triệu" id="10-15trieu">
+                                                    <label for="10-15trieu">10 triệu - 15 triệu</label> 
                                                 </li>
                                                 <li class="item">
-                                                    <span class="checkbox">
-                                                        <i class="fa-solid fa-check check-icon"></i>
-                                                    </span>
-                                                    <span class="item-text">Trên 15 triệu</span>
+                                                    <input type="radio" name="price" value="Trên 15 triệu" id="tren15trieu">
+                                                    <label for="tren15trieu">Trên 15 triệu</label> 
                                                 </li>
                                             </ul>
                                         </div>
@@ -529,6 +518,17 @@
         <script src="./assets/js/custom.js"></script>
         <script src="./assets/js/selectBox.js"></script>
         <script src="./assets/js/checkBox.js"></script>
+        <script src="./assets/js/home.js"></script>
+        
+        <script>
+            $(document).ready(function() {
+                $('.dropdown').on('focusin mouseenter', function() {
+                    $(this).addClass('show').find('.dropdown-menu').addClass('show');
+                }).on('focusout mouseleave', function() {
+                    $(this).removeClass('show').find('.dropdown-menu').removeClass('show');
+                });
+            });
+        </script>
     </body>
 
 </html>

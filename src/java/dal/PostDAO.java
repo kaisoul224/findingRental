@@ -4,11 +4,16 @@
  */
 package dal;
 
+import java.io.InputStream;
 import java.sql.Blob;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.ArrayList;
 import model.Post;
 import model.User;
 import org.apache.catalina.connector.Response;
@@ -82,5 +87,37 @@ public class PostDAO extends DBconnector{
         return null;
     }
     
+    public ArrayList<Post> getLítPostByTitle(String infor){
+        String query = "SELECT * FROM `postes` WHERE Title LIKE ?";
+        
+        ArrayList<Post> postList = new ArrayList<>();
+        try {
+            PreparedStatement st = conn.prepareStatement(query);
+            st.setString(1, infor);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                while (rs.next()) {
+                     // Assuming you have retrieved the java.util.Date object from the database as `dbDate`
+                    Date dbDate = rs.getDate(9);
+                    // Convert java.util.Date to LocalDate
+                    LocalDate localDate = dbDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                    Blob blob = getImage(rs.getInt(1));
+                    InputStream inputStream = blob.getBinaryStream();
+                    
+                    Post post = new Post(rs.getInt(1), rs.getString(2), rs.getString(3), 
+                            rs.getString(4), rs.getString(5), rs.getDouble(6), rs.getInt(7), rs.getInt(8) , localDate, rs.getInt(10), inputStream);
+
+                    postList.add(post);
+                }
+                return postList;
+            }
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Could not get any post by this infor");
+            System.out.println(e);
+        }
+        
+        return null;
+    }
 
 }

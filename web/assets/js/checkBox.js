@@ -1,21 +1,21 @@
-const selectButton = document.querySelector(".select-button"),
-      items = document.querySelectorAll(".item");
+const selectButton = document.querySelector(".select-button");
+const items = document.querySelectorAll(".item");
 
 selectButton.addEventListener("click", () => {
-    selectButton.classList.toggle("open");
+  selectButton.classList.toggle("open");
 });
 
 items.forEach(item => {
-    item.addEventListener("click", () => {
-        item.classList.toggle("checked");
+  item.addEventListener("click", function(event) {
+    const selectedValue = this.querySelector("input").value;
+    selectButton.firstElementChild.textContent = selectedValue;
+    selectButton.classList.remove("open");
+  });
+});
 
-        let checked = document.querySelectorAll(".checked"),
-            btnText = document.querySelector(".btn-text");
-
-            if(checked && checked.length > 0){
-                btnText.innerText = `${checked.length} Selected`;
-            }else{
-                btnText.innerText = "Select Language";
-            }
-    });
-})
+document.addEventListener("click", function(event) {
+  const atButtonClick = selectButton.contains(event.target);
+  if (!atButtonClick) {
+    selectButton.classList.remove("open");
+  }
+});

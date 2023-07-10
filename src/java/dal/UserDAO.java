@@ -123,7 +123,7 @@ public class UserDAO extends DBconnector {
          
      }
      
-     public void update(User uNew) {
+    public void update_forAdmin(User uNew) {
         String query = "UPDATE `users` SET "
                 + ",`fullName`=?"
                 + ",`Username`=?"
@@ -142,6 +142,30 @@ public class UserDAO extends DBconnector {
             st.setString(5, uNew.getPhoneNumber());
             st.setString(6, uNew.getEmail());
             st.setInt(6, uNew.getUserId());
+
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Could not Update this user");
+            System.out.println(e);
+        }
+
+    }
+    
+    public void update_forUser(User uNew) {
+        String query = "UPDATE `users` SET "
+                + "`fullName`=?,"
+                + "`Username`=?,"
+                + "`PhoneNumber`=?,"
+                + "`Email`=? "
+                + "WHERE userID = ?";
+
+        try {
+            PreparedStatement st = conn.prepareStatement(query);
+            st.setString(1, uNew.getFullName());
+            st.setString(2, uNew.getUserName());
+            st.setString(3, uNew.getPhoneNumber());
+            st.setString(4, uNew.getEmail());
+            st.setInt(5, uNew.getUserId());
 
             st.executeUpdate();
         } catch (SQLException e) {

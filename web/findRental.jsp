@@ -1,7 +1,7 @@
 <%-- 
     Document   : findRental
     Created on : Jul 8, 2023, 1:52:43 AM
-    Author     : kaiso
+    Author     : Tan Phat
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -75,11 +75,16 @@
                     <li class="effect"><a href="./rental">Rental</a></li>
                     <li class="effect"><a href="./instruction">Instruction</a></li>
                     <li class="effect"><a href="./post">Post</a></li>
-                    <li class="effect"><a href="./login">Logout</a></li>
-                    <li class="effect">
-                        <a class="nav-link" href="#">
+                    <li class="dropdown">
+                        <a class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-user"></i> <%= user %>
                         </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="./profile">Profile</a>
+                            <a class="dropdown-item" href="./post">Post</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="./login">Logout</a>
+                        </div>
                     </li>
                 </ul>
 
@@ -99,48 +104,48 @@
                 <div class="side-content">
 
                     <div class="filter-price">
-                        <p>Find by Price</p>
-                        <div class="filter-content">
-                            <ul class="list-items-rental">
-                                <li class="rental-item">
-                                    <input type="checkbox">
-                                    <span class="item-text">Tất cả</span>
-                                </li>
-                                <li class="rental-item">
-                                    <input type="checkbox">
-                                    <span class="item-text">Dưới 1 triệu</span>
-                                </li>
-                                <li class="rental-item">
-                                    <input type="checkbox">
-                                    <span class="item-text">1 triệu - 2 triệu</span>
-                                </li>
-                                <li class="rental-item">
-                                    <input type="checkbox">
-                                    <span class="item-text">2 triệu - 3 triệu</span>
-                                </li>
-                                <li class="rental-item">
-                                    <input type="checkbox">
-                                    <span class="item-text">3 triệu - 5 triệu</span>
-                                </li>
-                                <li class="rental-item">
-                                    <input type="checkbox">
-                                    <span class="item-text">5 triệu - 7 triệu</span>
-                                </li>
-                                <li class="rental-item">
-                                    <input type="checkbox">
-                                    <span class="item-text">7 triệu - 10 triệu</span>
-                                </li>
-                                <li class="rental-item">
-                                    <input type="checkbox">
-                                    <span class="item-text">10 triệu - 15 triệu</span>
-                                </li>
-                                <li class="rental-item">
-                                    <input type="checkbox">
-                                    <span class="item-text">Trên 15 triệu</span>
-                                </li>
-                            </ul>
-                        </div>
+                    <p>Find by Price</p>
+                    <div class="filter-content">
+                        <ul class="list-items-rental">
+                            <li class="rental-item">
+                                <input type="radio" name="price" value="Tat ca" id="tat-ca">
+                                <label for="tat-ca">Tất cả</label>
+                            </li>
+                            <li class="rental-item">
+                                <input type="radio" name="price" value="Duoi 1 trieu" id="duoi1trieu">
+                                <label for="duoi1trieu">Dưới 1 triệu</label>
+                            </li>
+                            <li class="rental-item">
+                                <input type="radio" name="price" value="1 trieu - 2 trieu" id="1-2trieu">
+                                <label for="1-2trieu">1 triệu - 2 triệu</label>
+                            </li>
+                            <li class="rental-item">
+                                <input type="radio" name="price" value="2 trieu - 3 trieu" id="2-3trieu">
+                                <label for="2-3trieu">2 triệu - 3 triệu</label>
+                            </li>
+                            <li class="rental-item">
+                                <input type="radio" name="price" value="3 trieu - 5 trieu" id="3-5trieu">
+                                <label for="3-5trieu">3 triệu - 5 triệu</label>
+                            </li>
+                            <li class="rental-item">
+                                <input type="radio" name="price" value="5 trieu - 7 trieu" id="5-7trieu">
+                                <label for="5-7trieu">5 triệu - 7 triệu</label>
+                            </li>
+                            <li class="rental-item">
+                                <input type="radio" name="price" value="7 trieu - 10 trieu" id="7-10trieu">
+                                <label for="7-10trieu">7 triệu - 10 triệu</label>
+                            </li>
+                            <li class="rental-item">
+                                <input type="radio" name="price" value="10 trieu - 15 trieu" id="10-15trieu">
+                                <label for="10-15trieu">10 triệu - 15 triệu</label>
+                            </li>
+                            <li class="rental-item">
+                                <input type="radio" name="price" value="Tren 15 trieu" id="tren15trieu">
+                                <label for="tren15trieu">Trên 15 triệu</label>
+                            </li>
+                        </ul>
                     </div>
+                </div>
 
                     <div class="filter-location">
                         <p>Find by Location</p>
@@ -617,7 +622,17 @@
         <script src="assets/js/popup.js"></script>
         <script src="assets/js/custom.js"></script>
         <script src="assets/js/rentalAutoSearch.js"></script>
-
+        
+        <script>
+            $(document).ready(function() {
+                $('.dropdown').on('focusin mouseenter', function() {
+                    $(this).addClass('show').find('.dropdown-menu').addClass('show');
+                }).on('focusout mouseleave', function() {
+                    $(this).removeClass('show').find('.dropdown-menu').removeClass('show');
+                });
+            });
+        </script>
+        
     </body>
 
 </html>

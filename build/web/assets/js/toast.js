@@ -17,10 +17,10 @@ function toast({title='', message='', type='info', duration = 3000}){
         }
 
         const icons = {
-            success: 'fa-solid fa-circle-check',
-            info: 'fa-solid fa-circle-info',
-            warning: 'fa-solid fa-circle-exclamation',
-            error:'fa-solid fa-circle-exclamation'
+            success: 'bi bi-check-circle-fill',
+            info: 'bi bi-info-circle-fill',
+            warning: 'bi bi-exclamation-circle-fill',
+            error:'bi bi-exclamation-circle-fill'
         };
         const icon = icons[type];
         const delay = (duration/1000).toFixed(2);

@@ -17,7 +17,7 @@
                 animateClass: 'animated', // Animation css class (default is animated)
                 offset:       20,         // Distance to the element when triggering the animation (default is 0)
                 mobile:       true,       // Trigger animations on mobile devices (default is true)
-                live:         true,       // Act on asynchronously loaded content (default is true)
+                live:         true       // Act on asynchronously loaded content (default is true)
             });
             wow.init();
         }
@@ -42,7 +42,7 @@
           var data = $(this).attr('data-filter');
           $grid.isotope({
             filter: data
-          })
+          });
         });
 
         var $grid = $(".grid").isotope({
@@ -51,7 +51,7 @@
           	masonry: {
             columnWidth: ".all"
         }
-    })
+    });
 
 	var width = $(window).width();
 		$(window).resize(function() {
@@ -61,7 +61,7 @@
 			else if (width < 992 && $(window).width() > 992) {
 				location.reload();
 			}
-	})
+	});
 
 
 
@@ -103,7 +103,7 @@
 				items:3
 			}
 		}
-	})
+	});
 
 	$('.owl-collection').owlCarousel({
 		items:3,
@@ -123,7 +123,7 @@
 				  items:3
 			}
 		}
-	})
+	});
 
 	$('.owl-banner').owlCarousel({
 		items:1,
@@ -143,7 +143,7 @@
 				  items:1
 			}
 		}
-	})
+	});
 
 	
 	

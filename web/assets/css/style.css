@@ -306,13 +306,15 @@ html,
 body {
     /*background: linear-gradient(to right, #bdc3c7, #2c3e50);*/
     background: #ffffff;
+    /*background-color: #989898;*/
+
     font-family: 'Poppins', sans-serif;
 }
 
 body .page-content {
     margin-top: 110px;
     margin-bottom: 70px;
-    background: linear-gradient(to right, #2c3e50, #bdc3c7);
+    background: linear-gradient(to right, #2a3036, #bdc3c7);
     padding: 70px;
     border-radius: 23px;
 }
@@ -1006,7 +1008,9 @@ Search box Style
 
 
 .search-area .contain {
-    background-color: rgba(255, 255, 255, 0.5);
+    /*background-color: rgba(255, 255, 255, 0.5);*/
+    background-color: rgba(149, 183, 189, 0.75);
+
     height: 130px;
     width: inherit;
     border-radius: 30px;
@@ -1291,7 +1295,17 @@ li.selected {
 }
 
 .list-items .item:hover {
-    background-color: rgba(255, 140, 0, 0.1);
+  background-color: rgba(255, 140, 0, 0.1);
+}
+
+.list-items .item input {
+  margin: 0 12px 0 0;
+}
+
+
+
+.item label{
+  font-size: 17px;
 }
 
 .item .item-text {
@@ -1300,7 +1314,7 @@ li.selected {
     color: #333;
 }
 
-.item .checkbox {
+/*.item .checkbox {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1326,7 +1340,7 @@ li.selected {
 
 .item.checked .check-icon {
     transform: scale(1);
-}
+}*/
 
 /* checkbox end ----------------------------*/
 

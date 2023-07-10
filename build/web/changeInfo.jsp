@@ -1,10 +1,12 @@
 <%-- 
-    Document   : post
-    Created on : Jul 8, 2023, 3:04:46 AM
+    Document   : changeInfo
+    Created on : Jul 9, 2023, 4:23:54 PM
     Author     : Quoc Anh
 --%>
 
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="model.User" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,7 +14,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Post</title>
+        <title>Change Information</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
@@ -26,9 +28,28 @@
         <link rel="stylesheet" href="assets/css/animate.css">
         <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
 
+        <style>
+            @media screen and (min-width: 1920px) {
+                .footer {
+                    position: fixed;
+                    left: 0;
+                    bottom: 0;
+                    width: 100%;
+                    background-color: #f8f8f8;
+                }
+            }
+
+            @media screen and (max-width: 16in) {
+                .footer {
+                    margin-top: 70px;
+                }
+            }
+        </style>
+
     </head>
 
     <body>
+
 
         <!-- ***** Preloader Start ***** -->
         <div id="js-preloader" class="js-preloader">
@@ -43,7 +64,6 @@
         </div>
         <!-- ***** Preloader End ***** -->
 
-
         <!-- ***** Header Area Start ***** -->
         <header class="header-area">
             <nav class="container main-nav">
@@ -55,31 +75,12 @@
                 <!-- ***** Logo End ***** -->
 
                 <!-- ***** Menu Start ***** -->
-                <% 
-                    String user = null;
-                    HttpSession section = request.getSession(false);
-                    if (session != null) {
-                        user = (String) session.getAttribute("username");
-                    } 
-                %>
-
-                <!-- ***** Menu Start ***** -->
                 <ul class="nav" style="display: flex; align-items: center;">
-                    <li class="effect"><a href="./home" class="active">Home</a></li>
+                    <li class="effect"><a href="./home" >Home</a></li>
                     <li class="effect"><a href="./rental">Rental</a></li>
                     <li class="effect"><a href="./instruction">Instruction</a></li>
-                    <li class="effect"><a href="./post">Post</a></li>
-                    <li class="dropdown">
-                        <a class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-user"></i> <%= user %>
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="./profile">Profile</a>
-                            <a class="dropdown-item" href="./post">Post</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="./login">Logout</a>
-                        </div>
-                    </li>
+                    <li class="effect"><a href="./register" class="active">Register</a></li>
+                    <li class="effect"><a href="./login">Login</a></li>
                 </ul>
 
                 <a class='menu-trigger'>
@@ -97,40 +98,31 @@
                 <div class="rounded d-flex justify-content-center" style="margin-bottom: 70px;">
                     <div class="col-lg-4 col-md-6 col-sm-12 shadow-lg p-5 bg-light">
                         <div class="text-center">
-                            <h3 class="text-primary">Post</h3>
+                            <h3 class="text-primary">Change Information</h3>
                         </div>
-                        <form id="postform" method="POST" action="post" enctype="multipart/form-data">
+                        <% User u = (User) request.getAttribute("data"); %>
+                        <form id="changeInfoform" method="POST" action="changeInfo">
                             <div class="p-4">
                                 <div class="row input-group mb-3">
-                                    <input name="title" type="text" class="form-control" placeholder="Title">
+                                    <span class="input-group-text bg-primary" style="width: 36px;"><i class="bi bi-person-plus-fill text-white"></i></span>
+                                    <input name="fullname" type="text" class="form-control" placeholder="Full Name" value="<%= u.getFullName() %>">
                                 </div>
                                 <div class="row input-group mb-3">
-                                    <input name="description" type="text" class="form-control" placeholder="Description">
+                                    <span class="col-1 input-group-text bg-primary" style="width: 36px;"><i class="bi bi-person-plus-fill text-white"></i></span>
+                                    <input name="username" type="text" class="form-control" placeholder="User Name" value="<%= u.getUserName() %>">
                                 </div>
                                 <div class="row input-group mb-3">
-                                    <input name="address" type="text" class="form-control" placeholder="Address">
+                                    <span class="input-group-text bg-primary" style="width: 36px;"><i class="bi bi-phone text-white"></i></span>
+                                    <input name="phoneNumber" type="text" class="form-control" placeholder="Phone Number" value="<%= u.getPhoneNumber() %>">
                                 </div>
                                 <div class="row input-group mb-3">
-                                    <input name="phoneNumber" type="text" class="form-control" placeholder="Phone Number">
-                                </div>
-                                <div class="row input-group mb-3">
-                                    <input name="area" type="text" class="form-control" placeholder="Area">
-                                </div>
-                                <div class="row input-group mb-3">
-                                    <input name="numberOfRoom" type="text" class="form-control" placeholder="Number Of Room">
-                                </div>
-                                <div class="row input-group mb-3">
-                                    <input name="availableRoom" type="text" class="form-control" placeholder="Available Room">
-                                </div> 
-                                <div class="row input-group mb-3">
-                                    <input name="image" type="file" class="form-control">
+                                    <span class="col-1 input-group-text bg-primary" style="width: 36px;"><i class="bi bi-envelope text-white"></i></span>
+                                    <input name="email" type="email" class="form-control" placeholder="Email" value="<%= u.getEmail() %>">
                                 </div>
 
                                 <button class="w-50 mx-auto btn btn-primary text-center mt-2" style="display: flex; justify-content: center;" type="submit">
-                                    Post
+                                    Change
                                 </button>
-                                
-                            </div>
                         </form>
                     </div>
                 </div>
@@ -200,93 +192,8 @@
                 request.setAttribute("registrationStatus", null);
             %>
             }
-
-            $(document).ready(function () {
-                $('#postform').validate({
-                    rules: {
-                        // Define validation rules for your form fields
-                        title: {
-                            required: true, // Field is required
-                            minlength: 5 // Minimum length of 5 characters
-                        },
-                        description: {
-                            required: true, // Field is required
-                        },
-                        address: {
-                            required: true, // Field is required
-                            minlength: 5
-                        },
-                        phoneNumber: {
-                            required: true, // Field is required
-                            number: true
-                        },
-                        area: {
-                            required: true,
-                            number: true
-                        },
-                        numberOfRoom: {
-                            required: true, // Field is required
-                            number: true // Minimum length of 5 characters
-                        },
-                        availableRoom: {
-                            required: true, // Field is required
-                            number: true // Minimum length of 5 characters
-                        },
-                        image: {
-                            required: true, // Field is required
-                        },
-                        
-                        // Add more fields and rules as needed
-                    },
-                    messages: {
-                        // Define error messages for your form fields
-                        title: {
-                            required: 'Please enter a value for this field',
-                            minlength: 'Minimum length is 6 characters'
-                        },
-                        description: {
-                            required: 'Please enter a value for this field',
-                        },
-                        address: {
-                            required: 'Please enter a value for this field',
-                            minlength: 'Minimum length is 6 characters'
-                        },
-                        phoneNumber: {
-                            required: 'Please enter a value for this field',
-                            number: 'Please enter a valid number'
-                        },
-                        area: {
-                            required: 'Please enter a value for this field',
-                            number: 'Please enter a valid number'
-                        },
-                        numberOfRoom: {
-                            required: 'Please enter a value for this field',
-                            number: 'Please enter a valid number'
-                        },
-                        availableRoom: {
-                            required: 'Please enter a value for this field',
-                            number: 'Please enter a valid number'
-                        },
-                        image: {
-                            required: 'Please enter a value for this field',
-                        },
-                        
-                        // Add more fields and messages as needed
-                    }
-                });
-            });
-            
-            $(document).ready(function() {
-                $('.dropdown').on('focusin mouseenter', function() {
-                    $(this).addClass('show').find('.dropdown-menu').addClass('show');
-                }).on('focusout mouseleave', function() {
-                    $(this).removeClass('show').find('.dropdown-menu').removeClass('show');
-                });
-            });
-            
         </script>
     </body>
 
 </html>
-
 

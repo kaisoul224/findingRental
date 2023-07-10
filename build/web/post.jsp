@@ -69,11 +69,16 @@
                     <li class="effect"><a href="./rental">Rental</a></li>
                     <li class="effect"><a href="./instruction">Instruction</a></li>
                     <li class="effect"><a href="./post">Post</a></li>
-                    <li class="effect"><a href="./login">Logout</a></li>
-                    <li class="effect">
-                        <a class="nav-link" href="#">
+                    <li class="dropdown">
+                        <a class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-user"></i> <%= user %>
                         </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="./profile">Profile</a>
+                            <a class="dropdown-item" href="./post">Post</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="./login">Logout</a>
+                        </div>
                     </li>
                 </ul>
 
@@ -270,6 +275,15 @@
                     }
                 });
             });
+            
+            $(document).ready(function() {
+                $('.dropdown').on('focusin mouseenter', function() {
+                    $(this).addClass('show').find('.dropdown-menu').addClass('show');
+                }).on('focusout mouseleave', function() {
+                    $(this).removeClass('show').find('.dropdown-menu').removeClass('show');
+                });
+            });
+            
         </script>
     </body>
 

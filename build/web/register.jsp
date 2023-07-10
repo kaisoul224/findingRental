@@ -25,6 +25,24 @@
         <link rel="stylesheet" href="assets/css/owl.css">
         <link rel="stylesheet" href="assets/css/animate.css">
         <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+        
+                <style>
+                    @media screen and (min-width: 1920px) {
+                       .footer {
+                           position: fixed;
+                           left: 0;
+                           bottom: 0;
+                           width: 100%;
+                           background-color: #f8f8f8; 
+                       }
+                   }
+
+                   @media screen and (max-width: 16in) {
+                       .footer {
+                           margin-top: 70px;
+                       }
+                   }
+                </style>
 
     </head>
 
@@ -100,8 +118,12 @@
                                 </div>
                                 <div class="row input-group mb-3">
                                     <span class="input-group-text bg-primary" style="width: 36px;"><i class="bi bi-key-fill text-white"></i></span>
-                                    <input name="password" type="password" class="form-control" placeholder="Password">
-                                </div>                           
+                                    <input id="password" name="password" type="password" class="form-control" placeholder="Password">
+                                </div>  
+                                <div class="row input-group mb-3">
+                                    <span class="input-group-text bg-primary" style="width: 36px;"><i class="bi bi-key-fill text-white"></i></span>
+                                    <input name="cfpassword" type="password" class="form-control" placeholder="Confirm Password">
+                                </div> 
 
                                 <button class="w-50 mx-auto btn btn-primary text-center mt-2" style="display: flex; justify-content: center;" type="submit">
                                     Register
@@ -212,6 +234,10 @@
                         password: {
                             required: true, // Field is required
                             minlength: 6 // Minimum length of 5 characters
+                        },
+                        cfpassword: {
+                            required: true, // Field is required
+                            equalTo: "#password"
                         }
                         // Add more fields and rules as needed
                     },
@@ -236,6 +262,10 @@
                         password: {
                             required: 'Please enter a value for this field',
                             minlength: 'Minimum length is 6 characters'
+                        },
+                        cfpassword: {
+                            required: 'Please enter a value for this field',
+                            equalTo: 'Must equal to password'
                         }
                         // Add more fields and messages as needed
                     }

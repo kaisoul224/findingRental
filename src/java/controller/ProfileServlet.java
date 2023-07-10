@@ -2,6 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
+
 package controller;
 
 import dal.UserDAO;
@@ -19,12 +20,12 @@ import model.User;
  *
  * @author Quoc Anh
  */
-public class HomeServlet extends HttpServlet {
+public class ProfileServlet extends HttpServlet {
+   
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
+    /** 
      * Handles the HTTP <code>GET</code> method.
-     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -32,9 +33,8 @@ public class HomeServlet extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        
-                // Get all the cookies from the request
+    throws ServletException, IOException {
+                        // Get all the cookies from the request
         Cookie[] cookies = request.getCookies();
         
         if (cookies != null && request.getSession().getAttribute("username") == null && request.getSession().getAttribute("login") == null ) {
@@ -48,6 +48,8 @@ public class HomeServlet extends HttpServlet {
                     String[] accountInfo = accountCookieValue.split(":");
                     String username = accountInfo[0];
                     String password = accountInfo[1];
+                    System.out.println("username: " + username);
+                    System.out.println("password: "+ password);
                     UserDAO udb = new UserDAO();
                     User u = udb.check(username, password);
                     if (u != null) {
@@ -55,36 +57,30 @@ public class HomeServlet extends HttpServlet {
                         session.setMaxInactiveInterval(Integer.MAX_VALUE);
                         session.setAttribute("username", username);
                         session.setAttribute("login", "true");
-                        response.sendRedirect(request.getContextPath() + "/home");
+                        response.sendRedirect(request.getContextPath() + "/profile");
                         break;
-                    } else {
-                        if (request.getSession().getAttribute("username") != null) {
-                            HttpSession session = request.getSession();
-                            session.setMaxInactiveInterval(Integer.MAX_VALUE);
-                            session.setAttribute("username", request.getSession().getAttribute("username"));
-                            request.getRequestDispatcher("/home.jsp").forward(request, response);
-                        } else {
-                            request.getRequestDispatcher("/index.jsp").forward(request, response);
-                        }
                     }
                     break; // Exit the loop since we found the desired cookie
                 }
             }
         } else {
             if (request.getSession().getAttribute("username") != null) {
+                UserDAO udb = new UserDAO();
+                String username = (String) request.getSession().getAttribute("username");
+                User u = udb.getUserByUsername(username);
+                request.setAttribute("data", u);
                 HttpSession session = request.getSession();
                 session.setMaxInactiveInterval(Integer.MAX_VALUE);
-                session.setAttribute("username", request.getSession().getAttribute("username"));
-                request.getRequestDispatcher("/home.jsp").forward(request, response);
+                session.setAttribute("username", username);
+                request.getRequestDispatcher("/profile.jsp").forward(request, response);
             } else {
                 request.getRequestDispatcher("/index.jsp").forward(request, response);
             }
-        } 
-    }
+        }
+    } 
 
-    /**
+    /** 
      * Handles the HTTP <code>POST</code> method.
-     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -92,7 +88,8 @@ public class HomeServlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        
+    throws ServletException, IOException {
     }
+
+
 }

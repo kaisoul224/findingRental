@@ -25,6 +25,24 @@
         <link rel="stylesheet" href="assets/css/owl.css">
         <link rel="stylesheet" href="assets/css/animate.css">
         <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+        
+        <style>
+            @media screen and (min-width: 1920px) {
+               .footer {
+                   position: fixed;
+                   left: 0;
+                   bottom: 0;
+                   width: 100%;
+                   background-color: #f8f8f8;
+               }
+           }
+
+           @media screen and (max-width: 16in) {
+               .footer {
+                   margin-top: 70px;
+               }
+           }
+        </style>
 
     </head>
 
@@ -72,7 +90,7 @@
 
 
         <div class="container-fluid vh-40" style="margin-top:150px">
-            <div id="toast" style="z-index: 1;"></div>
+            <div id="toast" style="z-index: 1000000;"></div>
             <div class="">
                 <div class="rounded d-flex justify-content-center" style="margin-bottom: 70px;">
                     <div class="col-lg-4 col-md-6 col-sm-12 shadow-lg p-5 bg-light">

@@ -39,4 +39,14 @@ searchInp.addEventListener("keyup", () => {
     options.innerHTML = arr ? arr : `<p style="margin-top: 10px;">City not found!</p>`;
 });
 
+// Add an event listener to the document for a click event
+document.addEventListener("click", function(event) {
+    const isClickInside = wrapper.contains(event.target); // Check if the click is inside the wrapper
+  
+    if (!isClickInside) {
+      // If the click is outside the wrapper, hide the dropdown
+      wrapper.classList.remove("active");
+    }
+  });
+
 selectBtn.addEventListener("click", () => wrapper.classList.toggle("active"));

@@ -1,10 +1,11 @@
 <%-- 
-    Document   : post
-    Created on : Jul 8, 2023, 3:04:46 AM
+    Document   : register
+    Created on : Jul 6, 2023, 3:42:34 PM
     Author     : Quoc Anh
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="model.User" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,7 +13,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Post</title>
+        <title>Profile</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
@@ -25,10 +26,29 @@
         <link rel="stylesheet" href="assets/css/owl.css">
         <link rel="stylesheet" href="assets/css/animate.css">
         <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+        
+                <style>
+                    @media screen and (min-width: 1920px) {
+                       .footer {
+                           position: fixed;
+                           left: 0;
+                           bottom: 0;
+                           width: 100%;
+                           background-color: #f8f8f8; 
+                       }
+                   }
+
+                   @media screen and (max-width: 16in) {
+                       .footer {
+                           margin-top: 70px;
+                       }
+                   }
+                </style>
 
     </head>
 
     <body>
+
 
         <!-- ***** Preloader Start ***** -->
         <div id="js-preloader" class="js-preloader">
@@ -42,7 +62,6 @@
             </div>
         </div>
         <!-- ***** Preloader End ***** -->
-
 
         <!-- ***** Header Area Start ***** -->
         <header class="header-area">
@@ -91,51 +110,58 @@
         <!-- ***** Header Area End ***** -->
 
 
-        <div class="container-fluid vh-40" style="margin-top:150px">
-            <div id="toast" style="z-index: 1;"></div>
-            <div class="">
-                <div class="rounded d-flex justify-content-center" style="margin-bottom: 70px;">
-                    <div class="col-lg-4 col-md-6 col-sm-12 shadow-lg p-5 bg-light">
-                        <div class="text-center">
-                            <h3 class="text-primary">Post</h3>
-                        </div>
-                        <form id="postform" method="POST" action="post" enctype="multipart/form-data">
-                            <div class="p-4">
-                                <div class="row input-group mb-3">
-                                    <input name="title" type="text" class="form-control" placeholder="Title">
-                                </div>
-                                <div class="row input-group mb-3">
-                                    <input name="description" type="text" class="form-control" placeholder="Description">
-                                </div>
-                                <div class="row input-group mb-3">
-                                    <input name="address" type="text" class="form-control" placeholder="Address">
-                                </div>
-                                <div class="row input-group mb-3">
-                                    <input name="phoneNumber" type="text" class="form-control" placeholder="Phone Number">
-                                </div>
-                                <div class="row input-group mb-3">
-                                    <input name="area" type="text" class="form-control" placeholder="Area">
-                                </div>
-                                <div class="row input-group mb-3">
-                                    <input name="numberOfRoom" type="text" class="form-control" placeholder="Number Of Room">
-                                </div>
-                                <div class="row input-group mb-3">
-                                    <input name="availableRoom" type="text" class="form-control" placeholder="Available Room">
-                                </div> 
-                                <div class="row input-group mb-3">
-                                    <input name="image" type="file" class="form-control">
-                                </div>
-
-                                <button class="w-50 mx-auto btn btn-primary text-center mt-2" style="display: flex; justify-content: center;" type="submit">
-                                    Post
-                                </button>
-                                
-                            </div>
-                        </form>
-                    </div>
-                </div>
+        <div class="container-fluid vh-40" style="margin-top: 150px;">
+    <div id="toast" style="z-index: 1;"></div>
+    <div class="d-flex justify-content-center align-items-center">
+        <div class="col-lg-4 col-md-6 col-sm-12 shadow-lg p-5 bg-light rounded">
+            <div class="text-center">
+                <h3 class="text-primary">Your Profile</h3>
             </div>
+            <% User u = (User) request.getAttribute("data"); %>
+            <form id="profileform" method="POST">
+                <div class="p-4">
+                    <div class="mb-3">
+                        <div class="input-group">
+                            <span class="input-group-text bg-primary"><i class="bi bi-person-plus-fill text-white"></i></span>
+                            <input name="fullname" type="text" class="form-control" placeholder="Full Name" readonly value="<%= u.getFullName() %>">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="input-group">
+                            <span class="input-group-text bg-primary"><i class="bi bi-person-plus-fill text-white"></i></span>
+                            <input name="username" type="text" class="form-control" placeholder="User Name" readonly value="<%= u.getUserName() %>">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="input-group">
+                            <span class="input-group-text bg-primary"><i class="bi bi-phone text-white"></i></span>
+                            <input name="phoneNumber" type="text" class="form-control" placeholder="Phone Number" readonly value="<%= u.getPhoneNumber() %>">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="input-group">
+                            <span class="input-group-text bg-primary"><i class="bi bi-envelope text-white"></i></span>
+                            <input name="email" type="email" class="form-control" placeholder="Email" readonly value="<%= u.getEmail() %>">
+                        </div>
+                    </div>
+                    
+                </div>
+            </form>
+            <div class="mb-3">
+                <a class="btn btn-primary w-100" href="./changeInfo">
+                    Change Information
+                </a>
+            </div>
+            <div>
+                <a class="btn btn-primary w-100" href="./changePassword">
+                    Change Password
+                </a>
+            </div>
+
         </div>
+    </div>
+</div>
+
 
 
         <div class="footer">
@@ -191,91 +217,8 @@
         <script src="./assets/js/tabs.js"></script>
         <script src="./assets/js/popup.js"></script>
         <script src="./assets/js/custom.js"></script>
-        <script src="./assets/js/toast.js"></script>
-
+        
         <script>
-            if ("${requestScope.registrationStatus}" === "failure") {
-                showErrorRegister();
-            <%
-                request.setAttribute("registrationStatus", null);
-            %>
-            }
-
-            $(document).ready(function () {
-                $('#postform').validate({
-                    rules: {
-                        // Define validation rules for your form fields
-                        title: {
-                            required: true, // Field is required
-                            minlength: 5 // Minimum length of 5 characters
-                        },
-                        description: {
-                            required: true, // Field is required
-                        },
-                        address: {
-                            required: true, // Field is required
-                            minlength: 5
-                        },
-                        phoneNumber: {
-                            required: true, // Field is required
-                            number: true
-                        },
-                        area: {
-                            required: true,
-                            number: true
-                        },
-                        numberOfRoom: {
-                            required: true, // Field is required
-                            number: true // Minimum length of 5 characters
-                        },
-                        availableRoom: {
-                            required: true, // Field is required
-                            number: true // Minimum length of 5 characters
-                        },
-                        image: {
-                            required: true, // Field is required
-                        },
-                        
-                        // Add more fields and rules as needed
-                    },
-                    messages: {
-                        // Define error messages for your form fields
-                        title: {
-                            required: 'Please enter a value for this field',
-                            minlength: 'Minimum length is 6 characters'
-                        },
-                        description: {
-                            required: 'Please enter a value for this field',
-                        },
-                        address: {
-                            required: 'Please enter a value for this field',
-                            minlength: 'Minimum length is 6 characters'
-                        },
-                        phoneNumber: {
-                            required: 'Please enter a value for this field',
-                            number: 'Please enter a valid number'
-                        },
-                        area: {
-                            required: 'Please enter a value for this field',
-                            number: 'Please enter a valid number'
-                        },
-                        numberOfRoom: {
-                            required: 'Please enter a value for this field',
-                            number: 'Please enter a valid number'
-                        },
-                        availableRoom: {
-                            required: 'Please enter a value for this field',
-                            number: 'Please enter a valid number'
-                        },
-                        image: {
-                            required: 'Please enter a value for this field',
-                        },
-                        
-                        // Add more fields and messages as needed
-                    }
-                });
-            });
-            
             $(document).ready(function() {
                 $('.dropdown').on('focusin mouseenter', function() {
                     $(this).addClass('show').find('.dropdown-menu').addClass('show');
@@ -283,7 +226,6 @@
                     $(this).removeClass('show').find('.dropdown-menu').removeClass('show');
                 });
             });
-            
         </script>
     </body>
 
