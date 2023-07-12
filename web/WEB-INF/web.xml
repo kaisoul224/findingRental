@@ -47,7 +47,7 @@
     </servlet>
     <servlet>
         <servlet-name>FindRental</servlet-name>
-        <servlet-class>controller.FindRental</servlet-class>
+        <servlet-class>controller.FindRentalServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
@@ -103,6 +103,12 @@
             30
         </session-timeout>
     </session-config>
+    <jsp-config>
+        <jsp-property-group>
+            <url-pattern>*.jsp</url-pattern>
+            <page-encoding>UTF-8</page-encoding>
+        </jsp-property-group>
+    </jsp-config>
     <welcome-file-list>
         <!--<welcome-file>faces/index.xhtml</welcome-file>-->
         <welcome-file>/index.jsp</welcome-file>

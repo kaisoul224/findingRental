@@ -4,11 +4,12 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/D:/FPT/Courses/SU23/PRJ301/Group3_PRJ301_Project/web/assets/js/home.js</file>
-            <file>file:/D:/FPT/Courses/SU23/PRJ301/Group3_PRJ301_Project/src/java/dal/UserDAO.java</file>
             <file>file:/D:/FPT/Courses/SU23/PRJ301/Group3_PRJ301_Project/web/index.jsp</file>
-            <file>file:/D:/FPT/Courses/SU23/PRJ301/Group3_PRJ301_Project/src/java/dal/PostDAO.java</file>
+            <file>file:/D:/FPT/Courses/SU23/PRJ301/Group3_PRJ301_Project/src/java/controller/FindRentalServlet.java</file>
+            <file>file:/D:/FPT/Courses/SU23/PRJ301/Group3_PRJ301_Project/web/WEB-INF/web.xml</file>
             <file>file:/D:/FPT/Courses/SU23/PRJ301/Group3_PRJ301_Project/web/home.jsp</file>
-            <file>file:/D:/FPT/Courses/SU23/PRJ301/Group3_PRJ301_Project/src/java/controller/FindRental.java</file>
+            <file>file:/D:/FPT/Courses/SU23/PRJ301/Group3_PRJ301_Project/web/assets/js/checkBox.js</file>
+            <file>file:/D:/FPT/Courses/SU23/PRJ301/Group3_PRJ301_Project/web/assets/js/selectBox.js</file>
         </group>
     </open-files>
 </project-private>

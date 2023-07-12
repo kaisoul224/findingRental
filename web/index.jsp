@@ -101,81 +101,91 @@
                             <div class="search-area">
 
                                 <div class="contain">
-                                    <div class="search-bar" style="height: 40px;">
-                                        <input id="search_home" class="input-content" type="text" placeholder="Search">
-                                        <i class="fa fa-search" style="color: #000000;"></i>
-                                    </div>
-
-
-                                    <div class="search-button">
-
-                                        <div class="wrapper">
-                                            <div class="select-btn">
-                                                <span>Select City</span>
-                                                <span class="arrow-dwn">
-                                                    <i class="fa fa-angle-down"></i>
-                                                </span>
-                                            </div>
-                                            <div class="content">
-                                                <div class="search">
-                                                    <i class="uil uil-search"></i>
-                                                    <input spellcheck="false" type="text" placeholder="Search">
-                                                </div>
-                                                <ul  class="options"></ul>
-                                            </div>
+                                    <form method="POST" action="HomeServlet">
+                                        <div class="search-bar" style="height: 40px;">
+                                            <input name="search_home" id="search_home" class="input-content" type="text" placeholder="Search">
+                                            <button style="border: none; outline: none; background: none; padding: 0;" type="submit">
+                                                <i class="fa fa-search" style="color: #000000;"></i>
+                                            </button>
                                         </div>
+                                    </form>
 
-                                        <div class="container-holder">
-                                            <div class="select-button">
-                                                <span class="btn-text">Select Rental Price</span>
-                                                <span class="arrow-dwn">
-                                                    <i class="fa fa-angle-down"></i>
-                                                </span>
-                                            </div>
 
-                                            <ul class="list-items">
-                                                <li class="item">
-                                                    <input type="radio" name="price" value="Tất cả" id="tat-ca">
-                                                    <label for="tat-ca">Tất cả</label>
-                                                </li>
-                                                <li class="item">
-                                                    <input type="radio" name="price" value="Dưới 1 triệu" id="duoi1trieu">
-                                                    <label for="duoi1trieu">Dưới 1 triệu</label>
-                                                </li>
-                                                <li class="item">
-                                                    <input type="radio" name="price" value="1 triệu - 2 triệu" id="1-2trieu">
-                                                    <label for="1-2trieu">1 triệu - 2 triệu </label>
-                                                </li>
-                                                <li class="item">
-                                                    <input type="radio" name="price" value="2 triệu - 3 triệu" id="2-3trieu">
-                                                    <label for="2-3trieu">2 triệu - 3 triệu</label> 
-                                                </li>
-                                                <li class="item">
-                                                    <input type="radio" name="price" value="3 triệu - 5 triệu" id="3-5trieu">
-                                                    <label for="3-5trieu">3 triệu - 5 triệu</label> 
-                                                </li>
-                                                <li class="item">
-                                                    <input type="radio" name="price" value="5 triệu - 7 triệu" id="5-7trieu">
-                                                    <label for="5-7trieu">5 triệu - 7 triệu</label> 
-                                                </li>
-                                                <li class="item">
-                                                    <input type="radio" name="price" value="7 triệu - 10 triệu" id="7-10trieu">
-                                                    <label for="7-10trieu">7 triệu - 10 triệu</label> 
-                                                </li>
-                                                <li class="item">
-                                                    <input type="radio" name="price" value="10 triệu - 15 triệu" id="10-15trieu">
-                                                    <label for="10-15trieu">10 triệu - 15 triệu</label> 
-                                                </li>
-                                                <li class="item">
-                                                    <input type="radio" name="price" value="Trên 15 triệu" id="tren15trieu">
-                                                    <label for="tren15trieu">Trên 15 triệu</label> 
-                                                </li>
-                                            </ul>
-                                        </div>
 
-                                        <div class="apply-box-container">
-                                            <div class="apply-button">
-                                                <button>Search</button>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="search-button">
+                                                <form method="POST" action="home">
+                                                    <div class="row">
+                                                        <div class="col-lg-5 col-sm-12">
+                                                            <div class="wrapper">
+                                                                <div class="select-btn">
+                                                                    <input type="text" name="search_city" id="search_city" value="Select City"
+                                                                           style="padding-left: 25px; outline: none; border: none; background: transparent;"
+                                                                           readonly>
+                                                                    <span class="arrow-dwn">
+                                                                        <i class="fa fa-angle-down"></i>
+                                                                    </span>
+                                                                </div>
+                                                                <div class="content">
+                                                                    <div class="search">
+                                                                        <i class="uil uil-search"></i>
+                                                                        <input spellcheck="false" type="text" placeholder="Search">
+                                                                    </div>
+                                                                    <ul style="max-height: 110px;" class="options"></ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-5 col-sm-12">
+                                                            <div class="container-holder">
+                                                                <div class="select-button">
+                                                                    <input type="text" name="search_price" id="search_price" class="btn-text"
+                                                                           value="Select Rental Price"
+                                                                           style="padding-left: 25px; outline: none; border: none; background: transparent;"
+                                                                           readonly>
+                                                                    <span class="arrow-dwn">
+                                                                        <i class="fa fa-angle-down"></i>
+                                                                    </span>
+                                                                </div>
+                                                                <div class="list-items" style="max-height: 210px; overflow-y: scroll;">
+                                                                    <ul>
+                                                                        <li class="item">
+                                                                            <input type="radio" name="price" value="all" id="tat-ca">
+                                                                            <label for="tat-ca">Tất cả</label>
+                                                                        </li>
+                                                                        <li class="item">
+                                                                            <input type="radio" name="price" value="0-1000000" id="duoi1trieu">
+                                                                            <label for="duoi1trieu">Dưới 1 triệu</label>
+                                                                        </li>
+                                                                        <li class="item">
+                                                                            <input type="radio" name="price" value="1000000-2000000" id="1-2trieu">
+                                                                            <label for="1-2trieu">1 triệu - 2 triệu</label>
+                                                                        </li>
+                                                                        <li class="item">
+                                                                            <input type="radio" name="price" value="2000000-3000000" id="2-3trieu">
+                                                                            <label for="2-3trieu">2 triệu - 3 triệu</label>
+                                                                        </li>
+                                                                        <li class="item">
+                                                                            <input type="radio" name="price" value="3000000-5000000" id="3-5trieu">
+                                                                            <label for="3-5trieu">3 triệu - 5 triệu</label>
+                                                                        </li>
+                                                                        <li class="item">
+                                                                            <input type="radio" name="price" value="5000000-10000000" id="5-10trieu">
+                                                                            <label for="5-10trieu">5 triệu - 10 triệu</label>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                       <div class="col-lg-2 col-sm-12">
+                                                            <div class="apply-box-container">
+                                                                <div class="apply-button">
+                                                                    <button type="submit" class="btn">Search</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
@@ -501,7 +511,7 @@
         <script src="./assets/js/custom.js"></script>
         <script src="./assets/js/selectBox.js"></script>
         <script src="./assets/js/checkBox.js"></script>
-
+        <!--<script src="./assets/js/home.js"></script>-->
 
     </body>
 

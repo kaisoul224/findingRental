@@ -21,7 +21,7 @@ import model.User;
 public class DBconnector {
 
     private String hostName = "localhost";
-    private String dbName = "prj301_project";
+    private String dbName = "prj_project";
     private String username = "root";
     private String password = "";
 

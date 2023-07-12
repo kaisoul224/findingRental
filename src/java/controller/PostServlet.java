@@ -95,6 +95,7 @@ public class PostServlet extends HttpServlet {
         String area_raw = request.getParameter("area");
         String numberOfRoom_raw = request.getParameter("numberOfRoom");
         String availableRoom_raw = request.getParameter("availableRoom");
+        String price_raw = request.getParameter("price");
         Part part = request.getPart("image");
         PostDAO pdb = new PostDAO();
         UserDAO udb = new UserDAO();
@@ -103,6 +104,7 @@ public class PostServlet extends HttpServlet {
                 double area = Double.parseDouble(area_raw);
                 int numberOfRoom = Integer.parseInt(numberOfRoom_raw);
                 int availableRoom = Integer.parseInt(availableRoom_raw);
+                int price = Integer.parseInt(price_raw);
                 InputStream is = part.getInputStream();
                 LocalDate localDate = LocalDate.now();
                 String username = (String) request.getSession().getAttribute("username");
@@ -112,7 +114,7 @@ public class PostServlet extends HttpServlet {
                 }
                 
                 int userid = udb.getUserByUsername(username).getUserId();
-                Post newP = new Post(0, title, description, address, phoneNumber, area, numberOfRoom, availableRoom, localDate, userid, is);
+                Post newP = new Post(0, title, description, address, phoneNumber, area, numberOfRoom, availableRoom,price,localDate, userid, is);
                 pdb.insertPost_forUser(newP);
                 pdb.insertImage_forUser(newP);
                 response.sendRedirect(request.getContextPath() + "/home");

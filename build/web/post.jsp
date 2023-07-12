@@ -123,6 +123,9 @@
                                     <input name="availableRoom" type="text" class="form-control" placeholder="Available Room">
                                 </div> 
                                 <div class="row input-group mb-3">
+                                    <input name="price" type="text" class="form-control" placeholder="Price">
+                                </div> 
+                                <div class="row input-group mb-3">
                                     <input name="image" type="file" class="form-control">
                                 </div>
 
@@ -232,6 +235,10 @@
                             required: true, // Field is required
                             number: true // Minimum length of 5 characters
                         },
+                        price: {
+                            required: true, // Field is required
+                            number: true // Minimum length of 5 characters
+                        },
                         image: {
                             required: true, // Field is required
                         },
@@ -264,6 +271,10 @@
                             number: 'Please enter a valid number'
                         },
                         availableRoom: {
+                            required: 'Please enter a value for this field',
+                            number: 'Please enter a valid number'
+                        },
+                        price: {
                             required: 'Please enter a value for this field',
                             number: 'Please enter a valid number'
                         },

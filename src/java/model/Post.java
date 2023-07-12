@@ -20,11 +20,12 @@ public class Post {
     private double area;
     private int numberOfRoom;
     private int availableRoom;
+    private int price;
     private LocalDate date;
     private int userID;
     private InputStream url;
 
-    public Post(int postID, String title, String description, String address, String phoneNumber, double area, int numberOfRoom, int availableRoom, LocalDate date, int userID, InputStream url) {
+    public Post(int postID, String title, String description, String address, String phoneNumber, double area, int numberOfRoom, int availableRoom, int price, LocalDate date, int userID, InputStream url) {
         this.postID = postID;
         this.title = title;
         this.description = description;
@@ -33,6 +34,7 @@ public class Post {
         this.area = area;
         this.numberOfRoom = numberOfRoom;
         this.availableRoom = availableRoom;
+        this.price = price;
         this.date = date;
         this.userID = userID;
         this.url = url;
@@ -102,6 +104,14 @@ public class Post {
         this.availableRoom = availableRoom;
     }
 
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
     public LocalDate getDate() {
         return date;
     }
@@ -125,4 +135,7 @@ public class Post {
     public void setUrl(InputStream url) {
         this.url = url;
     }
+
+    
+    
 }

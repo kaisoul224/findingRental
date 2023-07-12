@@ -305,9 +305,9 @@ Global Styles
 html,
 body {
     /*background: linear-gradient(to right, #bdc3c7, #2c3e50);*/
-    background: #ffffff;
+    /*background: #ffffff;*/
     /*background-color: #989898;*/
-
+    
     font-family: 'Poppins', sans-serif;
 }
 
@@ -1081,11 +1081,11 @@ Search box Style
 Option box Style
 --------------------------------------------- 
 */
-.search-area .contain .search-button {
+/*.search-area .contain .search-button {
     display: flex;
-    /* align-items: center; */
-    justify-content: center;
-}
+     align-items: center; 
+    justify-content: space-around;
+}*/
 
 /* select-option start */
 ::selection {
@@ -1139,6 +1139,7 @@ li {
 }
 
 .content {
+    z-index: 100000000;
     width: inherit;
     display: none;
     padding: 20px;
@@ -1187,7 +1188,7 @@ li {
 
 .content .options {
     margin-top: 10px;
-    max-height: 250px;
+    max-height: 100px;
     overflow-y: auto;
     padding-right: 7px;
 }
@@ -1278,6 +1279,7 @@ li.selected {
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
     display: none;
 }
+
 
 .select-button.open~.list-items {
     display: block;
@@ -1654,19 +1656,19 @@ Stream Style
 .page-content-find {
     margin-top: 70px;
     /*margin-bottom: 70px;*/
-    background: #808080;
-    padding: 70px;
+    /*background: #808080;*/
+    padding: 40px;
 }
 
-.page-content-find {
+/*.page-content-find {
     display: flex;
     flex-wrap: wrap;
-}
+}*/
 
 /* side content start */
 /* filter by price start*/
 .page-content-find .side-content {
-    flex: 20%;
+    /*flex: 20%;*/
     background-color: #bebebe;
     padding: 10px;
     border-top-left-radius: 10px;
@@ -1756,6 +1758,7 @@ Stream Style
 
 .filter-location .filter-content .wrapper .search-input{
     background: #ffffff;
+    height: 100%;
     width: 100%;
     border-radius: 0 0 5px 5px;
     position: relative;
@@ -1825,7 +1828,7 @@ Stream Style
 
 /* main content start */
 .page-content-find .main-content {
-    flex: 80%;
+    /*flex: 80%;*/
     background-color: #eee;
     padding: 10px;
     border-top-right-radius: 10px;
