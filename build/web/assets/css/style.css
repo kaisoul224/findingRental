@@ -1718,6 +1718,7 @@ Stream Style
     transition: 0.3s;
     padding: 0 15px;
     border-radius: 8px;
+    cursor: pointer;
 }
 
 .list-items-rental .rental-item:hover {

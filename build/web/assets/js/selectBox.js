@@ -30,6 +30,8 @@ function updateName(selectedLi) {
     searchCityVal.value = selectedLi.textContent;
 }
 
+
+
 searchInp.addEventListener("keyup", () => {
     let arr = [];
     let searchWord = searchInp.value.toLowerCase();

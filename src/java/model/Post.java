@@ -39,6 +39,19 @@ public class Post {
         this.userID = userID;
         this.url = url;
     }
+    
+    // Override equals() method
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Post otherPost = (Post) obj;
+        return this.postID == otherPost.postID;
+    }
 
     public int getPostID() {
         return postID;

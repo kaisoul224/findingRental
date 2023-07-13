@@ -2,7 +2,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-
 package controller;
 
 import dal.PostDAO;
@@ -19,7 +18,9 @@ import jakarta.servlet.http.HttpSession;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.text.Normalizer;
 import java.util.ArrayList;
+import java.util.Iterator;
 import model.Post;
 import model.User;
 
@@ -28,11 +29,17 @@ import model.User;
  * @author Quoc Anh
  */
 public class FindRentalServlet extends HttpServlet {
-   
+    
+    // Method to remove diacritics from a Vietnamese string
+    public String removeDiacritics(String vietnameseString) {
+        String normalizedString = Normalizer.normalize(vietnameseString, Normalizer.Form.NFD);
+        return normalizedString.replaceAll("\\p{M}", "");
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
+    /**
      * Handles the HTTP <code>GET</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -40,20 +47,20 @@ public class FindRentalServlet extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        
+            throws ServletException, IOException {
+
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
-        
+
         String searchValue1 = request.getParameter("query");
         String searchValue2 = request.getParameter("city");
         String searchValue3 = request.getParameter("price");
         HttpSession session = request.getSession();
         PostDAO pdb = new PostDAO();
-        
-        session.removeAttribute("postList");
-        
+
         if (searchValue1 != null) {
+            session.removeAttribute("postList_raw");
+            session.removeAttribute("postList");
             ArrayList<Post> postList1 = pdb.getListPostByAddress(searchValue1);
             ArrayList<Post> postList2 = pdb.getListPostByTitle(searchValue1);
             if (postList1 != null && postList2 != null) {
@@ -66,8 +73,9 @@ public class FindRentalServlet extends HttpServlet {
                 session.setAttribute("postList", postList1);
             } else if (postList2 != null) {
                 session.setAttribute("postList", postList2);
-            }            
+            }
         } else if (searchValue2 != null && searchValue3 != null) {
+            session.removeAttribute("postList");
             // Handle search by city and price
             ArrayList<Post> postList = pdb.getListPostByCityAndPrice(searchValue2, searchValue3);
             if (!postList.isEmpty()) {
@@ -76,8 +84,10 @@ public class FindRentalServlet extends HttpServlet {
                 System.out.println("No posts found.");
             }
         } else if (searchValue2 != null) {
-            ArrayList<Post> postList1 = pdb.getListPostByAddress(searchValue3);
-            ArrayList<Post> postList2 = pdb.getListPostByTitle(searchValue3);
+            session.removeAttribute("postList");
+            searchValue2= removeDiacritics(searchValue2);
+            ArrayList<Post> postList1 = pdb.getListPostByAddress(searchValue2);
+            ArrayList<Post> postList2 = pdb.getListPostByTitle(searchValue2);
             if (postList1 != null && postList2 != null) {
                 if (postList1.size() > postList2.size()) {
                     session.setAttribute("postList", postList1);
@@ -88,9 +98,53 @@ public class FindRentalServlet extends HttpServlet {
                 session.setAttribute("postList", postList1);
             } else if (postList2 != null) {
                 session.setAttribute("postList", postList2);
-            } 
+            }
+        } else if (searchValue3 != null) {
+            ArrayList<Post> postList_raw;
+            if (session.getAttribute("postList_raw") != null && session.getAttribute("postList") != null) {
+                postList_raw = (ArrayList<Post>) session.getAttribute("postList_raw");
+            } else if (session.getAttribute("postList") != null ) {
+                postList_raw = (ArrayList<Post>) session.getAttribute("postList");
+            } else if (session.getAttribute("postList_raw") != null) {
+                 postList_raw = (ArrayList<Post>) session.getAttribute("postList_raw");
+            } else {
+                postList_raw = pdb.getAllListPost();
+            }
+
+            ArrayList<Post> postList_all = pdb.getAllListPost();
+
+            ArrayList<Post> postList = new ArrayList<>();
+            // Prepare the price range variables
+            int minPrice = 0;
+            int maxPrice = Integer.MAX_VALUE;
+
+            session.removeAttribute("postList");
+
+            if (searchValue3 != null && !searchValue3.equals("all")) {
+                String[] priceRange = searchValue3.split("-");
+                if (priceRange.length == 2) {
+                    minPrice = Integer.parseInt(priceRange[0]);
+                    maxPrice = Integer.parseInt(priceRange[1]);
+                }
+            }
+            System.out.println("postList_raw  " + postList_raw.size());
+            for (Post p : postList_all) {
+                if (postList_raw.contains(p)) {
+                    postList.add(p);
+                }
+            }
+            System.out.println("postList  " + postList.size());
+            Iterator<Post> iterator = postList.iterator();
+            while (iterator.hasNext()) {
+                Post p = iterator.next();
+                if (p.getPrice() < minPrice || p.getPrice() > maxPrice) {
+                    iterator.remove();
+                }
+            }
+            session.setAttribute("postList_raw", postList_raw);
+            session.setAttribute("postList", postList);
         }
-    
+
         // Get all the cookies from the request
         Cookie[] cookies = request.getCookies();
 
@@ -134,10 +188,11 @@ public class FindRentalServlet extends HttpServlet {
                 request.getRequestDispatcher("/rental.jsp").forward(request, response);
             }
         }
-    } 
+    }
 
-    /** 
+    /**
      * Handles the HTTP <code>POST</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -145,9 +200,8 @@ public class FindRentalServlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        
-    }
+            throws ServletException, IOException {
 
+    }
 
 }

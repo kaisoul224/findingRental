@@ -43,7 +43,7 @@ inputBox.onkeyup = (e)=>{
     }else{
         searchWrapper.classList.remove("active"); //hide autocomplete box
     }
-}
+};
 
 function select(element){
     let selectData = element.textContent;
@@ -52,7 +52,7 @@ function select(element){
         webLink = `https://www.google.com/search?q=${selectData}`;
         linkTag.setAttribute("href", webLink);
         linkTag.click();
-    }
+    };
     searchWrapper.classList.remove("active");
 }
 

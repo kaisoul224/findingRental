@@ -2,7 +2,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-
 package controller;
 
 import dal.PostDAO;
@@ -24,9 +23,10 @@ import model.User;
  * @author Quoc Anh
  */
 public class RentalServlet extends HttpServlet {
-   
-    /** 
+
+    /**
      * Handles the HTTP <code>GET</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -34,16 +34,15 @@ public class RentalServlet extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        
-        
+            throws ServletException, IOException {
+
         Cookie[] cookies = request.getCookies();
         ArrayList<Post> postList = new ArrayList<>();
         PostDAO pdb = new PostDAO();
         postList = pdb.getAllListPost();
         HttpSession session = request.getSession();
         session.setAttribute("postList", postList);
-        if (cookies != null && request.getSession().getAttribute("username") == null && request.getSession().getAttribute("login") == null ) {
+        if (cookies != null && request.getSession().getAttribute("username") == null && request.getSession().getAttribute("login") == null) {
             for (Cookie cookie : cookies) {
                 if (cookie.getName().equals("account")) {
                     // Read the value of the "account" cookie
@@ -61,7 +60,7 @@ public class RentalServlet extends HttpServlet {
                     } else {
                         if (request.getSession().getAttribute("username") != null) {
                             session.setAttribute("username", request.getSession().getAttribute("username"));
-                            
+
                             request.getRequestDispatcher("/findRental.jsp").forward(request, response);
                         } else {
                             request.getRequestDispatcher("/rental.jsp").forward(request, response);
@@ -78,11 +77,12 @@ public class RentalServlet extends HttpServlet {
                 request.getRequestDispatcher("/rental.jsp").forward(request, response);
             }
         }
-        
-    } 
 
-    /** 
+    }
+
+    /**
      * Handles the HTTP <code>POST</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -90,7 +90,28 @@ public class RentalServlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
+        try {
+            // Set character encoding for request and response
+            request.setCharacterEncoding("UTF-8");
+            response.setCharacterEncoding("UTF-8");
+
+            String searchValue = request.getParameter("search_value");
+
+            if (searchValue != null && !searchValue.isEmpty()) {
+//                searchValue = removeDiacritics(searchValue);
+                // Encode search value with proper encoding
+                String encodedSearchValue = java.net.URLEncoder.encode(searchValue, "UTF-8");
+
+                response.sendRedirect(request.getContextPath() + "/find?query=" + encodedSearchValue);
+            } else {
+                response.sendRedirect(request.getContextPath() + "/rental");
+            }
+        } catch (IOException e) { // Handle encoding exception
+            // Handle encoding exception
+            response.sendRedirect(request.getContextPath() + "/rental");
+        }
+
     }
 
 }

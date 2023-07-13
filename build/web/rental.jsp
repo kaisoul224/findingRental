@@ -109,7 +109,7 @@
         <div class="container">
             <div class="row page-content-find">
                 <div class="col-3 side-content">
-                    <form method="POST" action="find">
+                    <form method="POST" action="rental" style="margin-bottom: 30px;">
                         <div class="filter-location">
                             <p>Find by Location</p>
                             <div class="filter-content">
@@ -117,62 +117,57 @@
                                     <div class="search-input">
                                         <a href="" target="_blank" hidden></a>
                                         <input name="search_value" type="text" placeholder="Search...">
-                                        <button type="submit">
+                                        <div class="autocom-box"></div>
+                                        <button class="icon btn btn-unstyled d-flex align-items-center" type="submit">
                                             <i class="fas fa-search"></i>
                                         </button>
-                                        
-                                        <!--<div class="autocom-box"></div>-->
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </form>
+                    <div class="filter-price">
+                        <p>Find by City</p>
+                        <div class="filter-content">
+                            <div class="select-btn" style="border-radius: 0 0 7px 7px;">
+                                <select name="search_city" id="search_city" style="height: 60px; width: 100%; outline: none; border: none; background: transparent;">
+                                    <option selected disabled>Select City</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                     
                     <div class="filter-price">
                         <p>Find by Price</p>
                         <div class="filter-content">
                             <ul class="list-items-rental">
                                 <li class="rental-item">
-                                    <input type="radio" name="price" value="Tat ca" id="tat-ca">
+                                    <input type="radio" name="price" value="all" id="tat-ca">
                                     <label for="tat-ca">Tất cả</label>
                                 </li>
                                 <li class="rental-item">
-                                    <input type="radio" name="price" value="Duoi 1 trieu" id="duoi1trieu">
+                                    <input type="radio" name="price" value="0-1000000" id="duoi1trieu">
                                     <label for="duoi1trieu">Dưới 1 triệu</label>
                                 </li>
                                 <li class="rental-item">
-                                    <input type="radio" name="price" value="1 trieu - 2 trieu" id="1-2trieu">
+                                    <input type="radio" name="price" value="1000000-2000000" id="1-2trieu">
                                     <label for="1-2trieu">1 triệu - 2 triệu</label>
                                 </li>
                                 <li class="rental-item">
-                                    <input type="radio" name="price" value="2 trieu - 3 trieu" id="2-3trieu">
+                                    <input type="radio" name="price" value="2000000-3000000" id="2-3trieu">
                                     <label for="2-3trieu">2 triệu - 3 triệu</label>
                                 </li>
                                 <li class="rental-item">
-                                    <input type="radio" name="price" value="3 trieu - 5 trieu" id="3-5trieu">
+                                    <input type="radio" name="price" value="3000000-5000000" id="3-5trieu">
                                     <label for="3-5trieu">3 triệu - 5 triệu</label>
                                 </li>
                                 <li class="rental-item">
-                                    <input type="radio" name="price" value="5 trieu - 7 trieu" id="5-7trieu">
-                                    <label for="5-7trieu">5 triệu - 7 triệu</label>
-                                </li>
-                                <li class="rental-item">
-                                    <input type="radio" name="price" value="7 trieu - 10 trieu" id="7-10trieu">
-                                    <label for="7-10trieu">7 triệu - 10 triệu</label>
-                                </li>
-                                <li class="rental-item">
-                                    <input type="radio" name="price" value="10 trieu - 15 trieu" id="10-15trieu">
-                                    <label for="10-15trieu">10 triệu - 15 triệu</label>
-                                </li>
-                                <li class="rental-item">
-                                    <input type="radio" name="price" value="Tren 15 trieu" id="tren15trieu">
-                                    <label for="tren15trieu">Trên 15 triệu</label>
+                                    <input type="radio" name="price" value="5000000-10000000" id="5-10trieu">
+                                    <label for="5-10trieu">5 triệu - 10 triệu</label>
                                 </li>
                             </ul>
                         </div>
                     </div>
-
-
                 </div>
 
                 <div class="col-9 main-content">
@@ -295,12 +290,12 @@
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 
-        <script src="assets/js/isotope.js"></script>
-        <script src="assets/js/owl-carousel.js"></script>
-        <script src="assets/js/tabs.js"></script>
-        <script src="assets/js/popup.js"></script>
-        <script src="assets/js/custom.js"></script>
-        <script src="assets/js/rentalAutoSearch.js"></script>
+        <script src="./assets/js/isotope.js"></script>
+        <script src="./assets/js/owl-carousel.js"></script>
+        <script src="./assets/js/tabs.js"></script>
+        <script src="./assets/js/popup.js"></script>
+        <script src="./assets/js/custom.js"></script>
+        <script src="./assets/js/rental.js"></script>
 
     </body>
 
