@@ -33,6 +33,26 @@
             }
         </style>
 
+        <style>
+            .modal {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.7);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 9999;
+            }
+
+            .modal-image {
+                max-width: 90%;
+                max-height: 90%;
+            }
+        </style>
+
     </head>
 
     <body>
@@ -61,7 +81,7 @@
                 <!-- ***** Logo End ***** -->
 
                 <!-- ***** Menu Start ***** -->
-                <ul class="nav" style="display: flex; align-items: center;">
+                <ul class="nav" style="align-items: center;">
                     <li class="effect"><a href="./home" class="active">Home</a></li>
                     <li class="effect"><a href="./rental">Rental</a></li>
                     <li class="effect"><a href="./instruction">Instruction</a></li>
@@ -76,6 +96,25 @@
             </nav>
         </header>
         <!-- ***** Header Area End ***** -->
+
+        <div class="container" style="background-color: #eee; padding: 20px; margin-top: 70px; border-radius: 0 0 10px 10px;">
+            <h2 class="text-center mb-4 text-primary">Post Instruction</h2>
+            <p class="text-center">Follow these steps to post your rental listing:</p>
+
+            <ol>
+                <li>Step 0: You need to register an account and login to your account.</li>
+                <li>Step 1: Click on the "Post" button in the navigation menu.</li>
+                <li>Step 2: Fill in the required information in the provided fields.</li>
+                <li>Step 3: Upload a photo of your rental property.</li>
+                <li>Step 4: Click the "Post" button to submit your listing.</li>
+            </ol>
+
+            <div class="text-center mt-5">
+                <a href="./assets/images/instruction.png" target="_blank">
+                    <img style="height: 100%; object-fit: cover; border-radius: 10px; cursor: pointer;" src="./assets/images/instruction.png" alt="Detailed Image" width="600" height="400">
+                </a>
+            </div>
+        </div>
 
         <div class="footer">
             <div class="container">
@@ -131,6 +170,31 @@
         <script src="assets/js/popup.js"></script>
         <script src="assets/js/custom.js"></script>
 
+        <script>
+            function showFullImage(imageElement) {
+                var imageUrl = imageElement.getAttribute('src');
+
+                // Create a modal/lightbox element
+                var modal = document.createElement('div');
+                modal.classList.add('modal');
+
+                // Create an image element inside the modal
+                var modalImage = document.createElement('img');
+                modalImage.classList.add('modal-image');
+                modalImage.setAttribute('src', imageUrl);
+
+                // Append the modal image to the modal
+                modal.appendChild(modalImage);
+
+                // Append the modal to the document body
+                document.body.appendChild(modal);
+
+                // Add a click event listener to the modal to close it when clicked
+                modal.addEventListener('click', function () {
+                    modal.remove();
+                });
+            }
+        </script>
     </body>
 
 </html>

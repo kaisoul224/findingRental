@@ -96,7 +96,7 @@
                         user = (String) session.getAttribute("username");
                     } 
                 %>
-                <ul class="nav" style="display: flex; align-items: center;">
+                <ul class="nav" style="align-items: center; width: 70vw;">
                     <li class="effect"><a href="./home" class="active">Home</a></li>
                     <li class="effect"><a href="./rental">Rental</a></li>
                     <li class="effect"><a href="./instruction">Instruction</a></li>
@@ -151,8 +151,8 @@
 
                             <div class="search-area">
 
-                                <div class="contain">
-                                    <form method="POST" action="home">
+                                <div class="row contain" style="margin: 0;">
+                                    <form class="col-sm-12" style="width: 100%;"method="POST" action="home">
                                         <div class="search-bar" style="height: 40px;">
                                             <input name="search_home" id="search_home" class="input-content" type="text" placeholder="Search">
                                             <button style="border: none; outline: none; background: none; padding: 0;" type="submit">
@@ -168,7 +168,7 @@
                                             <div class="search-button">
                                                 <form method="POST" action="home">
                                                     <div class="row">
-                                                        <div class="col-lg-5 col-sm-12">
+                                                        <div class="col-lg-5 col-sm-12"">
                                                             <div class="wrapper">
                                                                 <div class="select-btn">
                                                                     <input type="text" name="search_city" id="search_city" value="Select City"

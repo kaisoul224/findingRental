@@ -45,7 +45,7 @@ public class RentalServlet extends HttpServlet {
         session.setAttribute("postList", postList);
         if (cookies != null && request.getSession().getAttribute("username") == null && request.getSession().getAttribute("login") == null) {
             for (Cookie cookie : cookies) {
-                if (cookie.getName().equals("account")) {
+                if (cookie.getName().equals("accountt")) {
                     // Read the value of the "account" cookie
                     String accountCookieValue = cookie.getValue();
                     String[] accountInfo = accountCookieValue.split(":");

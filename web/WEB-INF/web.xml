@@ -29,11 +29,6 @@
         <servlet-class>controller.Post.PostServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>Faces Servlet</servlet-name>
-        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
-    <servlet>
         <servlet-name>ChangePasswordServlet</servlet-name>
         <servlet-class>controller.User.ChangePasswordServlet</servlet-class>
     </servlet>
@@ -58,12 +53,16 @@
         <servlet-class>controller.Page.AdminPageServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>UpdatePostServlet</servlet-name>
-        <servlet-class>controller.Post.UpdatePostServlet</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>PostDetailServlet</servlet-name>
         <servlet-class>controller.Post.PostDetailServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteUserServlet</servlet-name>
+        <servlet-class>controller.User.DeleteUserServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdatePostServlet</servlet-name>
+        <servlet-class>controller.Post.UpdatePostServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
@@ -94,10 +93,6 @@
         <servlet-name>PostServlet</servlet-name>
         <url-pattern>/post</url-pattern>
     </servlet-mapping>
-        <servlet-mapping>
-        <servlet-name>Faces Servlet</servlet-name>
-        <url-pattern>/faces/*</url-pattern>
-    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ChangePasswordServlet</servlet-name>
         <url-pattern>/changePassword</url-pattern>
@@ -123,12 +118,16 @@
         <url-pattern>/admin</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>UpdatePostServlet</servlet-name>
-        <url-pattern>/updatePost</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>PostDetailServlet</servlet-name>
         <url-pattern>/postDetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteUserServlet</servlet-name>
+        <url-pattern>/deleteUser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdatePostServlet</servlet-name>
+        <url-pattern>/updatePost</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
@@ -142,7 +141,6 @@
         </jsp-property-group>
     </jsp-config>
     <welcome-file-list>
-        <!--<welcome-file>faces/index.xhtml</welcome-file>-->
         <welcome-file>/index.jsp</welcome-file>
     </welcome-file-list>
 </web-app>

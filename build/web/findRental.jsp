@@ -97,7 +97,7 @@
                 %>
 
                 <!-- ***** Menu Start ***** -->
-                <ul class="nav" style="display: flex; align-items: center;">
+                <ul class="nav" style="align-items: center;">
                     <li class="effect"><a href="./home" class="active">Home</a></li>
                     <li class="effect"><a href="./rental">Rental</a></li>
                     <li class="effect"><a href="./instruction">Instruction</a></li>
@@ -134,7 +134,7 @@
             <div id="toast" style="z-index: 1000000;"></div>
             <!-- ***** Page content Start ***** -->
             <div class="row page-content-find">
-                <div class="col-3 side-content">
+                <div class="col-sm-12 col-lg-3 side-content">
                     <form method="POST" action="rental" style="margin-bottom: 30px;">
                         <div class="filter-location">
                             <p>Find by Location</p>
@@ -152,7 +152,7 @@
                             </div>
                         </div>
                     </form>
-                    <div class="filter-price">
+                    <div class="col-lg-3 col-sm-12 filter-price">
                         <p>Find by City</p>
                         <div class="filter-content">
                             <div class="select-btn" style="border-radius: 0 0 7px 7px;">
@@ -162,7 +162,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="filter-price">
+                    <div class="col-lg-3 col-sm-12 filter-price">
                         <p>Find by Price</p>
                         <div class="filter-content">
                             <ul class="list-items-rental">
@@ -199,7 +199,7 @@
                 </div>
 
 
-                <div class="col-9 main-content">
+                <div class="col-lg-9 col-sm-12 main-content">
 
                     <%
                         ArrayList<Post> postList = new ArrayList<Post>();

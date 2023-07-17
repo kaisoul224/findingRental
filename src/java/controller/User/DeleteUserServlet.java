@@ -3,9 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package controller.Post;
+package controller.User;
 
 import dal.PostDAO;
+import dal.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -15,9 +16,9 @@ import jakarta.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Quoc Anh
+ * @author kaiso
  */
-public class DeletePostServlet extends HttpServlet {
+public class DeleteUserServlet extends HttpServlet {
    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -33,15 +34,15 @@ public class DeletePostServlet extends HttpServlet {
     throws ServletException, IOException {
         String PostID = request.getParameter("id");
         int id = Integer.parseInt(PostID);
-        PostDAO pdb = new PostDAO();
+        UserDAO udb = new UserDAO();
         String referer = request.getHeader("Referer");
 
-        if (pdb.deletePostByID(id)){
+        if (udb.delete(id)){
             request.setAttribute("deleteStatus", "success");
-            response.sendRedirect(request.getContextPath() + "/home");
+            request.getRequestDispatcher(referer).forward(request, response);
         } else {
             request.setAttribute("deleteStatus", "failure");
-            response.sendRedirect(request.getContextPath() + "/home");
+            request.getRequestDispatcher(referer).forward(request, response);
         }
     } 
 
@@ -57,6 +58,14 @@ public class DeletePostServlet extends HttpServlet {
     throws ServletException, IOException {
         
     }
-    
+
+    /** 
+     * Returns a short description of the servlet.
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }// </editor-fold>
 
 }

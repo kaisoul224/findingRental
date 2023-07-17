@@ -12,6 +12,7 @@
 <%@ page import="java.util.Base64" %>
 <%@page import="java.util.ArrayList" %>
 <%@ page import="model.Post" %>
+<%@ page import="model.City" %>
 <%@ page import="com.google.gson.Gson" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,7 +21,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Post</title>
+        <title>Update Post</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
@@ -85,7 +86,7 @@
                 %>
 
                 <!-- ***** Menu Start ***** -->
-                <ul class="nav" style="display: flex; align-items: center;">
+                <ul class="nav" style="align-items: center;">
                     <li class="effect"><a href="./home" class="active">Home</a></li>
                     <li class="effect"><a href="./rental">Rental</a></li>
                     <li class="effect"><a href="./instruction">Instruction</a></li>
@@ -123,16 +124,17 @@
             <div id="toast" style="z-index: 1;"></div>
             <% 
                 Post post = new Post();
-                post = (Post) session.getAttribute("post");                   
+                post = (Post) session.getAttribute("post");  
+                City c = new City();
             %>
 
             <div class="">
                 <div class="rounded d-flex justify-content-center" style="margin-bottom: 70px;">
                     <div class="col-lg-4 col-md-6 col-sm-12 shadow-lg p-5 background-light"style="width: 80vw; background-color: rgba(255, 255, 255, 0.7); border-radius: 25px;" >
                         <div class="text-center">
-                            <h3 class="text-primary">Post</h3>
+                            <h3 class="text-primary">Update Post</h3>
                         </div>
-                        <form id="postform" method="POST" action="post" enctype="multipart/form-data">
+                        <form id="postform" method="POST" action="updatePost" enctype="multipart/form-data">
                             <div class="p-4">
                                 <div class="row input-group mb-3">
                                     <input name="title" type="text" class="form-control" placeholder="Title" value="<%=post.getTitle() %>">
@@ -143,8 +145,8 @@
 
                                 <div class="row input-group mb-3">
                                     <div class="col-lg-4 col-sm-12 d-flex" style="padding-left: 0;">
-                                        <select name="city" id="citySelect" class="w-100 form-select" aria-label="City">
-                                            <option selected disabled>Select a city</option>
+                                        <select  name="city" id="citySelect" class="w-100 form-select" aria-label="City" >
+                                            <option  selected disabled><%= c.getCity(post.getCityID()) %></option>
                                             <!-- Add options dynamically using JavaScript -->
                                         </select>
                                     </div>
@@ -287,9 +289,7 @@
                             required: true, // Field is required
                             number: true // Minimum length of 5 characters
                         },
-                        image: {
-                            required: true, // Field is required
-                        },
+
 
                         // Add more fields and rules as needed
                     },
@@ -329,9 +329,6 @@
                         price: {
                             required: 'Please enter a value for this field',
                             number: 'Please enter a valid number'
-                        },
-                        image: {
-                            required: 'Please enter a value for this field',
                         },
 
                         // Add more fields and messages as needed

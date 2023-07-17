@@ -37,6 +37,7 @@
         <link rel="stylesheet" href="assets/css/owl.css">
         <link rel="stylesheet" href="assets/css/animate.css">
         <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+        
         <style>
             .modal {
                 position: fixed;
@@ -56,6 +57,7 @@
                 max-height: 90%;
             }
         </style>
+
 
     </head>
 
@@ -117,25 +119,8 @@
                     <li class="effect"><a href="./home" class="active">Home</a></li>
                     <li class="effect"><a href="./rental">Rental</a></li>
                     <li class="effect"><a href="./instruction">Instruction</a></li>
-                    <li class="effect"><a href="./post">Post</a></li>
-                        <% 
-                            if ("admin".equals(session.getAttribute("usertype"))) {
-                        %>
-                    <li class="effect"><a href="./admin">Admin</a></li>
-                        <%
-                            }
-                        %>
-                    <li class="dropdown">
-                        <a class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-user"></i> <%= user %>
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="./profile">Profile</a>
-                            <a class="dropdown-item" href="./post">Post</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="./login">Logout</a>
-                        </div>
-                    </li>
+                    <li class="effect"><a href="./register">Register</a></li>
+                    <li class="effect"><a href="./login">Login</a></li>
                 </ul>
 
                 <a class='menu-trigger'>

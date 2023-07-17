@@ -53,6 +53,18 @@ function PostDetail(postId) {
     window.location.href = "postDetail?id=" + postId;
 }
 
-
+  // Function to handle click outside the nav
+  function handleClickOutsideNav(event) {
+    var nav = document.querySelector('.nav');
+    var menuTrigger = document.querySelector('.menu-trigger');
+    
+    // Check if the clicked element is outside the nav and menu trigger
+    if (!nav.contains(event.target) && !menuTrigger.contains(event.target)) {
+      nav.style.display = 'none';
+    }
+  }
+  
+  // Add event listener for click outside the nav
+  document.addEventListener('click', handleClickOutsideNav);
 
 

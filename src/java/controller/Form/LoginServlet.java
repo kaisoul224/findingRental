@@ -66,8 +66,7 @@ public class LoginServlet extends HttpServlet {
         User u = udb.check(username, password);
         if (u != null) {
             if (remember != null && remember.equals("on")) {
-
-                Cookie cookie = new Cookie("account", username + ":" + password);
+                Cookie cookie = new Cookie("accountt", username + ":" + password);
                 cookie.setMaxAge(3600 * 24 * 365); // Cookie expires in 1 year
                 cookie.setPath("/");    // Cookie is valid for the entire website
                 response.addCookie(cookie); // Set the cookie in the response

@@ -81,7 +81,7 @@
                 %>
 
                 <!-- ***** Menu Start ***** -->
-                <ul class="nav" style="display: flex; align-items: center;">
+                <ul class="nav" style="align-items: center;">
                     <li class="effect"><a href="./home" class="active">Home</a></li>
                     <li class="effect"><a href="./rental">Rental</a></li>
                     <li class="effect"><a href="./instruction">Instruction</a></li>

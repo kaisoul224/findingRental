@@ -42,7 +42,7 @@ public class ChangePasswordServlet extends HttpServlet {
 
         if (cookies != null && request.getSession().getAttribute("username") == null && request.getSession().getAttribute("login") == null) {
             for (Cookie cookie : cookies) {
-                if (cookie.getName().equals("account")) {
+                if (cookie.getName().equals("accountt")) {
                     // Read the value of the "account" cookie
                     String accountCookieValue = cookie.getValue();
 
@@ -104,8 +104,8 @@ public class ChangePasswordServlet extends HttpServlet {
         Cookie[] cookies = request.getCookies();
         if (cookies != null) {
             for (Cookie cookie : cookies) {
-                if (cookie.getName().equals("account")) {
-                    Cookie cookie_ = new Cookie("account", username + ":" + password);
+                if (cookie.getName().equals("accountt")) {
+                    Cookie cookie_ = new Cookie("accountt", username + ":" + password);
                     cookie.setMaxAge(3600 * 24 * 365); // Cookie expires in 1 year
                     cookie.setPath("/");    // Cookie is valid for the entire website
                     response.addCookie(cookie_); // Set the cookie in the response

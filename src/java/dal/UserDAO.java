@@ -109,16 +109,18 @@ public class UserDAO extends DBconnector {
         return null;
     }
      
-     public void delete(int id){
+     public boolean delete(int id){
          String sql = "DELETE FROM `users` WHERE userID =?";
          
          try{
              PreparedStatement st = conn.prepareStatement(sql);
              st.setInt(1, id);
-             st.executeUpdate();    
+             st.executeUpdate();
+             return true;
          }catch(SQLException e){
              System.out.println("Could not delete this user");
             System.out.println(e);
+            return false;
          }
          
      }

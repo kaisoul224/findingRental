@@ -37,16 +37,29 @@
         <link rel="stylesheet" href="assets/css/owl.css">
         <link rel="stylesheet" href="assets/css/animate.css">
         <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
-
         <style>
-            .footer {
-                margin-top: 70px;
+            .modal {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.7);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 9999;
+            }
+
+            .modal-image {
+                max-width: 90%;
+                max-height: 90%;
             }
         </style>
 
     </head>
 
-    <body  onload="initMap()">
+    <body >
 
         <%! 
             public String inputStreamToBase64(InputStream inputStream) throws IOException {
@@ -100,7 +113,7 @@
                 %>
 
                 <!-- ***** Menu Start ***** -->
-                <ul class="nav" style="display: flex; align-items: center;">
+                <ul class="nav" style="align-items: center;">
                     <li class="effect"><a href="./home" class="active">Home</a></li>
                     <li class="effect"><a href="./rental">Rental</a></li>
                     <li class="effect"><a href="./instruction">Instruction</a></li>
@@ -137,10 +150,10 @@
             User userOfPost = (User) request.getAttribute("userOfPost"); 
         %>
         <!-- ***** BODY Area Start ***** -->
-        <div class="container" style="background-color: white; padding: 20px; margin-top: 70px;">
+        <div class="container" style="background-color: #eee; padding: 20px; margin-top: 70px;">
             <div class="row">
                 <div class="col-lg-12">
-                    <img style="height: 70vh; object-fit: cover; border-radius: 10px;" src="data:image/png;base64,<%= inputStreamToBase64(post.getUrl()) %>" alt="Post Image" class="img-fluid">
+                    <img style="height: 70vh; object-fit: cover; border-radius: 10px; cursor: pointer;" src="data:image/png;base64,<%= inputStreamToBase64(post.getUrl()) %>" alt="Post Image" class="img-fluid" onclick="showFullImage(this)">
                 </div>
             </div>
             <div class="row mt-3">
@@ -153,6 +166,18 @@
                     <p><%= post.getDescription()%></p>
                 </div>
             </div>
+
+            <% 
+                if ("admin".equals(session.getAttribute("usertype"))) {
+                                                        
+            %>
+            <div class="row button-group">
+                <button class="btn btn-primary" onclick="updatePost(<%= post.getPostID() %>)">Update</button>
+                <button class="btn btn-danger" onclick="deletePost(<%= post.getPostID() %>)">Delete</button>
+            </div>
+            <%
+                }
+            %>
             <div class="row mt-3">
                 <div class="col-lg-6">
                     <table class="table">
@@ -218,16 +243,63 @@
                     </ul>
                 </div>
             </div>
-            <div id="map" style="z-index: 100000000;"></div>   
+
             <div class="row mt-3">
                 <div class="col-lg-12">
-                    <h4 class="text-primary mb-4">Search Location</h4>
-                    <div class="input-group">
-                        <input id="search-location" type="text" class="form-control" placeholder="Enter a location" value="<%= post.getAddress() %>">
-                        <button class="btn btn-primary" type="button" onclick="searchLocation()">Search</button>
+                    <h4 class="text-primary mb-4">Near Rental</h4>
+                    <%
+                        ArrayList<Post> nearPost = (ArrayList<Post>) session.getAttribute("nearPost");
+
+                        if (nearPost != null) {
+                            for (Post npost : nearPost) {
+                    %>
+                    <div class="col-lg-8" style="margin-bottom: 20px; border-bottom: 1px solid #ccc; padding-bottom: 10px;">
+                        <div class="item" style="font-family: 'Arial', sans-serif;">
+                            <div class="row">
+                                <div class="col-md-4 popular-img">
+                                    <img style=" object-fit: cover; border-radius: 10px; width: 100%; height: 150px;" src="data:image/png;base64,<%= inputStreamToBase64(npost.getUrl()) %>" alt="" class="img-popular">
+                                </div>
+                                <div class="col-md-8 popular-des" style="display: flex; flex-wrap: wrap; align-items: flex-start;">
+                                    <h4 class="title" style="font-size: 18px;">
+                                        <a href="./postDetail?id=<%=npost.getPostID()%>"><%= npost.getTitle() %></a>
+                                    </h4>
+                                    <div class="location">
+                                        <dl class="address">
+                                            <dt>Address: <%= npost.getAddress() %></dt>
+                                        </dl>
+                                    </div>
+                                    <div class="contact">
+                                        <dl class="price">
+                                            <dt style="font-size: 15px; color: #666666; font-weight: 400; margin-right: 10px;">Price: <%= formatCurrency(npost.getPrice()) %></dt>
+                                        </dl>
+                                    </div>
+                                    <div class="post-date">
+                                        <dl class="date">
+                                            <dt style="font-size: 15px; color: #666666; font-weight: 400;">Post Date: <%= npost.getDate() %></dt>
+                                        </dl>
+                                    </div>
+                                    <% 
+                                        if ("admin".equals(session.getAttribute("usertype"))) {      
+                                    %>
+                                    <div class="button-group">
+                                        <button class="btn btn-primary" onclick="updatePost(<%= npost.getPostID() %>)">Update</button>
+                                        <button class="btn btn-danger" onclick="deletePost(<%= npost.getPostID() %>)">Delete</button>
+                                    </div>
+                                    <%
+                                        }
+                                    %>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
+                    <%
+                            }
+                        }
+                    %>
                 </div>
             </div>
+
         </div>
 
         <!-- ***** BODY Area End ***** -->
@@ -283,28 +355,51 @@
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 
-        <!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAVUwRXJYeKMiRdG6zZ1GQFiSGuWGOgU&libraries=places&callback=initMap" async defer></script>-->
-        <!--        <script async
-                    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAVUwRXJYeKMiRdG6zZ1GQFiSGuWGOgU&callback=initMap">
-                </script>-->
-        <script>
-            // Create a map
-            var map = new google.maps.Map(document.getElementById("map"), {
-                center: new google.maps.LatLng(40.748437, -73.985669),
-                zoom: 15
-            });
 
-            // Create a marker
-            var marker = new google.maps.Marker({
-                position: new google.maps.LatLng(40.748437, -73.985669),
-                map: map
-            });
-        </script>
+
         <script src="assets/js/isotope.js"></script>
         <script src="assets/js/owl-carousel.js"></script>
         <script src="assets/js/tabs.js"></script>
         <script src="assets/js/popup.js"></script>
         <script src="assets/js/custom.js"></script>
-        <script src="assets/js/postDetail.js"></script>
+
+        <script>
+            function updatePost(postId) {
+                // Perform the necessary logic to update the post
+                // For example, you can redirect to an update page with the post ID
+                window.location.href = "updatePost?id=" + postId;
+            }
+
+            function deletePost(postId) {
+                // Perform the necessary logic to update the post
+                // For example, you can redirect to an update page with the post ID
+                window.location.href = "deletePost?id=" + postId;
+            }
+        </script>
+        <script>
+            function showFullImage(imageElement) {
+                var imageUrl = imageElement.getAttribute('src');
+
+                // Create a modal/lightbox element
+                var modal = document.createElement('div');
+                modal.classList.add('modal');
+
+                // Create an image element inside the modal
+                var modalImage = document.createElement('img');
+                modalImage.classList.add('modal-image');
+                modalImage.setAttribute('src', imageUrl);
+
+                // Append the modal image to the modal
+                modal.appendChild(modalImage);
+
+                // Append the modal to the document body
+                document.body.appendChild(modal);
+
+                // Add a click event listener to the modal to close it when clicked
+                modal.addEventListener('click', function () {
+                    modal.remove();
+                });
+            }
+        </script>
     </body>
 </html>

@@ -72,7 +72,7 @@
                 <!-- ***** Logo End ***** -->
 
                 <!-- ***** Menu Start ***** -->
-                <ul class="nav" style="display: flex; align-items: center;">
+                <ul class="nav" style="align-items: center;">
                     <li class="effect"><a href="./home" >Home</a></li>
                     <li class="effect"><a href="./rental">Rental</a></li>
                     <li class="effect"><a href="./instruction">Instruction</a></li>
@@ -113,7 +113,7 @@
                                 </button>
                                 <p class="text-center mt-5">
                                     Don't have an account?
-                                    <a href="/register" class="text-primary" style="cursor: pointer;">
+                                    <a href="./register" class="text-primary" style="cursor: pointer;">
                                         Sign Up
                                     </a>
                                 </p>

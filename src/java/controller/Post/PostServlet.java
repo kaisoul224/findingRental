@@ -46,7 +46,7 @@ public class PostServlet extends HttpServlet {
 
         if (cookies != null && request.getSession().getAttribute("username") == null && request.getSession().getAttribute("login") == null) {
             for (Cookie cookie : cookies) {
-                if (cookie.getName().equals("account")) {
+                if (cookie.getName().equals("accountt")) {
                     // Read the value of the "account" cookie
                     String accountCookieValue = cookie.getValue();
 
@@ -107,6 +107,7 @@ public class PostServlet extends HttpServlet {
         String numberOfRoom_raw = request.getParameter("numberOfRoom");
         String availableRoom_raw = request.getParameter("availableRoom");
         String price_raw = request.getParameter("price");
+        
         Part part = request.getPart("image");
         PostDAO pdb = new PostDAO();
         UserDAO udb = new UserDAO();
@@ -132,7 +133,7 @@ public class PostServlet extends HttpServlet {
                             Post newP = new Post(0, title, description, address, phoneNumber, area, numberOfRoom, availableRoom, price, localDate, userid, cityID, is);
                             pdb.insertPost_forUser(newP);
                             pdb.insertImage_forUser(newP);
-                            response.sendRedirect(request.getContextPath() + "/home");
+                            response.sendRedirect(request.getContextPath() + "/postDetail?id="+pdb.getNewestID());
                             break; // Exit the loop since we found the desired cookie
                         }
                     }
@@ -140,7 +141,7 @@ public class PostServlet extends HttpServlet {
             } catch (IOException | NumberFormatException e) {
                 System.out.println("Could not save this post");
                 System.out.println(e);
-                request.setAttribute("registrationStatus", "failure");
+                request.setAttribute("postStatus", "failure");
                 request.getRequestDispatcher("/post.jsp").forward(request, response);
             }
         }

@@ -875,7 +875,7 @@ Header Style
 
     .header-area .main-nav .nav {
         float: none;
-        width: 100%;
+        width: 80%;
         display: none;
         -webkit-transition: all 0s ease 0s;
         -moz-transition: all 0s ease 0s;
@@ -1353,7 +1353,7 @@ li.selected {
 .apply-box-container{
     background-color: transparent;
     max-width: 200px;
-    width: 200;
+    /*width: 200px;*/
     margin: 10px 15px 10px 15px;
     display: flex;
     justify-content: center;
@@ -1373,31 +1373,6 @@ li.selected {
     border-radius: 8px;
     border: none;
 }
-
-/* .apply-box-container .apply-button button{
-  display: flex;
-  height: 50px;
-  width: 285px;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 16px;
-  border-radius: 8px;
-  cursor: pointer;
-  background-color: #fff;
-} */
-/* button-search end -----------------------*/
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /* 

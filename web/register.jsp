@@ -79,7 +79,7 @@
                 <!-- ***** Logo End ***** -->
 
                 <!-- ***** Menu Start ***** -->
-                <ul class="nav" style="display: flex; align-items: center;">
+                <ul class="nav" style="align-items: center;">
                     <li class="effect"><a href="./home" >Home</a></li>
                     <li class="effect"><a href="./rental">Rental</a></li>
                     <li class="effect"><a href="./instruction">Instruction</a></li>
@@ -100,7 +100,7 @@
             <div id="toast" style="z-index: 1;"></div>
             <div class="">
                 <div class="rounded d-flex justify-content-center">
-                    <div class="col-lg-4 col-md-6 col-sm-12 background-light" style="background-color: rgba(255, 255, 255, 0.7); border-radius: 25px; width: 500px; height: 520px">
+                    <div class="col-lg-4 col-md-6 col-sm-12 background-light" style="background-color: rgba(255, 255, 255, 0.7); border-radius: 25px;">
                         <div class="text-center" style="margin-top: 20px;">
                             <h3 class="text-primary">Register</h3>
                         </div>

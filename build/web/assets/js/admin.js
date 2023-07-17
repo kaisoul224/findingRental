@@ -35,3 +35,27 @@ function searchUsers() {
 function removeDiacritics(text) {
     return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 }
+
+function updatePost(postId) {
+    // Perform the necessary logic to update the post
+    // For example, you can redirect to an update page with the post ID
+    window.location.href = "updatePost?id=" + postId;
+}
+
+function deletePost(postId) {
+    // Perform the necessary logic to update the post
+    // For example, you can redirect to an update page with the post ID
+    window.location.href = "deletePost?id=" + postId;
+}
+
+function updateUser(userId) {
+    // Perform the necessary logic to update the post
+    // For example, you can redirect to an update page with the post ID
+    window.location.href = "changeInfo?id=" + userId;
+}
+
+function deleteUser(userId) {
+    // Perform the necessary logic to update the post
+    // For example, you can redirect to an update page with the post ID
+    window.location.href = "deleteUser?id=" + userId;
+}

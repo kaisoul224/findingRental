@@ -89,7 +89,7 @@
                 <!-- ***** Logo End ***** -->
 
                 <!-- ***** Menu Start ***** -->
-                <ul class="nav" style="display: flex; align-items: center;">
+                <ul class="nav" style="align-items: center;">
                     <li class="effect"><a href="./home" >Home</a></li>
                     <li class="effect"><a href="./rental" class="active">Rental</a></li>
                     <li class="effect"><a href="./instruction">Instruction</a></li>
@@ -109,8 +109,8 @@
         <div class="container">
             <!-- ***** Page content Start ***** -->
             <div class="row page-content-find">
-                <div class="col-3 side-content">
-                    <form method="POST" action="findRental" style="margin-bottom: 30px;">
+                <div class="col-sm-12 col-lg-3 side-content">
+                    <form method="POST" action="rental" style="margin-bottom: 30px;">
                         <div class="filter-location">
                             <p>Find by Location</p>
                             <div class="filter-content">
@@ -127,7 +127,7 @@
                             </div>
                         </div>
                     </form>
-                    <div class="filter-price">
+                    <div class="col-lg-3 col-sm-12 filter-price">
                         <p>Find by City</p>
                         <div class="filter-content">
                             <div class="select-btn" style="border-radius: 0 0 7px 7px;">
@@ -137,7 +137,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="filter-price">
+                    <div class="col-lg-3 col-sm-12 filter-price">
                         <p>Find by Price</p>
                         <div class="filter-content">
                             <ul class="list-items-rental">
@@ -174,7 +174,7 @@
                 </div>
 
 
-                <div class="col-9 main-content">
+                <div class="col-lg-9 col-sm-12 main-content">
 
                     <%
                         ArrayList<Post> postList = new ArrayList<Post>();
@@ -212,13 +212,13 @@
                     <div class="item-find">
                         <div class="row">
                             <div class="col-md-5 pic">
-                                <a href="#">
+                                <a href="./postDetail?id=<%=post.getPostID()%>">
                                     <img src="data:image/png;base64,<%= inputStreamToBase64(post.getUrl()) %>" alt="" class="img-item">
                                 </a>
                             </div>
                             <div class="col-md-7 des">
                                 <h4 class="title">
-                                    <a href="#"><%=post.getTitle()%></a>
+                                    <a href="./postDetail?id=<%=post.getPostID()%>"><%=post.getTitle()%></a>
                                 </h4>
                                 <div class="location">
                                     <p class="address"><%=post.getAddress()%></p>

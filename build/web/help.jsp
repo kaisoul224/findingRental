@@ -68,18 +68,18 @@
                 %>
 
                 <!-- ***** Menu Start ***** -->
-                <ul class="nav" style="display: flex; align-items: center;">
+                <ul class="nav" style="align-items: center;">
                     <li class="effect"><a href="./home" class="active">Home</a></li>
                     <li class="effect"><a href="./rental">Rental</a></li>
                     <li class="effect"><a href="./instruction">Instruction</a></li>
                     <li class="effect"><a href="./post">Post</a></li>
-                    <% 
-                        if ("admin".equals(session.getAttribute("usertype"))) {
-                    %>
-                        <li class="effect"><a href="./admin">Admin</a></li>
-                    <%
-                        }
-                    %>
+                        <% 
+                            if ("admin".equals(session.getAttribute("usertype"))) {
+                        %>
+                    <li class="effect"><a href="./admin">Admin</a></li>
+                        <%
+                            }
+                        %>
                     <li class="dropdown">
                         <a class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-user"></i> <%= user %>
@@ -101,7 +101,26 @@
         </header>
         <!-- ***** Header Area End ***** -->
 
+        <div class="container" style="background-color: #eee; padding: 20px; margin-top: 70px; border-radius: 0 0 10px 10px;">
+            <h2 class="text-center mb-4 text-primary" >Post Instruction</h2>
+            <p class="text-center">Follow these steps to post your rental listing:</p>
 
+            <ol>
+                <li>Step 0: You need to register an account and login to your account.</li>
+                <li>Step 1: Click on the "Post" button in the navigation menu.</li>
+                <li>Step 2: Fill in the required information in the provided fields.</li>
+                <li>Step 3: Upload a photo of your rental property.</li>
+                <li>Step 4: Click the "Post" button to submit your listing.</li>
+            </ol>
+
+            <div class="text-center mt-5">
+                <a href="./assets/images/instruction.png" target="_blank">
+                    <img style="height: 100%; object-fit: cover; border-radius: 10px; cursor: pointer;" src="./assets/images/instruction.png" alt="Detailed Image" width="600" height="400">
+                </a>
+            </div>
+        </div>
+
+        <!--Start footer-->
         <div class="footer">
             <div class="container">
                 <div class="row">
@@ -152,15 +171,40 @@
         <script src="assets/js/tabs.js"></script>
         <script src="assets/js/popup.js"></script>
         <script src="assets/js/custom.js"></script>
-        
+
         <script>
-            $(document).ready(function() {
-                $('.dropdown').on('focusin mouseenter', function() {
-                    $(this).addClass('show').find('.dropdown-menu').addClass('show');
-                }).on('focusout mouseleave', function() {
-                    $(this).removeClass('show').find('.dropdown-menu').removeClass('show');
+      $(document).ready(function () {
+          $('.dropdown').on('focusin mouseenter', function () {
+              $(this).addClass('show').find('.dropdown-menu').addClass('show');
+          }).on('focusout mouseleave', function () {
+              $(this).removeClass('show').find('.dropdown-menu').removeClass('show');
+          });
+      });
+        </script>
+        <script>
+            function showFullImage(imageElement) {
+                var imageUrl = imageElement.getAttribute('src');
+
+                // Create a modal/lightbox element
+                var modal = document.createElement('div');
+                modal.classList.add('modal');
+
+                // Create an image element inside the modal
+                var modalImage = document.createElement('img');
+                modalImage.classList.add('modal-image');
+                modalImage.setAttribute('src', imageUrl);
+
+                // Append the modal image to the modal
+                modal.appendChild(modalImage);
+
+                // Append the modal to the document body
+                document.body.appendChild(modal);
+
+                // Add a click event listener to the modal to close it when clicked
+                modal.addEventListener('click', function () {
+                    modal.remove();
                 });
-            });
+            }
         </script>
     </body>
 

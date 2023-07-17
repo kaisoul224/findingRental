@@ -77,3 +77,4 @@ cities.forEach(function(city) {
   option.value = city;
   select.add(option);
 });
+
