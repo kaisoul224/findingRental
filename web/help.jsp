@@ -73,6 +73,13 @@
                     <li class="effect"><a href="./rental">Rental</a></li>
                     <li class="effect"><a href="./instruction">Instruction</a></li>
                     <li class="effect"><a href="./post">Post</a></li>
+                    <% 
+                        if ("admin".equals(session.getAttribute("usertype"))) {
+                    %>
+                        <li class="effect"><a href="./admin">Admin</a></li>
+                    <%
+                        }
+                    %>
                     <li class="dropdown">
                         <a class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-user"></i> <%= user %>

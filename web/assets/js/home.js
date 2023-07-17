@@ -35,6 +35,24 @@ homeSearchBtn2.addEventListener("click", function () {
         
 });
 
+function updatePost(postId) {
+    // Perform the necessary logic to update the post
+    // For example, you can redirect to an update page with the post ID
+    window.location.href = "updatePost?id=" + postId;
+}
+
+function deletePost(postId) {
+    // Perform the necessary logic to update the post
+    // For example, you can redirect to an update page with the post ID
+    window.location.href = "deletePost?id=" + postId;
+}
+
+function PostDetail(postId) {
+    // Perform the necessary logic to update the post
+    // For example, you can redirect to an update page with the post ID
+    window.location.href = "postDetail?id=" + postId;
+}
+
 
 
 

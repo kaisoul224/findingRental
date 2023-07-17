@@ -5,6 +5,14 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="java.io.InputStream" %>
+<%@ page import="java.io.ByteArrayOutputStream" %>
+<%@ page import="java.text.DecimalFormat, java.text.NumberFormat, java.util.Locale" %>
+<%@ page import="java.io.IOException" %>
+<%@ page import="java.util.Base64" %>
+<%@page import="java.util.ArrayList" %>
+<%@ page import="model.Post" %>
+<%@ page import="com.google.gson.Gson" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -40,6 +48,25 @@
     </head>
 
     <body>
+        <%! 
+            public String inputStreamToBase64(InputStream inputStream) throws IOException {
+                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                byte[] buffer = new byte[4096];
+                int bytesRead;
+                while ((bytesRead = inputStream.read(buffer)) != -1) {
+                    outputStream.write(buffer, 0, bytesRead);
+                }
+                byte[] imageBytes = outputStream.toByteArray();
+                return Base64.getEncoder().encodeToString(imageBytes);
+            }
+
+            public String formatCurrency(double price) {
+                NumberFormat formatter = NumberFormat.getNumberInstance(Locale.US);
+                DecimalFormat decimalFormat = (DecimalFormat) formatter;
+                decimalFormat.applyPattern("#,### VNĐ");
+                return decimalFormat.format(price);
+            }
+        %>
 
         <!-- ***** Preloader Start ***** -->
         <div id="js-preloader" class="js-preloader">
@@ -81,6 +108,7 @@
         <!-- ***** Header Area End ***** -->
 
         <div class="container">
+            <div id="toast" style="z-index: 1000000;"></div>
             <div class="row">
                 <div class="col-lg-12">
                     <div class="page-content">
@@ -101,15 +129,15 @@
                             <div class="search-area">
 
                                 <div class="contain">
-                                    <form method="POST" action="HomeServlet">
+                                    <form method="POST" action="home">
                                         <div class="search-bar" style="height: 40px;">
                                             <input name="search_home" id="search_home" class="input-content" type="text" placeholder="Search">
                                             <button style="border: none; outline: none; background: none; padding: 0;" type="submit">
                                                 <i class="fa fa-search" style="color: #000000;"></i>
                                             </button>
+
                                         </div>
                                     </form>
-
 
 
                                     <div class="row">
@@ -177,7 +205,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                       <div class="col-lg-2 col-sm-12">
+                                                        <div class="col-lg-2 col-sm-12">
                                                             <div class="apply-box-container">
                                                                 <div class="apply-button">
                                                                     <button type="submit" class="btn">Search</button>
@@ -208,138 +236,61 @@
                                     <h4>MOST POPULAR</h4>
                                 </div>
 
+
                                 <div class="row">
+                                    <%
+                                        ArrayList<Post> newestPost = (ArrayList<Post>) session.getAttribute("newestPost");
+
+                                        if (newestPost != null) {
+                                            for (Post post : newestPost) {
+                                    %>
                                     <div class="col-lg-6">
-                                        <div class="item">
+                                        <div class="item" style="font-family: 'Arial', sans-serif;">
                                             <div class="row">
                                                 <div class="col-md-5 popular-img">
-                                                    <a href="rental.html"><img src="assets/images/game1.jpg" alt="" class="img-popular"></a>
+                                                    <img src="data:image/png;base64,<%= inputStreamToBase64(post.getUrl()) %>" alt="" class="img-popular">
                                                 </div>
-                                                <div class="col-md-7 popular-des">
-                                                    <div class="city">
-                                                        <span>
-                                                            <a href="rental.html">Hồ Chí Minh</a>
-                                                        </span>
-                                                    </div>
-                                                    <h4 class="title">
-                                                        <a href="rental.html">
-                                                            PHÒNG NGAY VINCOM Q9 - NGÃ TƯ THỦ ĐỨC </a>
+                                                <div class="col-md-7 popular-des" style="display: flex; flex-wrap: wrap; align-items: flex-start;">
+                                                    <h4 class="title" style="font-size: 18px;">
+                                                        <a href="./postDetail?id=<%=post.getPostID()%>"><%= post.getTitle() %></a>
                                                     </h4>
                                                     <div class="location">
                                                         <dl class="address">
-                                                            <dt>147/19 Đường Tân Lập 2, Phường Hiệp Phú, Quận 9, Hồ Chí Minh , Quận 9</dt>
+                                                            <dt>Address: <%= post.getAddress() %></dt>
                                                         </dl>
                                                     </div>
                                                     <div class="contact">
                                                         <dl class="price">
-                                                            <dt>2.700.000 VNĐ</dt>
+                                                            <dt>Price: <%= formatCurrency(post.getPrice()) %></dt>
                                                         </dl>
                                                     </div>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-6">
-                                        <div class="item">
-                                            <div class="row">
-                                                <div class="col-md-5 popular-img">
-                                                    <a href="rental.html"><img src="assets/images/game1.jpg" alt="" class="img-popular"></a>
-                                                </div>
-                                                <div class="col-md-7 popular-des">
-                                                    <div class="city">
-                                                        <span>
-                                                            <a href="rental.html">Hồ Chí Minh</a>
-                                                        </span>
+                                                    <div class="post-date">
+                                                        <p>Post Date: <%= post.getDate() %></p>
                                                     </div>
-                                                    <h4 class="title">
-                                                        <a href="rental.html">
-                                                            PHÒNG NGAY VINCOM Q9 - NGÃ TƯ THỦ ĐỨC </a>
-                                                    </h4>
-                                                    <div class="location">
-                                                        <dl class="address">
-                                                            <dt>147/19 Đường Tân Lập 2, Phường Hiệp Phú, Quận 9, Hồ Chí Minh , Quận 9</dt>
-                                                        </dl>
+                                                    <% 
+                                                        if ("admin".equals(session.getAttribute("usertype"))) {
+                                                        
+                                                    %>
+                                                    <div class="button-group">
+                                                        <button class="btn btn-primary" onclick="updatePost(<%= post.getPostID() %>)">Update</button>
+                                                        <button class="btn btn-danger" onclick="deletePost(<%= post.getPostID() %>)">Delete</button>
                                                     </div>
-                                                    <div class="contact">
-                                                        <dl class="price">
-                                                            <dt>2.700.000 VNĐ</dt>
-                                                        </dl>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-6">
-                                        <div class="item">
-                                            <div class="row">
-                                                <div class="col-md-5 popular-img">
-                                                    <a href="rental.html"><img src="assets/images/game1.jpg" alt="" class="img-popular"></a>
-                                                </div>
-                                                <div class="col-md-7 popular-des">
-                                                    <div class="city">
-                                                        <span>
-                                                            <a href="rental.html">Hồ Chí Minh</a>
-                                                        </span>
-                                                    </div>
-                                                    <h4 class="title">
-                                                        <a href="rental.html">
-                                                            PHÒNG NGAY VINCOM Q9 - NGÃ TƯ THỦ ĐỨC </a>
-                                                    </h4>
-                                                    <div class="location">
-                                                        <dl class="address">
-                                                            <dt>147/19 Đường Tân Lập 2, Phường Hiệp Phú, Quận 9, Hồ Chí Minh , Quận 9</dt>
-                                                        </dl>
-                                                    </div>
-                                                    <div class="contact">
-                                                        <dl class="price">
-                                                            <dt>2.700.000 VNĐ</dt>
-                                                        </dl>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-6">
-                                        <div class="item">
-                                            <div class="row">
-                                                <div class="col-md-5 popular-img">
-                                                    <a href="rental.html"><img src="assets/images/game1.jpg" alt="" class="img-popular"></a>
-                                                </div>
-                                                <div class="col-md-7 popular-des">
-                                                    <div class="city">
-                                                        <span>
-                                                            <a href="rental.html">Hồ Chí Minh</a>
-                                                        </span>
-                                                    </div>
-                                                    <h4 class="title">
-                                                        <a href="rental.html">
-                                                            PHÒNG NGAY VINCOM Q9 - NGÃ TƯ THỦ ĐỨC </a>
-                                                    </h4>
-                                                    <div class="location">
-                                                        <dl class="address">
-                                                            <dt>147/19 Đường Tân Lập 2, Phường Hiệp Phú, Quận 9, Hồ Chí Minh , Quận 9</dt>
-                                                        </dl>
-                                                    </div>
-                                                    <div class="contact">
-                                                        <dl class="price">
-                                                            <dt>2.700.000 VNĐ</dt>
-                                                        </dl>
-                                                    </div>
+                                                    <%
+                                                        }
+                                                    %>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+
+                                    <%
+                                            }
+                                        }
+                                    %>
                                 </div>
-
                                 <div class="col-lg-12">
                                     <div class="main-button">
-                                        <a href="profile.html">MORE</a>
+                                        <a href="./rental">MORE</a>
                                     </div>
                                 </div>
 
@@ -354,96 +305,56 @@
                             <div class="heading-section">
                                 <h4>HOT RECOMMENDED</h4>
                             </div>
+                            <%
+                                ArrayList<Post> priciestPost = (ArrayList<Post>) session.getAttribute("priciestPost");
 
-                            <div class="item">
-                                <div class="row">
-                                    <div class="col-md-5 picture">
-                                        <a href="rental.html"><img src="assets/images/game1.jpg" alt="" class="img-hot"></a>
+                                if (priciestPost != null) {
+                                    for (Post post : priciestPost) {
+                            %>
+                            <div class="item" style="font-family: 'Arial', sans-serif;">
+                                <div class="row" style="border-radius: 10px;">
+                                    <div class="col-md-5 picture" style="object-fit: contain;">
+                                        <img src="data:image/png;base64,<%= inputStreamToBase64(post.getUrl()) %>" alt="" class="img-hot">
                                     </div>
                                     <div class="col-md-7 describe">
-                                        <div class="city">
-                                            <span>
-                                                <a href="rental.html">Hồ Chí Minh</a>
-                                            </span>
-                                        </div>
                                         <h4 class="title">
-                                            <a href="rental.html">
-                                                PHÒNG NGAY VINCOM Q9 - NGÃ TƯ THỦ ĐỨC </a>
+                                            <a href="./postDetail?id=<%=post.getPostID()%>" style="font-size: 22px;" href="rental.html"><%= post.getTitle() %></a>
                                         </h4>
                                         <div class="location">
-                                            <dl class="address">
-                                                <dt>147/19 Đường Tân Lập 2, Phường Hiệp Phú, Quận 9, Hồ Chí Minh , Quận 9</dt>
+                                            <dl  class="address">
+                                                <dt>Address: <%= post.getAddress() %></dt>
                                             </dl>
                                         </div>
+
                                         <div class="contact">
                                             <dl class="price">
-                                                <dt>2.700.000 VNĐ</dt>
+                                                <dt>Price: <%= formatCurrency(post.getPrice()) %></dt>
                                             </dl>
                                         </div>
+                                        <div class="post-date">
+                                            <p>Post Date: <%= post.getDate() %></p>
+                                        </div>
+                                        <% 
+                                        if ("admin".equals(session.getAttribute("usertype"))) {
+                                        %>
+                                        <div class="button-group">
+                                            <button class="btn btn-primary" onclick="updatePost(<%= post.getPostID() %>)">Update</button>
+                                            <button class="btn btn-danger" onclick="deletePost(<%= post.getPostID() %>)">Delete</button>
+                                        </div>
+                                        <%
+                                            }
+                                        %>
                                     </div>
                                 </div>
                             </div>
+                            <%
+                                    }
+                                }
+                            %>
 
-                            <div class="item">
-                                <div class="row">
-                                    <div class="col-md-5 picture">
-                                        <a href="rental.html"><img src="assets/images/game-02.jpg" alt="" class="img-hot"></a>
-                                    </div>
-                                    <div class="col-md-7 describe">
-                                        <div class="city">
-                                            <span>
-                                                <a href="rental.html">Hà Nội</a>
-                                            </span>
-                                        </div>
-                                        <h4 class="title">
-                                            <a href="rental.html">
-                                                2 phòng ngủ tại triều khúc mới tinh vào ở luôn </a>
-                                        </h4>
-                                        <div class="location">
-                                            <dl class="address">
-                                                <dt>Nguyễn Xiển, Thanh Xuân Nam, Thanh Xuân , Thanh Xuân</dt>
-                                            </dl>
-                                        </div>
-                                        <div class="contact">
-                                            <dl class="price">
-                                                <dt>5.400.000 VNĐ</dt>
-                                            </dl>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="last-item">
-                                <div class="row">
-                                    <div class="col-md-5 picture">
-                                        <a href="rental.html"><img src="assets/images/game-03.jpg" alt="" class="img-hot"></a>
-                                    </div>
-                                    <div class="col-md-7 describe">
-                                        <div class="city">
-                                            <span>
-                                                <a href="rental.html">Hồ Chí Minh</a>
-                                            </span>
-                                        </div>
-                                        <h4 class="title">
-                                            <a href="rental.html">
-                                                PHÒNG SẠCH SẼ, THOÁNG MÁT GẦN ĐẠI HỌC KINH TẾ </a>
-                                        </h4>
-                                        <div class="location">
-                                            <dl class="address">
-                                                <dt>97D Đường Nguyễn Tri Phương, Phường 3, Quận 10, Hồ Chí Minh</dt>
-                                            </dl>
-                                        </div>
-                                        <div class="contact">
-                                            <dl class="price">
-                                                <dt>2.700.000 VNĐ</dt>
-                                            </dl>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="col-lg-12">
                                 <div class="main-button">
-                                    <a href="profile.html">MORE</a>
+                                    <a href="./rental">MORE</a>
                                 </div>
                             </div>
                         </div>
@@ -504,6 +415,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
         <script src="./assets/js/isotope.js"></script>
         <script src="./assets/js/owl-carousel.js"></script>
         <script src="./assets/js/tabs.js"></script>
@@ -511,8 +423,30 @@
         <script src="./assets/js/custom.js"></script>
         <script src="./assets/js/selectBox.js"></script>
         <script src="./assets/js/checkBox.js"></script>
-        <!--<script src="./assets/js/home.js"></script>-->
+        <script src="./assets/js/home.js"></script>
+        <script src="./assets/js/toast.js"></script>
 
+        <script>
+                                                if ("${requestScope.deleteStatus}" === "failure") {
+                                                    showErrorDelete();
+            <%
+                request.setAttribute("deleteStatus", null);
+            %>
+                                                } else if ("${requestScope.deleteStatus}" === "success") {
+                                                    showSuccessDelete();
+            <%
+                request.setAttribute("deleteStatus", null);
+            %>
+                                                }
+
+                                                $(document).ready(function () {
+                                                    $('.dropdown').on('focusin mouseenter', function () {
+                                                        $(this).addClass('show').find('.dropdown-menu').addClass('show');
+                                                    }).on('focusout mouseleave', function () {
+                                                        $(this).removeClass('show').find('.dropdown-menu').removeClass('show');
+                                                    });
+                                                });
+        </script>
     </body>
 
 </html>

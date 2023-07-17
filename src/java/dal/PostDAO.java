@@ -14,6 +14,7 @@ import java.sql.Statement;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Iterator;
 import model.Post;
 import model.User;
 import org.apache.catalina.connector.Response;
@@ -24,26 +25,26 @@ import org.apache.catalina.connector.Response;
  */
 public class PostDAO extends DBconnector {
 
-    public void insertPost_forUser(Post u) {
-        String sqlforPost = "INSERT INTO `postes`(`Title`, `Description`, `Address`, `PhoneNumber`, `Area`, "
-                + "`NumberOfRoom`, `AvailableRoom`,`Price`,`PostDate`, `UserID`)"
-                + "VALUES (?,?,?,?,?,?,?,?,?,?)";
+    public void insertPost_forUser(Post p) {
+        String sqlforPost = "INSERT INTO `postes`(`Title`, `Description`, `Address`, `PhoneNumber`, `Area`, `NumberOfRoom`, `AvailableRoom`, `Price`, `PostDate`, `UserID`, `CityID`) "
+                + "VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 
-        java.sql.Date sqlDate = java.sql.Date.valueOf(u.getDate());
+        java.sql.Date sqlDate = java.sql.Date.valueOf(p.getDate());
 
         try {
             PreparedStatement st = conn.prepareStatement(sqlforPost);
 
-            st.setString(1, u.getTitle());
-            st.setString(2, u.getDescription());
-            st.setString(3, u.getAddress());
-            st.setString(4, u.getPhoneNumber());
-            st.setDouble(5, u.getArea());
-            st.setInt(6, u.getNumberOfRoom());
-            st.setInt(7, u.getAvailableRoom());
-            st.setInt(8, u.getPrice());
+            st.setString(1, p.getTitle());
+            st.setString(2, p.getDescription());
+            st.setString(3, p.getAddress());
+            st.setString(4, p.getPhoneNumber());
+            st.setDouble(5, p.getArea());
+            st.setInt(6, p.getNumberOfRoom());
+            st.setInt(7, p.getAvailableRoom());
+            st.setInt(8, p.getPrice());
             st.setDate(9, sqlDate);
-            st.setInt(10, u.getUserID());
+            st.setInt(10, p.getUserID());
+            st.setInt(11, p.getCityID());
 
             st.executeUpdate();
         } catch (SQLException e) {
@@ -89,12 +90,11 @@ public class PostDAO extends DBconnector {
     }
 
     public ArrayList<Post> getListPostByAddress(String infor) {
-        String query = "SELECT * FROM `postes` WHERE Address LIKE ?";
+        String query = "SELECT * FROM `postes` WHERE 1";
 
         ArrayList<Post> postList = new ArrayList<>();
         try {
             PreparedStatement st = conn.prepareStatement(query);
-            st.setString(1, "%" + infor + "%");
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
                 while (rs.next()) {
@@ -105,10 +105,20 @@ public class PostDAO extends DBconnector {
 
                     Post post = new Post(rs.getInt(1), rs.getString(2), rs.getString(3),
                             rs.getString(4), rs.getString(5), rs.getDouble(6), rs.getInt(7),
-                            rs.getInt(8), rs.getInt(9), localDate, rs.getInt(11), inputStream);
+                            rs.getInt(8), rs.getInt(9), localDate, rs.getInt(11), rs.getInt(12), inputStream);
 
                     postList.add(post);
                 }
+                
+                Iterator<Post> iterator = postList.iterator();
+    
+                while (iterator.hasNext()) {
+                    Post post = iterator.next();
+                    if (!post.getAddress().toLowerCase().contains(infor)) {
+                        iterator.remove();
+                    }
+                }
+                
                 return postList;
             }
         } catch (SQLException e) {
@@ -119,13 +129,13 @@ public class PostDAO extends DBconnector {
         return null;
     }
 
-    public ArrayList<Post> getListPostByCityAndPrice(String city, String price) {
-        String query = "SELECT * FROM `postes` WHERE Address LIKE ?";
+    public ArrayList<Post> getListPostByCityAndPrice(int cityID, String price) {
+        String query = "SELECT * FROM `postes` WHERE 1";
 
         // Prepare the price range variables
         int minPrice = 0;
         int maxPrice = Integer.MAX_VALUE;
-
+        price = price.trim();
         if (price != null && !price.equals("all")) {
             String[] priceRange = price.split("-");
             if (priceRange.length == 2) {
@@ -137,11 +147,9 @@ public class PostDAO extends DBconnector {
         ArrayList<Post> postList = new ArrayList<>();
         try {
             PreparedStatement st = conn.prepareStatement(query);
-            st.setString(1, "%" + city + "%");
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
                 while (rs.next()) {
-                    
                     int postPrice = rs.getInt(9);
                     if (postPrice >= minPrice && postPrice <= maxPrice) {
                         Date dbDate = rs.getDate(10);
@@ -150,12 +158,21 @@ public class PostDAO extends DBconnector {
                         InputStream inputStream = blob.getBinaryStream();
 
                         Post post = new Post(rs.getInt(1), rs.getString(2), rs.getString(3),
-                            rs.getString(4), rs.getString(5), rs.getDouble(6), rs.getInt(7),
-                            rs.getInt(8), postPrice, localDate, rs.getInt(11), inputStream);
+                                rs.getString(4), rs.getString(5), rs.getDouble(6), rs.getInt(7),
+                                rs.getInt(8), postPrice, localDate, rs.getInt(11), rs.getInt(12), inputStream);
 
                         postList.add(post);
                     }
                 }
+                Iterator<Post> iterator = postList.iterator();
+    
+                while (iterator.hasNext()) {
+                    Post post = iterator.next();
+                    if (post.getCityID() != cityID) {
+                        iterator.remove();
+                    }
+                }
+                
                 return postList;
             }
         } catch (SQLException e) {
@@ -167,12 +184,11 @@ public class PostDAO extends DBconnector {
     }
 
     public ArrayList<Post> getListPostByTitle(String infor) {
-        String query = "SELECT * FROM `postes` WHERE Title LIKE ?";
+        String query = "SELECT * FROM `postes` WHERE 1";
 
         ArrayList<Post> postList = new ArrayList<>();
         try {
             PreparedStatement st = conn.prepareStatement(query);
-            st.setString(1, "%" + infor + "%");
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
                 while (rs.next()) {
@@ -183,9 +199,18 @@ public class PostDAO extends DBconnector {
 
                     Post post = new Post(rs.getInt(1), rs.getString(2), rs.getString(3),
                             rs.getString(4), rs.getString(5), rs.getDouble(6), rs.getInt(7),
-                            rs.getInt(8), rs.getInt(9), localDate, rs.getInt(11), inputStream);
+                            rs.getInt(8), rs.getInt(9), localDate, rs.getInt(11), rs.getInt(12), inputStream);
 
                     postList.add(post);
+                }
+                
+                Iterator<Post> iterator = postList.iterator();
+    
+                while (iterator.hasNext()) {
+                    Post post = iterator.next();
+                    if (!post.getTitle().toLowerCase().contains(infor)) {
+                        iterator.remove();
+                    }
                 }
                 return postList;
             }
@@ -194,6 +219,88 @@ public class PostDAO extends DBconnector {
             System.out.println(e);
         }
         return null;
+    }
+
+    public Post getPostByID(int postID) {
+        String query = "SELECT * FROM `postes` WHERE PostID = ?";
+
+        try {
+            PreparedStatement st = conn.prepareStatement(query);
+            st.setInt(1, postID);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                Date dbDate = rs.getDate(10);
+                LocalDate localDate = dbDate.toLocalDate();
+                Blob blob = getImage(rs.getInt(1));
+                InputStream inputStream = blob.getBinaryStream();
+
+                Post post = new Post(rs.getInt(1), rs.getString(2), rs.getString(3),
+                        rs.getString(4), rs.getString(5), rs.getDouble(6), rs.getInt(7),
+                        rs.getInt(8), rs.getInt(9), localDate, rs.getInt(11), rs.getInt(12), inputStream);
+
+                return post;
+            }
+        } catch (SQLException e) {
+            System.out.println("Could not get the post with ID: " + postID);
+            System.out.println(e);
+        }
+        return null;
+    }
+
+    public ArrayList<Post> getNewestPosts(int limit) {
+        String query = "SELECT * FROM `postes` ORDER BY PostDate DESC LIMIT ?";
+
+        ArrayList<Post> postList = new ArrayList<>();
+        try {
+            PreparedStatement st = conn.prepareStatement(query);
+            st.setInt(1, limit);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Date dbDate = rs.getDate(10);
+                LocalDate localDate = dbDate.toLocalDate();
+                Blob blob = getImage(rs.getInt(1));
+                InputStream inputStream = blob.getBinaryStream();
+
+                Post post = new Post(rs.getInt(1), rs.getString(2), rs.getString(3),
+                        rs.getString(4), rs.getString(5), rs.getDouble(6), rs.getInt(7),
+                        rs.getInt(8), rs.getInt(9), localDate, rs.getInt(11), rs.getInt(12), inputStream);
+
+                postList.add(post);
+            }
+        } catch (SQLException e) {
+            System.out.println("Could not get any post");
+            System.out.println(e);
+        }
+
+        return postList;
+    }
+
+    public ArrayList<Post> getPriciestPosts(int limit) {
+        String query = "SELECT * FROM `postes` ORDER BY Price DESC LIMIT ?";
+
+        ArrayList<Post> postList = new ArrayList<>();
+        try {
+            PreparedStatement st = conn.prepareStatement(query);
+            st.setInt(1, limit);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Date dbDate = rs.getDate(10);
+                LocalDate localDate = dbDate.toLocalDate();
+                Blob blob = getImage(rs.getInt(1));
+                InputStream inputStream = blob.getBinaryStream();
+
+                Post post = new Post(rs.getInt(1), rs.getString(2), rs.getString(3),
+                        rs.getString(4), rs.getString(5), rs.getDouble(6), rs.getInt(7),
+                        rs.getInt(8), rs.getInt(9), localDate, rs.getInt(11), rs.getInt(12), inputStream);
+
+                postList.add(post);
+            }
+        } catch (SQLException e) {
+            System.out.println("Could not get any post");
+            System.out.println(e);
+        }
+
+        return postList;
     }
 
     public ArrayList<Post> getAllListPost() {
@@ -211,7 +318,7 @@ public class PostDAO extends DBconnector {
 
                 Post post = new Post(rs.getInt(1), rs.getString(2), rs.getString(3),
                         rs.getString(4), rs.getString(5), rs.getDouble(6), rs.getInt(7),
-                        rs.getInt(8), rs.getInt(9), localDate, rs.getInt(11), inputStream);
+                        rs.getInt(8), rs.getInt(9), localDate, rs.getInt(11), rs.getInt(12), inputStream);
 
                 postList.add(post);
             }
@@ -223,4 +330,17 @@ public class PostDAO extends DBconnector {
         return postList;
     }
 
+    public boolean deletePostByID(int id) {
+        String query = "DELETE FROM `postes` WHERE PostID = ?";
+        try {
+            PreparedStatement st = conn.prepareStatement(query);
+            st.setInt(1, id);
+            st.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            System.out.println("Could not delete this post");
+            System.out.println(e);
+            return false;
+        }
+    }
 }

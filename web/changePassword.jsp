@@ -70,13 +70,38 @@
                 </a>
                 <!-- ***** Logo End ***** -->
 
+                <% 
+                    String user = null;
+                    HttpSession section = request.getSession(false);
+                    if (session != null) {
+                        user = (String) session.getAttribute("username");
+                    } 
+                %>
+
                 <!-- ***** Menu Start ***** -->
                 <ul class="nav" style="display: flex; align-items: center;">
-                    <li class="effect"><a href="./home" >Home</a></li>
+                    <li class="effect"><a href="./home" class="active">Home</a></li>
                     <li class="effect"><a href="./rental">Rental</a></li>
                     <li class="effect"><a href="./instruction">Instruction</a></li>
-                    <li class="effect"><a href="./register">Register</a></li>
-                    <li class="effect"><a href="./login"  class="active">Login</a></li>
+                    <li class="effect"><a href="./post">Post</a></li>
+                    <% 
+                        if ("admin".equals(session.getAttribute("usertype"))) {
+                    %>
+                        <li class="effect"><a href="./admin">Admin</a></li>
+                    <%
+                        }
+                    %>
+                    <li class="dropdown">
+                        <a class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-user"></i> <%= user %>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="./profile">Profile</a>
+                            <a class="dropdown-item" href="./post">Post</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="./login">Logout</a>
+                        </div>
+                    </li>
                 </ul>
 
                 <a class='menu-trigger'>
@@ -91,7 +116,7 @@
         <div class="container-fluid vh-40" style="margin-top:150px">
             <div class="">
                 <div class="rounded d-flex justify-content-center">
-                    <div class="col-lg-4 col-md-6 col-sm-12 shadow-lg p-5 bg-light">
+                    <div class="col-lg-4 col-md-6 col-sm-12 shadow-lg p-5 background-light" style="background-color: rgba(255, 255, 255, 0.5); border-radius: 25px;">
                         <div class="text-center">
                             <h3 class="text-primary">Change Password</h3>
                         </div>
@@ -195,7 +220,8 @@
                     rules: {
                         password: {
                             required: true, // Field is required
-                            minlength: 6 // Minimum length of 5 characters
+                            minlength: 6, // Minimum length of 5 characters
+                            maxlength: 50
                         },
                         cfpassword: {
                             required: true, // Field is required
@@ -206,7 +232,8 @@
                     messages: {
                         password: {
                             required: 'Please enter a value for this field',
-                            minlength: 'Minimum length is 6 characters'
+                            minlength: 'Minimum length is 6 characters',
+                            maxlength: 'Minimum length is 50 characters'
                         },
                         cfpassword: {
                             required: 'Please enter a value for this field',

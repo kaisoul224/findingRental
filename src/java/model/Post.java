@@ -23,9 +23,13 @@ public class Post {
     private int price;
     private LocalDate date;
     private int userID;
+    private int cityID;
     private InputStream url;
 
-    public Post(int postID, String title, String description, String address, String phoneNumber, double area, int numberOfRoom, int availableRoom, int price, LocalDate date, int userID, InputStream url) {
+    public Post() {
+    }
+    
+    public Post(int postID, String title, String description, String address, String phoneNumber, double area, int numberOfRoom, int availableRoom, int price, LocalDate date, int userID, int cityID, InputStream url) {
         this.postID = postID;
         this.title = title;
         this.description = description;
@@ -37,9 +41,9 @@ public class Post {
         this.price = price;
         this.date = date;
         this.userID = userID;
+        this.cityID = cityID;
         this.url = url;
     }
-    
     // Override equals() method
     @Override
     public boolean equals(Object obj) {
@@ -128,6 +132,10 @@ public class Post {
     public LocalDate getDate() {
         return date;
     }
+    
+    public String getDateString() {
+        return date.toString();
+    }
 
     public void setDate(LocalDate date) {
         this.date = date;
@@ -140,6 +148,15 @@ public class Post {
     public void setUserID(int userID) {
         this.userID = userID;
     }
+
+    public int getCityID() {
+        return cityID;
+    }
+
+    public void setCityID(int cityID) {
+        this.cityID = cityID;
+    }
+    
 
     public InputStream getUrl() {
         return url;

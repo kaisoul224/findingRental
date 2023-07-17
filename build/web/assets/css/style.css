@@ -262,12 +262,15 @@ body {
 }
 
 a {
-    color: #fd6467;
+    /*color: #fd6467;*/
+    color: #531aea;
+    font-size: 18px;
     text-decoration: none !important;
 }
 
 a:hover {
-    color: #F99;
+    /*color: #F99;*/
+    opacity: 0.7;
 }
 
 h1,
@@ -304,10 +307,10 @@ Global Styles
 */
 html,
 body {
-    /*background: linear-gradient(to right, #bdc3c7, #2c3e50);*/
+    background: linear-gradient(to right, #101518, #595f66);
     /*background: #ffffff;*/
     /*background-color: #989898;*/
-    
+
     font-family: 'Poppins', sans-serif;
 }
 
@@ -1297,17 +1300,17 @@ li.selected {
 }
 
 .list-items .item:hover {
-  background-color: rgba(255, 140, 0, 0.1);
+    background-color: rgba(255, 140, 0, 0.1);
 }
 
 .list-items .item input {
-  margin: 0 12px 0 0;
+    margin: 0 12px 0 0;
 }
 
 
 
 .item label{
-  font-size: 17px;
+    font-size: 17px;
 }
 
 .item .item-text {
@@ -1463,14 +1466,16 @@ Most Popular Style
 }
 
 .most-popular .location .address dt {
-    color: #000000;
-    font-size: 13px;
+    color: #666666;
+    /*opacity: 0.7;*/
+    font-size: 14px;
+    font-weight: 500;
     margin-top: 10px;
 }
 
 .most-popular .contact .price dt {
-    color: #ff0000;
-    font-size: 14px;
+    /*color: #ff0000;*/
+    font-size: 15px;
     margin-top: 15px;
 }
 
@@ -1493,9 +1498,10 @@ Gaming Library Style
 }
 
 .hot-search .item {
-    border-bottom: 1px solid #ff0000;
+    border-bottom: 2px solid #ccc;
     margin-bottom: 20px;
     padding-bottom: 20px;
+    border-radius: 10px;
 }
 
 .hot-search .row {
@@ -1519,6 +1525,8 @@ Gaming Library Style
 
 .hot-search .item ul li img {
     margin-top: -30px;
+    object-fit: contain;
+    height: 200px;
 }
 
 .hot-search .item ul li {
@@ -1570,13 +1578,16 @@ Gaming Library Style
 } */
 
 .hot-search .location .address dt {
-    color: #ff0000;
+    /*color: #ff0000;*/
+    color: #666666;
     font-size: 17px;
+    font-weight: 400;
     margin-top: 20px;
 }
 
 .hot-search .contact .price dt {
-    color: #ff0000;
+    /*color: #ff0000;*/
+    color: #000;
     font-size: 20px;
     margin-top: 20px;
 }
@@ -1584,6 +1595,12 @@ Gaming Library Style
 .hot-search .main-button {
     text-align: center;
     margin-bottom: -53px;
+}
+
+.img-hot{
+    object-fit: cover;
+    height: 250px;
+    width: 100%;
 }
 
 /* 
@@ -1657,7 +1674,7 @@ Stream Style
     margin-top: 70px;
     /*margin-bottom: 70px;*/
     /*background: #808080;*/
-    padding: 40px;
+    padding: 40px 40px 20px 40px;
 }
 
 /*.page-content-find {
@@ -2063,7 +2080,72 @@ body {
     }
 }
 
-@media only screen and (max-width: 1260px) {
+.search-bar {
+    display: flex;
+    align-items: center;
+}
 
+.search-bar input[type="text"] {
+    flex: 1;
+    padding-right: 40px; /* Add space for the search button */
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    background-color: #f1f1f1;
+    height: 30px;
+}
 
+.search-bar button {
+    margin-left: 10px; /* Add some spacing between the input and button */
+    width: 30px;
+    height: 30px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.search-bar button i {
+    color: #555555;
+    font-size: 18px;
+}
+
+/* CSS */
+.form-check-input[type="checkbox"] {
+    background-color: black;
+    border-color: white;
+}
+
+.form-check-input[type="checkbox"]:checked {
+    background-color: black;
+    border-color: white;
+}
+
+.form-check-input[type="checkbox"]:checked::before {
+    content: "";
+    display: block;
+    width: 12px;
+    height: 12px;
+    margin-left: 1px;
+    margin-top: -4px;
+    background-color: white;
+}
+
+.contact-options {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.contact-options li {
+    margin-bottom: 10px;
+}
+
+.contact-options li i {
+    margin-right: 10px;
+}
+
+.contact-link {
+    color: #000;
+    text-decoration: none;
 }

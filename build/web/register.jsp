@@ -25,24 +25,30 @@
         <link rel="stylesheet" href="assets/css/owl.css">
         <link rel="stylesheet" href="assets/css/animate.css">
         <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
-        
-                <style>
-                    @media screen and (min-width: 1920px) {
-                       .footer {
-                           position: fixed;
-                           left: 0;
-                           bottom: 0;
-                           width: 100%;
-                           background-color: #f8f8f8; 
-                       }
-                   }
 
-                   @media screen and (max-width: 16in) {
-                       .footer {
-                           margin-top: 70px;
-                       }
+        <style>
+            body{
+                background-image: url("https://scontent.fsgn5-10.fna.fbcdn.net/v/t39.30808-6/358146094_1519419708797170_2579582474373830106_n.jpg?_nc_cat=107&cb=99be929b-59f725be&ccb=1-7&_nc_sid=730e14&_nc_ohc=qSnf1izl1NIAX8rmhms&_nc_ht=scontent.fsgn5-10.fna&oh=00_AfCLZ411T764CTEFMSipSXrp7VUIL15-Djpt-3PFxmtX4w&oe=64B85FCE");
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-position: center;
+
+            }
+                @media screen and (min-width: 1920px) {
+                   .footer {
+                       position: fixed;
+                       left: 0;
+                       bottom: 0;
+                       width: 100%;
                    }
-                </style>
+               }
+
+               @media screen and (max-width: 16in) {
+                   .footer {
+                       margin-top: 70px;
+                   }
+               }
+        </style>
 
     </head>
 
@@ -90,31 +96,31 @@
         <!-- ***** Header Area End ***** -->
 
 
-        <div class="container-fluid vh-40" style="margin-top:150px">
+        <div class="container-fluid vh-40" style="margin-top:70px; padding: 40px;">
             <div id="toast" style="z-index: 1;"></div>
             <div class="">
-                <div class="rounded d-flex justify-content-center" style="margin-bottom: 70px;">
-                    <div class="col-lg-4 col-md-6 col-sm-12 shadow-lg p-5 bg-light">
-                        <div class="text-center">
+                <div class="rounded d-flex justify-content-center">
+                    <div class="col-lg-4 col-md-6 col-sm-12 background-light" style="background-color: rgba(255, 255, 255, 0.7); border-radius: 25px; width: 500px; height: 520px">
+                        <div class="text-center" style="margin-top: 20px;">
                             <h3 class="text-primary">Register</h3>
                         </div>
                         <form id="registerform" method="POST" action="register">
-                            <div class="p-4">
+                            <div style="padding: 30px 48px;">
                                 <div class="row input-group mb-3">
                                     <span class="input-group-text bg-primary" style="width: 36px;"><i class="bi bi-person-plus-fill text-white"></i></span>
-                                    <input name="fullname" type="text" class="form-control" placeholder="Full Name">
+                                    <input id="fullname" name="fullname" type="text" class="form-control" placeholder="Full Name">
                                 </div>
                                 <div class="row input-group mb-3">
                                     <span class="col-1 input-group-text bg-primary" style="width: 36px;"><i class="bi bi-person-plus-fill text-white"></i></span>
-                                    <input name="username" type="text" class="form-control" placeholder="User Name">
+                                    <input id="username" name="username" type="text" class="form-control" placeholder="User Name">
                                 </div>
                                 <div class="row input-group mb-3">
                                     <span class="input-group-text bg-primary" style="width: 36px;"><i class="bi bi-phone text-white"></i></span>
-                                    <input name="phoneNumber" type="text" class="form-control" placeholder="Phone Number">
+                                    <input id="phoneNumber" name="phoneNumber" type="text" class="form-control" placeholder="Phone Number">
                                 </div>
                                 <div class="row input-group mb-3">
                                     <span class="col-1 input-group-text bg-primary" style="width: 36px;"><i class="bi bi-envelope text-white"></i></span>
-                                    <input name="email" type="email" class="form-control" placeholder="Email">
+                                    <input id="email" name="email" type="email" class="form-control" placeholder="Email">
                                 </div>
                                 <div class="row input-group mb-3">
                                     <span class="input-group-text bg-primary" style="width: 36px;"><i class="bi bi-key-fill text-white"></i></span>
@@ -122,13 +128,13 @@
                                 </div>  
                                 <div class="row input-group mb-3">
                                     <span class="input-group-text bg-primary" style="width: 36px;"><i class="bi bi-key-fill text-white"></i></span>
-                                    <input name="cfpassword" type="password" class="form-control" placeholder="Confirm Password">
+                                    <input id="cfpassword" name="cfpassword" type="password" class="form-control" placeholder="Confirm Password">
                                 </div> 
 
                                 <button class="w-50 mx-auto btn btn-primary text-center mt-2" style="display: flex; justify-content: center;" type="submit">
                                     Register
                                 </button>
-                                <p class="text-center mt-5">
+                                <p class="text-center" style="color: #000;">
                                     Don't have an account?
                                     <!--<span class="text-primary">Sign In</span>-->
                                     <a href="./login" class="text-primary" style="cursor: pointer;">
@@ -193,8 +199,11 @@
         <!-- Scripts -->
         <!-- Bootstrap core JavaScript -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+        <!--<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>-->
+        <!--<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>-->
+        
+        <script src="./vendor/jquery/jquery.min.js"></script>
+        <script src="./vendor/jquery/jquery.validate.min.js"></script>
 
         <script src="./assets/js/isotope.js"></script>
         <script src="./assets/js/owl-carousel.js"></script>
@@ -217,23 +226,28 @@
                         // Define validation rules for your form fields
                         fullname: {
                             required: true, // Field is required
-                            minlength: 5 // Minimum length of 5 characters
+                            minlength: 5, // Minimum length of 5 characters
+                            maxlength: 100 // Minimum length of 5 characters
                         },
                         username: {
                             required: true, // Field is required
-                            minlength: 5 // Minimum length of 5 characters
+                            minlength: 5, // Minimum length of 5 characters
+                            maxlength: 50
                         },
                         phoneNumber: {
                             required: true, // Field is required
-                            number: true
+                            number: true,
+                            maxlength: 10
                         },
                         email: {
                             required: true, // Field is required
-                            email: true
+                            email: true,
+                            maxlength: 100
                         },
                         password: {
                             required: true, // Field is required
-                            minlength: 6 // Minimum length of 5 characters
+                            minlength: 6, // Minimum length of 5 characters
+                            maxlength: 50
                         },
                         cfpassword: {
                             required: true, // Field is required
@@ -245,23 +259,28 @@
                         // Define error messages for your form fields
                         fullname: {
                             required: 'Please enter a value for this field',
-                            minlength: 'Minimum length is 6 characters'
+                            minlength: 'Minimum length is 6 characters',
+                            maxlength: 'Maximum length is 100 characters'
                         },
                         username: {
                             required: 'Please enter a value for this field',
-                            minlength: 'Minimum length is 6 characters'
+                            minlength: 'Minimum length is 6 characters',
+                            maxlength: 'Maximum length is 50 characters'
                         },
                         phoneNumber: {
                             required: 'Please enter a value for this field',
-                            number: 'Please enter a valid number'
+                            number: 'Please enter a valid number',
+                            maxlength: 'Maximum length is 10 characters'
                         },
                         email: {
                             required: 'Please enter a value for this field',
-                            email: 'Please enter a valid email'
+                            email: 'Please enter a valid email',
+                            maxlength: 'Maximum length is 100 characters'
                         },
                         password: {
                             required: 'Please enter a value for this field',
-                            minlength: 'Minimum length is 6 characters'
+                            minlength: 'Minimum length is 6 characters',
+                            maxlength: 'Maximum length is 50 characters'
                         },
                         cfpassword: {
                             required: 'Please enter a value for this field',

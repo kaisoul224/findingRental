@@ -26,6 +26,21 @@
         <link rel="stylesheet" href="assets/css/animate.css">
         <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
 
+        <style>
+            body{
+                background-image: url("https://scontent.fsgn2-4.fna.fbcdn.net/v/t39.30808-6/359827930_1520293782043096_977618124555652208_n.jpg?stp=dst-jpg_s2048x2048&_nc_cat=101&cb=99be929b-59f725be&ccb=1-7&_nc_sid=730e14&_nc_ohc=ZwQXfxPsazoAX96sNee&_nc_ht=scontent.fsgn2-4.fna&oh=00_AfCQuH4l8TlLxOGG4J5wFzYzK8gHXDyxosIKoMzNL3y63A&oe=64B396FE");
+                background-repeat: no-repeat;
+                background-size: 100% 100%;
+                background-position: center;
+            }
+            
+             .row-change:focus {
+                border: 1px solid #00FF00; /* Viền màu xanh khi được chọn */
+            }
+            
+            
+        </style>
+
     </head>
 
     <body>
@@ -69,6 +84,13 @@
                     <li class="effect"><a href="./rental">Rental</a></li>
                     <li class="effect"><a href="./instruction">Instruction</a></li>
                     <li class="effect"><a href="./post">Post</a></li>
+                        <% 
+                            if ("admin".equals(session.getAttribute("usertype"))) {
+                        %>
+                    <li class="effect"><a href="./admin">Admin</a></li>
+                        <%
+                            }
+                        %>
                     <li class="dropdown">
                         <a class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-user"></i> <%= user %>
@@ -91,11 +113,11 @@
         <!-- ***** Header Area End ***** -->
 
 
-        <div class="container-fluid vh-40" style="margin-top:150px">
+        <div class="container-fluid vh-40" style="margin-top:70px; padding-top: 40px;">
             <div id="toast" style="z-index: 1;"></div>
             <div class="">
                 <div class="rounded d-flex justify-content-center" style="margin-bottom: 70px;">
-                    <div class="col-lg-4 col-md-6 col-sm-12 shadow-lg p-5 bg-light">
+                    <div class="col-lg-4 col-md-6 col-sm-12 shadow-lg p-5 background-light"style="width: 80vw; background-color: rgba(255, 255, 255, 0.7); border-radius: 25px;" >
                         <div class="text-center">
                             <h3 class="text-primary">Post</h3>
                         </div>
@@ -104,12 +126,23 @@
                                 <div class="row input-group mb-3">
                                     <input name="title" type="text" class="form-control" placeholder="Title">
                                 </div>
-                                <div class="row input-group mb-3">
-                                    <input name="description" type="text" class="form-control" placeholder="Description">
+                                <div class="row input-group mb-3" style="height: 15vh;">
+                                    <textarea style="height: 100%; resize: vertical;" name="description" class="form-control" placeholder="Description"></textarea>
                                 </div>
+
                                 <div class="row input-group mb-3">
-                                    <input name="address" type="text" class="form-control" placeholder="Address">
+                                    <div class="col-lg-4 col-sm-12 d-flex" style="padding-left: 0;">
+                                        <select name="city" id="citySelect" class="w-100 form-select" aria-label="City">
+                                            <option selected disabled>Select a city</option>
+                                            <!-- Add options dynamically using JavaScript -->
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-8 col-sm-12" style="padding-right: 0;">
+                                        <input name="address" type="text" class="w-100 form-control" placeholder="Address detail">
+                                    </div>
                                 </div>
+
+
                                 <div class="row input-group mb-3">
                                     <input name="phoneNumber" type="text" class="form-control" placeholder="Phone Number">
                                 </div>
@@ -132,7 +165,7 @@
                                 <button class="w-50 mx-auto btn btn-primary text-center mt-2" style="display: flex; justify-content: center;" type="submit">
                                     Post
                                 </button>
-                                
+
                             </div>
                         </form>
                     </div>
@@ -195,6 +228,7 @@
         <script src="./assets/js/popup.js"></script>
         <script src="./assets/js/custom.js"></script>
         <script src="./assets/js/toast.js"></script>
+        <script src="./assets/js/post.js"></script>
 
         <script>
             if ("${requestScope.registrationStatus}" === "failure") {
@@ -210,18 +244,22 @@
                         // Define validation rules for your form fields
                         title: {
                             required: true, // Field is required
-                            minlength: 5 // Minimum length of 5 characters
+                            minlength: 5, // Minimum length of 5 characters
+                            maxlength: 100
                         },
                         description: {
                             required: true, // Field is required
+                            maxlength: 1000,
                         },
                         address: {
                             required: true, // Field is required
-                            minlength: 5
+                            minlength: 5,
+                            maxlength: 500,
                         },
                         phoneNumber: {
                             required: true, // Field is required
-                            number: true
+                            number: true,
+                            maxlength: 10,
                         },
                         area: {
                             required: true,
@@ -242,25 +280,29 @@
                         image: {
                             required: true, // Field is required
                         },
-                        
+
                         // Add more fields and rules as needed
                     },
                     messages: {
                         // Define error messages for your form fields
                         title: {
                             required: 'Please enter a value for this field',
-                            minlength: 'Minimum length is 6 characters'
+                            minlength: 'Minimum length is 6 characters',
+                            maxlength: 'Minimum length is 100 characters'
                         },
                         description: {
                             required: 'Please enter a value for this field',
+                            maxlength: 'Minimum length is 1000 characters'
                         },
                         address: {
                             required: 'Please enter a value for this field',
-                            minlength: 'Minimum length is 6 characters'
+                            minlength: 'Minimum length is 6 characters',
+                            maxlength: 'Minimum length is 500 characters'
                         },
                         phoneNumber: {
                             required: 'Please enter a value for this field',
-                            number: 'Please enter a valid number'
+                            number: 'Please enter a valid number',
+                            maxlength: 'Minimum length is 10 characters'
                         },
                         area: {
                             required: 'Please enter a value for this field',
@@ -281,20 +323,20 @@
                         image: {
                             required: 'Please enter a value for this field',
                         },
-                        
+
                         // Add more fields and messages as needed
                     }
                 });
             });
-            
-            $(document).ready(function() {
-                $('.dropdown').on('focusin mouseenter', function() {
+
+            $(document).ready(function () {
+                $('.dropdown').on('focusin mouseenter', function () {
                     $(this).addClass('show').find('.dropdown-menu').addClass('show');
-                }).on('focusout mouseleave', function() {
+                }).on('focusout mouseleave', function () {
                     $(this).removeClass('show').find('.dropdown-menu').removeClass('show');
                 });
             });
-            
+
         </script>
     </body>
 

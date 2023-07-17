@@ -26,25 +26,23 @@
         <link rel="stylesheet" href="assets/css/owl.css">
         <link rel="stylesheet" href="assets/css/animate.css">
         <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
-        
-                <style>
-                    @media screen and (min-width: 1920px) {
-                       .footer {
-                           position: fixed;
-                           left: 0;
-                           bottom: 0;
-                           width: 100%;
-                           background-color: #f8f8f8; 
-                       }
-                   }
+        <style>
+            @media screen and (min-width: 1920px) {
+               .footer {
+                   position: fixed;
+                   left: 0;
+                   bottom: 0;
+                   width: 100%;
+                   background-color: #f8f8f8;
+               }
+           }
 
-                   @media screen and (max-width: 16in) {
-                       .footer {
-                           margin-top: 70px;
-                       }
-                   }
-                </style>
-
+           @media screen and (max-width: 16in) {
+               .footer {
+                   margin-top: 70px;
+               }
+           }
+        </style>
     </head>
 
     <body>
@@ -88,6 +86,13 @@
                     <li class="effect"><a href="./rental">Rental</a></li>
                     <li class="effect"><a href="./instruction">Instruction</a></li>
                     <li class="effect"><a href="./post">Post</a></li>
+                    <% 
+                        if ("admin".equals(session.getAttribute("usertype"))) {
+                    %>
+                        <li class="effect"><a href="./admin">Admin</a></li>
+                    <%
+                        }
+                    %>
                     <li class="dropdown">
                         <a class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-user"></i> <%= user %>
@@ -113,7 +118,7 @@
         <div class="container-fluid vh-40" style="margin-top: 150px;">
     <div id="toast" style="z-index: 1;"></div>
     <div class="d-flex justify-content-center align-items-center">
-        <div class="col-lg-4 col-md-6 col-sm-12 shadow-lg p-5 bg-light rounded">
+        <div class="col-lg-4 col-md-6 col-sm-12 shadow-lg p-5 background-light rounded" style="background-color: rgba(255, 255, 255, 0.5); border-radius: 25px;">
             <div class="text-center">
                 <h3 class="text-primary">Your Profile</h3>
             </div>

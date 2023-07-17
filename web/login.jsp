@@ -25,23 +25,31 @@
         <link rel="stylesheet" href="assets/css/owl.css">
         <link rel="stylesheet" href="assets/css/animate.css">
         <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
-        
-        <style>
-            @media screen and (min-width: 1920px) {
-               .footer {
-                   position: fixed;
-                   left: 0;
-                   bottom: 0;
-                   width: 100%;
-                   background-color: #f8f8f8;
-               }
-           }
 
-           @media screen and (max-width: 16in) {
-               .footer {
-                   margin-top: 70px;
-               }
-           }
+        <style>
+
+            body{
+                background-image: url("https://scontent.fsgn5-12.fna.fbcdn.net/v/t39.30808-6/358108945_1519229058816235_577287776275203827_n.jpg?_nc_cat=103&cb=99be929b-59f725be&ccb=1-7&_nc_sid=730e14&_nc_ohc=L-UVs5ez0a0AX8eOOho&_nc_ht=scontent.fsgn5-12.fna&oh=00_AfAN8BoRvuClLINKXyK2Nj36kJ7CyGHcutXgQC2swQ_ICw&oe=64B6F3C7");
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-position: center;
+            }
+            
+            @media screen and (min-width: 1920px) {
+                .footer {
+                    position: fixed;
+                    left: 0;
+                    bottom: 0;
+                    width: 100%;
+                }
+            }
+
+            @media screen and (max-width: 16in) {
+                .footer {
+                    margin-top: 70px;
+                }
+            }
+
         </style>
 
     </head>
@@ -89,41 +97,43 @@
         <!-- ***** Header Area End ***** -->
 
 
-        <div class="container-fluid vh-40" style="margin-top:150px">
+        <div class="container-fluid" style="margin-top:70px; padding: 70px 0;">
             <div id="toast" style="z-index: 1000000;"></div>
             <div class="">
                 <div class="rounded d-flex justify-content-center" style="margin-bottom: 70px;">
-                    <div class="col-lg-4 col-md-6 col-sm-12 shadow-lg p-5 bg-light">
+
+                    <div class="col-lg-4 col-md-6 col-sm-12 background-light" style="background-color: rgba(255, 255, 255, 0.4); border-radius: 25px;">
                         <div class="text-center">
-                            <h3 class="text-primary">Login</h3>
+                            <h3 style="margin-top:30px; color: #000; padding: 20px; padding-bottom: 20px;">Login</h3>
                         </div>
                         <form id="loginform" method="POST" action="login">
-                            <div class="p-4">
+                            <div style="padding: 20px 48px;">
                                 <div class="row input-group mb-3">
-                                    <span class="input-group-text bg-primary" style="width: 36px;"><i class="bi bi-person-plus-fill text-white mr-auto"></i></span>
+                                    <span class="input-group-text" style="width: 36px; background: #000;"><i class="bi bi-person-plus-fill text-white mr-auto"></i></span>
                                     <input name="username" type="text" class="col-lg-10 col-md-10 col-sm-8 form-control" placeholder="Username">
                                 </div>
                                 <div class="row input-group mb-3">
-                                    <span class="input-group-text bg-primary" style="width: 36px;"><i class="bi bi-key-fill text-white"></i></span>
-                                    <input name="password" type="password" class="col-lg-10 col-md-10 col-sm-8 form-control" placeholder="password">
+                                    <span class="input-group-text" style="width: 36px; background: #000;"><i class="bi bi-key-fill text-white"></i></span>
+                                    <input name="password" type="password" class="col-lg-10 col-md-10 col-sm-8 form-control" placeholder="Password">
                                 </div>
                                 <div class="form-check">
                                     <input name="remember" class="form-check-input" type="checkbox" value="on" id="flexCheckDefault">
-                                    <label class="form-check-label" for="flexCheckDefault">
-                                        Remember Me
+                                    <label class="form-check-label" style="color: #ffffff" for="flexCheckDefault">
+                                        <i class="far fa-check-square"></i> Remember Me
                                     </label>
                                 </div>
-                                <button class="w-50 mx-auto btn btn-primary text-center mt-2" style="display: flex; justify-content: center;" type="submit">
+
+                                <button class="w-50 mx-auto btn btn-primary text-center mt-2" style="display: flex; justify-content: center; background: black; border: none;" type="submit" type="submit">
                                     Login
                                 </button>
-                                <p class="text-center mt-5">
+                                <p class="text-center " style="color: #ffffff; margin-top: 20px;">
                                     Don't have an account?
-                                    <a href="./register" class="text-primary" style="cursor: pointer;">
+                                    <a href="./register" style="color:orange; cursor: pointer">
                                         Sign Up
                                     </a>
                                 </p>
-                                <p class="text-center text-primary">
-                                    <a href="./forgot" class="text-primary" style="cursor: pointer;">
+                                <p class="text-center">
+                                    <a href="./forgot"  style="cursor: pointer; color: orange;">
                                         Forgot your password?
                                     </a>
                                 </p>
@@ -199,9 +209,9 @@
         <script>
             if ("${requestScope.loginStatus}" === "failure") {
                 showErrorLogin();
-                <%
-                    request.setAttribute("loginStatus", null);
-                %>
+            <%
+                request.setAttribute("loginStatus", null);
+            %>
             }
             $(document).ready(function () {
                 $('#loginform').validate({
@@ -210,10 +220,12 @@
                         username: {
                             required: true, // Field is required
                             minlength: 5, // Minimum length of 5 characters
+                            maxlength: 50, // Minimum length of 5 characters
                         },
                         password: {
                             required: true, // Field is required
                             minlength: 6, // Minimum length of 5 characters
+                            maxlength: 50, // Minimum length of 5 characters
                         }
                         // Add more fields and rules as needed
                     },
@@ -222,10 +234,12 @@
                         username: {
                             required: 'Please enter a value for this field',
                             minlength: 'Minimum length is 6 characters',
+                            maxlength: 'Maximum length is 50 characters',
                         },
                         password: {
                             required: 'Please enter a value for this field',
                             minlength: 'Minimum length is 6 characters',
+                            maxlength: 'Maximum length is 50 characters',
                         }
                         // Add more fields and messages as needed
                     }

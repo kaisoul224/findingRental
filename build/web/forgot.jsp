@@ -92,7 +92,7 @@
         <div class="container-fluid vh-40" style="margin-top:150px">
             <div class="">
                 <div class="rounded d-flex justify-content-center">
-                    <div class="col-lg-4 col-md-6 col-sm-12 shadow-lg p-5 bg-light">
+                    <div class="col-lg-4 col-md-6 col-sm-12 shadow-lg p-5 background-light" style="background-color: rgba(255, 255, 255, 0.5); border-radius: 25px;">
                         <div class="text-center">
                             <h3 class="text-primary">Forgot Password</h3>
                         </div>

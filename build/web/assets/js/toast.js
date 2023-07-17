@@ -118,3 +118,21 @@ function showErrorForget(){
         duration: 3000
     });
 }
+
+function showErrorDelete(){
+    toast({
+        title: 'Error',
+        message: 'Can not delete this post!',
+        type: 'error',
+        duration: 3000
+    });
+}
+
+function showSuccessDelete(){
+    toast({
+        title: 'Success',
+        message: 'Delete this post success!',
+        type: 'success',
+        duration: 3000
+    });
+}

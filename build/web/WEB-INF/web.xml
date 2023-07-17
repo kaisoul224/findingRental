@@ -2,31 +2,31 @@
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
         <servlet-name>HomeServlet</servlet-name>
-        <servlet-class>controller.HomeServlet</servlet-class>
+        <servlet-class>controller.Page.HomeServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ResgisterServlet</servlet-name>
-        <servlet-class>controller.ResgisterServlet</servlet-class>
+        <servlet-class>controller.Form.ResgisterServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>controller.LoginServlet</servlet-class>
+        <servlet-class>controller.Form.LoginServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>RentalServlet</servlet-name>
-        <servlet-class>controller.RentalServlet</servlet-class>
+        <servlet-class>controller.Page.RentalServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ForgotServlet</servlet-name>
-        <servlet-class>controller.ForgotServlet</servlet-class>
+        <servlet-class>controller.User.ForgotServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>InstructionServlet</servlet-name>
-        <servlet-class>controller.InstructionServlet</servlet-class>
+        <servlet-class>controller.Page.InstructionServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>PostServlet</servlet-name>
-        <servlet-class>controller.PostServlet</servlet-class>
+        <servlet-class>controller.Post.PostServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
@@ -35,19 +35,35 @@
     </servlet>
     <servlet>
         <servlet-name>ChangePasswordServlet</servlet-name>
-        <servlet-class>controller.ChangePasswordServlet</servlet-class>
+        <servlet-class>controller.User.ChangePasswordServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ProfileServlet</servlet-name>
-        <servlet-class>controller.ProfileServlet</servlet-class>
+        <servlet-class>controller.User.ProfileServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ChangeInfoServlet</servlet-name>
-        <servlet-class>controller.ChangeInfoServlet</servlet-class>
+        <servlet-class>controller.User.ChangeInfoServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>FindRental</servlet-name>
-        <servlet-class>controller.FindRentalServlet</servlet-class>
+        <servlet-class>controller.Post.FindRentalServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeletePostServlet</servlet-name>
+        <servlet-class>controller.Post.DeletePostServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminPageServlet</servlet-name>
+        <servlet-class>controller.Page.AdminPageServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdatePostServlet</servlet-name>
+        <servlet-class>controller.Post.UpdatePostServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PostDetailServlet</servlet-name>
+        <servlet-class>controller.Post.PostDetailServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
@@ -78,10 +94,10 @@
         <servlet-name>PostServlet</servlet-name>
         <url-pattern>/post</url-pattern>
     </servlet-mapping>
-    <!--    <servlet-mapping>
+        <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>
-    </servlet-mapping>-->
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ChangePasswordServlet</servlet-name>
         <url-pattern>/changePassword</url-pattern>
@@ -98,9 +114,25 @@
         <servlet-name>FindRental</servlet-name>
         <url-pattern>/find</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeletePostServlet</servlet-name>
+        <url-pattern>/deletePost</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminPageServlet</servlet-name>
+        <url-pattern>/admin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdatePostServlet</servlet-name>
+        <url-pattern>/updatePost</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PostDetailServlet</servlet-name>
+        <url-pattern>/postDetail</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
-            30
+            60
         </session-timeout>
     </session-config>
     <jsp-config>
