@@ -152,7 +152,7 @@
                             </div>
                         </div>
                     </form>
-                    <div class="col-lg-3 col-sm-12 filter-price">
+                    <div class="col-lg-12 col-sm-12 filter-price">
                         <p>Find by City</p>
                         <div class="filter-content">
                             <div class="select-btn" style="border-radius: 0 0 7px 7px;">
@@ -162,7 +162,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-sm-12 filter-price">
+                    <div class="col-lg-12 col-sm-12 filter-price">
                         <p>Find by Price</p>
                         <div class="filter-content">
                             <ul class="list-items-rental">
