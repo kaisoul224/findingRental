@@ -116,6 +116,7 @@
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="./profile">Profile</a>
                             <a class="dropdown-item" href="./post">Post</a>
+                            <a class="dropdown-item" href="./yourpost">Your Post</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="./login">Logout</a>
                         </div>
@@ -235,15 +236,19 @@
                                 Post post = postList.get(i);
                     %>
                     <div class="item-find">
+                        <%
+                            String postId = String.valueOf(post.getPostID());
+                            String encodedId = java.util.Base64.getEncoder().encodeToString(postId.getBytes());
+                        %>
                         <div class="row">
                             <div class="col-md-5 pic">
-                                <a href="./postDetail?id=<%=post.getPostID()%>">
+                                <a href="./postDetail?id=<%=encodedId%>">
                                     <img src="data:image/png;base64,<%= inputStreamToBase64(post.getUrl()) %>" alt="" class="img-item">
                                 </a>
                             </div>
                             <div class="col-md-7 des">
                                 <h4 class="title">
-                                    <a href="./postDetail?id=<%=post.getPostID()%>"><%=post.getTitle()%></a>
+                                    <a href="./postDetail?id=<%=encodedId%>"><%=post.getTitle()%></a>
                                 </h4>
                                 <div class="location">
                                     <p class="address">Address: <%=post.getAddress()%></p>
@@ -352,26 +357,26 @@
         <script src="./assets/js/toast.js"></script>
 
         <script>
-                                        if ("${requestScope.deleteStatus}" === "failure") {
-                                            showErrorDelete();
+                if ("${requestScope.deleteStatus}" === "failure") {
+                    showErrorDelete();
             <%
                 request.setAttribute("deleteStatus", null);
             %>
-                                        } else if ("${requestScope.deleteStatus}" === "success") {
-                                            showSuccessDelete();
+                } else if ("${requestScope.deleteStatus}" === "success") {
+                    showSuccessDelete();
             <%
                 request.setAttribute("deleteStatus", null);
             %>
-                                        }
+                }
 
-                                        var databaseData = <%= new Gson().toJson(postList) %>;
-                                        $(document).ready(function () {
-                                            $('.dropdown').on('focusin mouseenter', function () {
-                                                $(this).addClass('show').find('.dropdown-menu').addClass('show');
-                                            }).on('focusout mouseleave', function () {
-                                                $(this).removeClass('show').find('.dropdown-menu').removeClass('show');
-                                            });
-                                        });
+                var databaseData = <%= new Gson().toJson(postList) %>;
+                $(document).ready(function () {
+                    $('.dropdown').on('focusin mouseenter', function () {
+                        $(this).addClass('show').find('.dropdown-menu').addClass('show');
+                    }).on('focusout mouseleave', function () {
+                        $(this).removeClass('show').find('.dropdown-menu').removeClass('show');
+                    });
+                });
         </script>
 
     </body>

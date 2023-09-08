@@ -44,6 +44,9 @@ public class Post {
         this.cityID = cityID;
         this.url = url;
     }
+    
+    
+    
     // Override equals() method
     @Override
     public boolean equals(Object obj) {
@@ -56,6 +59,8 @@ public class Post {
         Post otherPost = (Post) obj;
         return this.postID == otherPost.postID;
     }
+    
+
 
     public int getPostID() {
         return postID;

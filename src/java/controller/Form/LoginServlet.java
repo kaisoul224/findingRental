@@ -38,7 +38,6 @@ public class LoginServlet extends HttpServlet {
         HttpSession session = request.getSession();
         session.setMaxInactiveInterval(Integer.MAX_VALUE);
         session.setAttribute("login", "false");
-        session.removeAttribute("username");
         session.removeAttribute("usertype");
         Cookie cookie = new Cookie("login", null); // Đặt giá trị của cookie thành null
         cookie.setMaxAge(0); // Đặt thời gian sống của cookie thành 0 (xóa ngay lập tức)

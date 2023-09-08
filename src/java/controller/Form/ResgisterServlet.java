@@ -5,6 +5,7 @@
 package controller.Form;
 
 import dal.UserDAO;
+import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -12,6 +13,15 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.Properties;
+import java.util.Random;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import model.User;
 
 /**
@@ -55,14 +65,61 @@ public class ResgisterServlet extends HttpServlet {
         String password = request.getParameter("password");
         String usertype = "normal";
         UserDAO udb = new UserDAO();
+        HttpSession session = request.getSession();
         try {
             if (udb.getUserByUsername(username) == null){
-                User uNew = new User(0, fullname, username, password, usertype, phonenumber, email);
-                udb.insert_forUser(uNew);
-                HttpSession session = request.getSession();
-                session.setAttribute("username", username);
-                session.setAttribute("login", "true");
-                response.sendRedirect(request.getContextPath() + "/home");
+                RequestDispatcher dispatcher = null;
+                    int otpvalue = 0;
+
+                    if (email != null && !email.equals("")) {
+                        // Sending OTP
+                        Random rand = new Random();
+                        otpvalue = rand.nextInt(1255650);
+
+                        String to = email; // Change accordingly
+
+                        // Get the session object
+                        Properties props = new Properties();
+                        props.put("mail.smtp.host", "smtp.gmail.com");
+                        props.put("mail.smtp.socketFactory.port", "465");
+                        props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+                        props.put("mail.smtp.auth", "true");
+                        props.put("mail.smtp.port", "465");
+                        Session mailSession = Session.getInstance(props, new javax.mail.Authenticator() {
+                            protected PasswordAuthentication getPasswordAuthentication() {
+                                return new PasswordAuthentication("anhnq1130@gmail.com", "syjaegemrckbnxgt"); // Put your email ID and password here
+                            }
+                        });
+
+                        // Compose message
+                        try {
+                            MimeMessage message = new MimeMessage(mailSession);
+                            message.setFrom(new InternetAddress("your-email@example.com")); // Change accordingly
+                            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+                            message.setSubject("Hello");
+                            message.setText("Your OTP is: " + otpvalue);
+
+                            // Send message
+                            Transport.send(message);
+                            System.out.println("Message sent successfully");
+                        } catch (MessagingException e) {
+                            throw new RuntimeException(e);
+                        }
+
+                        User uNew = new User(0, fullname, username, password, usertype, phonenumber, email);
+                        request.setAttribute("message", "OTP is sent to your email ID");
+                        session.setAttribute("otp", otpvalue);
+                        session.setAttribute("email", email);
+                        
+                        
+                        
+                        session.setAttribute("registerUser", uNew);
+                        session.setAttribute("username", username);
+                        
+                        
+                        response.sendRedirect(request.getContextPath() + "/emailverify");
+                    }
+                
             } else {
                 System.out.println("Could not send user register");
                 request.setAttribute("registrationStatus", "success");

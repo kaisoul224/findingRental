@@ -105,7 +105,7 @@
                                 
                                 <div class="row input-group mb-3">
                                     <span class="input-group-text bg-primary" style="width: 36px;"><i class="bi bi-phone text-white"></i></span>
-                                    <input name="phoneNumber" type="text" class="form-control" placeholder="Phone Number">
+                                    <input name="email" type="text" class="form-control" placeholder="Email">
                                 </div>
 
                                 <button class="w-50 mx-auto btn btn-primary text-center mt-2" style="display: flex; justify-content: center;" type="submit">
@@ -193,9 +193,9 @@
                         username: {
                             required: true, // Field is required
                         },
-                        phoneNumber: {
+                        email: {
                             required: true, // Field is required
-                            number: true
+                            email: true
                         },
                         // Add more fields and rules as needed
                     },
@@ -204,9 +204,9 @@
                         username: {
                             required: 'Please enter a value for this field',
                         },
-                        phoneNumber: {
+                        email: {
                             required: 'Please enter a value for this field',
-                            number: 'Please enter a valid number'
+                            email: 'Please enter a valid number'
                         },
                         // Add more fields and messages as needed
                     }

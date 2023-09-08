@@ -105,6 +105,7 @@
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="./profile">Profile</a>
                             <a class="dropdown-item" href="./post">Post</a>
+                            <a class="dropdown-item" href="./yourpost">Your Post</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="./login">Logout</a>
                         </div>
@@ -275,19 +276,23 @@
                         },
                         area: {
                             required: true,
-                            number: true
+                            number: true,
+                            min: 1
                         },
                         numberOfRoom: {
                             required: true, // Field is required
-                            number: true // Minimum length of 5 characters
+                            number: true, // Minimum length of 5 characters
+                            min: 1
                         },
                         availableRoom: {
                             required: true, // Field is required
-                            number: true // Minimum length of 5 characters
+                            number: true, // Minimum length of 5 characters
+                            min: 1
                         },
                         price: {
                             required: true, // Field is required
-                            number: true // Minimum length of 5 characters
+                            number: true, // Minimum length of 5 characters
+                            min: 1
                         },
 
 
@@ -316,19 +321,23 @@
                         },
                         area: {
                             required: 'Please enter a value for this field',
-                            number: 'Please enter a valid number'
+                            number: 'Please enter a valid number',
+                            min: 'Value must be greater than 0'
                         },
                         numberOfRoom: {
                             required: 'Please enter a value for this field',
-                            number: 'Please enter a valid number'
+                            number: 'Please enter a valid number',
+                            min: 'Value must be greater than 0'
                         },
                         availableRoom: {
                             required: 'Please enter a value for this field',
-                            number: 'Please enter a valid number'
+                            number: 'Please enter a valid number',
+                            min: 'Value must be greater than 0'
                         },
                         price: {
                             required: 'Please enter a value for this field',
-                            number: 'Please enter a valid number'
+                            number: 'Please enter a valid number',
+                            min: 'Value must be greater than 0'
                         },
 
                         // Add more fields and messages as needed

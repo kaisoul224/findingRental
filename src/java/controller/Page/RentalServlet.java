@@ -56,12 +56,12 @@ public class RentalServlet extends HttpServlet {
                     if (u != null) {
                         session.setAttribute("username", username);
                         session.setAttribute("login", "true");
-                        response.sendRedirect(request.getContextPath() + "/rental");
+//                        response.sendRedirect(request.getContextPath() + "/rental");
+                        request.getRequestDispatcher("/findRental.jsp").forward(request, response);
                         break;
                     } else {
                         if (request.getSession().getAttribute("username") != null) {
                             session.setAttribute("username", request.getSession().getAttribute("username"));
-
                             request.getRequestDispatcher("/findRental.jsp").forward(request, response);
                         } else {
                             request.getRequestDispatcher("/rental.jsp").forward(request, response);

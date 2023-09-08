@@ -29,14 +29,16 @@
               integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
               crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.css" />
+        <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
 
         <!-- Additional CSS Files -->
         <link rel="stylesheet" href="assets/css/fontawesome.css">
         <link rel="stylesheet" href="assets/css/style.css">
         <link rel="stylesheet" href="assets/css/owl.css">
         <link rel="stylesheet" href="assets/css/animate.css">
-        <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+
+
         <style>
             .modal {
                 position: fixed;
@@ -56,6 +58,7 @@
                 max-height: 90%;
             }
         </style>
+
 
     </head>
 
@@ -132,6 +135,7 @@
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="./profile">Profile</a>
                             <a class="dropdown-item" href="./post">Post</a>
+                            <a class="dropdown-item" href="./yourpost">Your Post</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="./login">Logout</a>
                         </div>
@@ -246,6 +250,13 @@
 
             <div class="row mt-3">
                 <div class="col-lg-12">
+                    <h4 class="text-primary mb-4">Search the location</h4>
+                    <div style="height: 400px;" id="map"></div>
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col-lg-12">
                     <h4 class="text-primary mb-4">Near Rental</h4>
                     <%
                         ArrayList<Post> nearPost = (ArrayList<Post>) session.getAttribute("nearPost");
@@ -259,9 +270,13 @@
                                 <div class="col-md-4 popular-img">
                                     <img style=" object-fit: cover; border-radius: 10px; width: 100%; height: 150px;" src="data:image/png;base64,<%= inputStreamToBase64(npost.getUrl()) %>" alt="" class="img-popular">
                                 </div>
+                                <%
+                                    String postId = String.valueOf(npost.getPostID());
+                                    String encodedId = java.util.Base64.getEncoder().encodeToString(postId.getBytes());
+                                %>
                                 <div class="col-md-8 popular-des" style="display: flex; flex-wrap: wrap; align-items: flex-start;">
                                     <h4 class="title" style="font-size: 18px;">
-                                        <a href="./postDetail?id=<%=npost.getPostID()%>"><%= npost.getTitle() %></a>
+                                        <a href="./postDetail?id=<%=encodedId%>"><%= npost.getTitle() %></a>
                                     </h4>
                                     <div class="location">
                                         <dl class="address">
@@ -354,6 +369,7 @@
         crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.js"></script>
 
 
 
@@ -362,44 +378,46 @@
         <script src="assets/js/tabs.js"></script>
         <script src="assets/js/popup.js"></script>
         <script src="assets/js/custom.js"></script>
-
+        <script src="assets/js/postDetail.js"></script>
         <script>
-            function updatePost(postId) {
-                // Perform the necessary logic to update the post
-                // For example, you can redirect to an update page with the post ID
-                window.location.href = "updatePost?id=" + postId;
-            }
+    var address = '<%= post.getAddress().replaceAll("'", "\\\\'") %>';
 
-            function deletePost(postId) {
-                // Perform the necessary logic to update the post
-                // For example, you can redirect to an update page with the post ID
-                window.location.href = "deletePost?id=" + postId;
-            }
+    fetch('https://nominatim.openstreetmap.org/search?format=json&q=' + encodeURIComponent(address))
+            .then(response => response.json())
+            .then(data => {
+                if (data.length > 0) {
+                    var latitude = parseFloat(data[0].lat);
+                    var longitude = parseFloat(data[0].lon);
+
+                    var map = L.map('map').setView([latitude, longitude], 14);
+
+                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        attribution: '&copy; OpenStreetMap contributors'
+                    }).addTo(map);
+
+                    L.marker([latitude, longitude]).addTo(map)
+                            .bindPopup('Your address')
+                            .openPopup();
+                } else {
+                    // Default location if address not found
+                    var defaultLatitude = 10.8231;
+                    var defaultLongitude =  106.6297;
+
+                    var map = L.map('map').setView([defaultLatitude, defaultLongitude], 14);
+
+                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        attribution: '&copy; OpenStreetMap contributors'
+                    }).addTo(map);
+
+                    console.log('No results found');
+                }
+            })
+            .catch(error => {
+                console.log('Error:', error);
+            });
+            
+            
         </script>
-        <script>
-            function showFullImage(imageElement) {
-                var imageUrl = imageElement.getAttribute('src');
 
-                // Create a modal/lightbox element
-                var modal = document.createElement('div');
-                modal.classList.add('modal');
-
-                // Create an image element inside the modal
-                var modalImage = document.createElement('img');
-                modalImage.classList.add('modal-image');
-                modalImage.setAttribute('src', imageUrl);
-
-                // Append the modal image to the modal
-                modal.appendChild(modalImage);
-
-                // Append the modal to the document body
-                document.body.appendChild(modal);
-
-                // Add a click event listener to the modal to close it when clicked
-                modal.addEventListener('click', function () {
-                    modal.remove();
-                });
-            }
-        </script>
     </body>
 </html>

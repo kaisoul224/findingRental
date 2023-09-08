@@ -39,7 +39,7 @@
                 background-color: #ffffff;
                 height: 100vh;
             }
-            
+
 
         </style>
     </head>
@@ -113,6 +113,7 @@
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="./profile">Profile</a>
                             <a class="dropdown-item" href="./post">Post</a>
+                            <a class="dropdown-item" href="./yourpost">Your Post</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="./login">Logout</a>
                         </div>
@@ -130,6 +131,12 @@
 
         <div class="container-fluid background-light" style="margin-top: 70px; margin-bottom: 40px; background-color: #fff; padding: 20px;">
 
+            <td>
+                <!-- Add action buttons for managing posts (e.g., update, delete) -->
+                <button class="btn btn-primary" onclick="addPost()">Add Post</button>
+                <button class="btn btn-danger" onclick="addUser()">Add User</button>
+            </td>
+            
             <ul class="nav nav-tabs mt-5">
                 <li class="nav-item">
                     <a class="nav-link active" data-bs-toggle="tab" href="#posts">Posts</a>
@@ -174,8 +181,12 @@
                                 for (Post post : postsList) { 
                         %>
                         <tr>
+                            <%
+                                String postId = String.valueOf(post.getPostID());
+                                String encodedId = java.util.Base64.getEncoder().encodeToString(postId.getBytes());
+                            %>
                             <td><%= post.getPostID() %></td>
-                            <td><%= post.getTitle() %></td>
+                            <td><a href="./postDetail?id=<%=encodedId%>"><%= post.getTitle() %></a></td>
                             <td>
                                 <% 
                                     String description = post.getDescription();
@@ -319,34 +330,31 @@
         <script src="assets/js/custom.js"></script>
         <script src="assets/js/admin.js"></script>
         <script>
-                                    $(document).ready(function () {
-                                        $('.dropdown').on('focusin mouseenter', function () {
-                                            $(this).addClass('show').find('.dropdown-menu').addClass('show');
-                                        }).on('focusout mouseleave', function () {
-                                            $(this).removeClass('show').find('.dropdown-menu').removeClass('show');
-                                        });
+            $(document).ready(function () {
+                $('.dropdown').on('focusin mouseenter', function () {
+                    $(this).addClass('show').find('.dropdown-menu').addClass('show');
+                }).on('focusout mouseleave', function () {
+                    $(this).removeClass('show').find('.dropdown-menu').removeClass('show');
+                });
 
-                                        $(document).on("click", ".read-more-link", function (e) {
-                                            e.preventDefault();
-                                            var container = $(this).closest('.item-description');
-                                            container.find(".truncated-description").hide();
-                                            container.find(".full-description").show();
-                                            $(this).hide(); // Hide the "Read More" link
-                                            container.find(".collapse-link").show(); // Show the "Tóm gọn" link
-                                        });
+                $(document).on("click", ".read-more-link", function (e) {
+                    e.preventDefault();
+                    var container = $(this).closest('.item-description');
+                    container.find(".truncated-description").hide();
+                    container.find(".full-description").show();
+                    $(this).hide(); // Hide the "Read More" link
+                    container.find(".collapse-link").show(); // Show the "Tóm gọn" link
+                });
 
-                                        $(document).on("click", ".collapse-link", function (e) {
-                                            e.preventDefault();
-                                            var container = $(this).closest('.item-description');
-                                            container.find(".full-description").hide();
-                                            container.find(".truncated-description").show();
-                                            $(this).hide(); // Hide the "Tóm gọn" link
-                                            container.find(".read-more-link").show(); // Show the "Read More" link
-                                        });
-                                    });
-
-
-
+                $(document).on("click", ".collapse-link", function (e) {
+                    e.preventDefault();
+                    var container = $(this).closest('.item-description');
+                    container.find(".full-description").hide();
+                    container.find(".truncated-description").show();
+                    $(this).hide(); // Hide the "Tóm gọn" link
+                    container.find(".read-more-link").show(); // Show the "Read More" link
+                });
+            });
         </script>
     </body>
 

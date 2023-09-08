@@ -20,9 +20,11 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.text.Normalizer;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import model.City;
 import model.Post;
+import model.PostComparator;
 import model.User;
 
 /**
@@ -59,21 +61,29 @@ public class FindRentalServlet extends HttpServlet {
         HttpSession session = request.getSession();
         City c = new City();
         PostDAO pdb = new PostDAO();
+        PostComparator comparator = new PostComparator();
+
 
         if (searchValue1 != null) {
             session.removeAttribute("postList_raw");
-            searchValue1 = removeDiacritics(searchValue1).toLowerCase();
+            searchValue1 = searchValue1.toLowerCase();
             ArrayList<Post> postList1 = pdb.getListPostByAddress(searchValue1);
             ArrayList<Post> postList2 = pdb.getListPostByTitle(searchValue1);
+            System.out.println("postList1 " + postList1.size());
+            System.out.println("postList2 " + postList2.size());
             if (postList1 != null && postList2 != null) {
                 if (postList1.size() > postList2.size()) {
+                    Collections.sort(postList1, comparator);
                     session.setAttribute("postList", postList1);
                 } else {
+                    Collections.sort(postList2, comparator);
                     session.setAttribute("postList", postList2);
                 }
             } else if (postList1 != null) {
+                Collections.sort(postList1, comparator);
                 session.setAttribute("postList", postList1);
             } else if (postList2 != null) {
+                Collections.sort(postList2, comparator);
                 session.setAttribute("postList", postList2);
             }
         } else if (searchValue2 != null && searchValue3 != null) {
@@ -81,15 +91,19 @@ public class FindRentalServlet extends HttpServlet {
             // Handle search by city and price
             ArrayList<Post> postList = pdb.getListPostByCityAndPrice(c.getID(searchValue2), searchValue3);
             if (!postList.isEmpty()) {
+                Collections.sort(postList, comparator);
                 session.setAttribute("postList", postList);
             } else {
+                session.removeAttribute("postList");
                 System.out.println("No posts found.");
             }
         } else if (searchValue2 != null) {
+            
             session.removeAttribute("postList_raw");
             session.removeAttribute("postList");
             searchValue2= removeDiacritics(searchValue2);
             ArrayList<Post> postList = pdb.getListPostByCityAndPrice(c.getID(searchValue2),"all");
+            Collections.sort(postList, comparator);
             session.setAttribute("postList", postList);
             
         } else if (searchValue3 != null) {
@@ -129,6 +143,8 @@ public class FindRentalServlet extends HttpServlet {
                     iterator.remove();
                 }
             }
+            Collections.sort(postList_raw, comparator);
+            Collections.sort(postList, comparator);
             session.setAttribute("postList_raw", postList_raw);
             session.setAttribute("postList", postList);
         }
@@ -170,6 +186,9 @@ public class FindRentalServlet extends HttpServlet {
                     break; // Exit the loop since we found the desired cookie
                 }
             }
+            System.out.println("Not found");
+            session.removeAttribute("postList_raw");
+            session.removeAttribute("postList");
         } else {
             if (request.getSession().getAttribute("username") != null) {
                 User u = udb.getUserByUsername((String) request.getSession().getAttribute("username"));

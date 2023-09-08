@@ -15,6 +15,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.Base64;
 import model.Post;
 import model.User;
 
@@ -42,7 +43,7 @@ public class PostDetailServlet extends HttpServlet {
         Cookie[] cookies = request.getCookies();
 
         String id_raw = request.getParameter("id");
-        int id = Integer.parseInt(id_raw);
+        int id = Integer.parseInt(new String(Base64.getDecoder().decode(id_raw)));
         Post post = pdb.getPostByID(id);
         User user = udb.getUserById(post.getUserID());
         ArrayList<Post> nearPost = new ArrayList<>();

@@ -1242,7 +1242,7 @@ li.selected {
     width: inherit;
     align-items: center;
     justify-content: space-between;
-    padding: 0 16px;
+    /*padding: 0 16px;*/
     border-radius: 8px;
     cursor: pointer;
     background-color: #fff;

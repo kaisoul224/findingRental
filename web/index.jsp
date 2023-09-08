@@ -129,13 +129,12 @@
                             <div class="search-area">
 
                                 <div class="row contain" style="margin: 0;">
-                                    <form class="col-sm-12" style="width: 100%;"method="POST" action="home">
+                                    <form class="col-sm-12" style="width: 100%;" method="POST" action="home" onsubmit="return validateForm()">
                                         <div class="search-bar" style="height: 40px;">
                                             <input name="search_home" id="search_home" class="input-content" type="text" placeholder="Search">
                                             <button style="border: none; outline: none; background: none; padding: 0;" type="submit">
                                                 <i class="fa fa-search" style="color: #000000;"></i>
                                             </button>
-
                                         </div>
                                     </form>
 
@@ -250,9 +249,13 @@
                                                 <div class="col-md-5 popular-img">
                                                     <img src="data:image/png;base64,<%= inputStreamToBase64(post.getUrl()) %>" alt="" class="img-popular">
                                                 </div>
+                                                <%
+                                                    String postId = String.valueOf(post.getPostID());
+                                                    String encodedId = java.util.Base64.getEncoder().encodeToString(postId.getBytes());
+                                                %>
                                                 <div class="col-md-7 popular-des" style="display: flex; flex-wrap: wrap; align-items: flex-start;">
                                                     <h4 class="title" style="font-size: 18px;">
-                                                        <a href="./postDetail?id=<%=post.getPostID()%>"><%= post.getTitle() %></a>
+                                                        <a href="./postDetail?id=<%=encodedId%>"><%= post.getTitle() %></a>
                                                     </h4>
                                                     <div class="location">
                                                         <dl class="address">
@@ -264,7 +267,7 @@
                                                             <dt>Price: <%= formatCurrency(post.getPrice()) %></dt>
                                                         </dl>
                                                     </div>
-                                                    <div class="post-date">
+                                                        <div class="post-date" style="margin-top: 10px; margin-left: 5px;">
                                                         <p>Post Date: <%= post.getDate() %></p>
                                                     </div>
                                                     <% 
@@ -316,9 +319,13 @@
                                     <div class="col-md-5 picture" style="object-fit: contain;">
                                         <img src="data:image/png;base64,<%= inputStreamToBase64(post.getUrl()) %>" alt="" class="img-hot">
                                     </div>
+                                    <%
+                                        String postId = String.valueOf(post.getPostID());
+                                        String encodedId = java.util.Base64.getEncoder().encodeToString(postId.getBytes());
+                                    %>
                                     <div class="col-md-7 describe">
                                         <h4 class="title">
-                                            <a href="./postDetail?id=<%=post.getPostID()%>" style="font-size: 22px;" href="rental.html"><%= post.getTitle() %></a>
+                                            <a href="./postDetail?id=<%=encodedId%>" style="font-size: 22px;" href="rental.html"><%= post.getTitle() %></a>
                                         </h4>
                                         <div class="location">
                                             <dl  class="address">

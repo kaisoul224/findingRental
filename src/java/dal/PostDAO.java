@@ -127,7 +127,6 @@ public class PostDAO extends DBconnector {
 
                     postList.add(post);
                 }
-                
                 Iterator<Post> iterator = postList.iterator();
     
                 while (iterator.hasNext()) {
@@ -294,6 +293,44 @@ public class PostDAO extends DBconnector {
             }
         } catch (SQLException e) {
             System.out.println("Could not get any post when finding by title");
+            System.out.println(e);
+        }
+        return null;
+    }
+    
+    public ArrayList<Post> getListPostByUserID(int id) {
+        String query = "SELECT * FROM `postes` WHERE 1";
+
+        ArrayList<Post> postList = new ArrayList<>();
+        try {
+            PreparedStatement st = conn.prepareStatement(query);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                while (rs.next()) {
+                    Date dbDate = rs.getDate(10);
+                    LocalDate localDate = dbDate.toLocalDate();
+                    Blob blob = getImage(rs.getInt(1));
+                    InputStream inputStream = blob.getBinaryStream();
+
+                    Post post = new Post(rs.getInt(1), rs.getString(2), rs.getString(3),
+                            rs.getString(4), rs.getString(5), rs.getDouble(6), rs.getInt(7),
+                            rs.getInt(8), rs.getInt(9), localDate, rs.getInt(11), rs.getInt(12), inputStream);
+
+                    postList.add(post);
+                }
+                
+                Iterator<Post> iterator = postList.iterator();
+    
+                while (iterator.hasNext()) {
+                    Post post = iterator.next();
+                    if (post.getUserID() != id) {
+                        iterator.remove();
+                    }
+                }
+                return postList;
+            }
+        } catch (SQLException e) {
+            System.out.println("Could not get any post by this id");
             System.out.println(e);
         }
         return null;

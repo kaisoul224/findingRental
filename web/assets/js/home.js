@@ -32,39 +32,41 @@ homeSearchBtn2.addEventListener("click", function () {
     if (cityValue !== "none" || priceValue !== "none") {
         window.location.href = "find?city=" + encodeURIComponent(cityValue) + ":" + encodeURIComponent(priceValue);
     }
-        
+
 });
 
 function updatePost(postId) {
     // Perform the necessary logic to update the post
     // For example, you can redirect to an update page with the post ID
-    window.location.href = "updatePost?id=" + postId;
+    window.location.href = "updatePost?id=" + btoa(postId);
 }
 
 function deletePost(postId) {
     // Perform the necessary logic to update the post
     // For example, you can redirect to an update page with the post ID
-    window.location.href = "deletePost?id=" + postId;
+    window.location.href = "deletePost?id=" + btoa(postId);
 }
 
-function PostDetail(postId) {
-    // Perform the necessary logic to update the post
-    // For example, you can redirect to an update page with the post ID
-    window.location.href = "postDetail?id=" + postId;
-}
 
-  // Function to handle click outside the nav
-  function handleClickOutsideNav(event) {
+// Function to handle click outside the nav
+function handleClickOutsideNav(event) {
     var nav = document.querySelector('.nav');
     var menuTrigger = document.querySelector('.menu-trigger');
-    
+
     // Check if the clicked element is outside the nav and menu trigger
     if (!nav.contains(event.target) && !menuTrigger.contains(event.target)) {
-      nav.style.display = 'none';
+        nav.style.display = 'none';
     }
-  }
-  
-  // Add event listener for click outside the nav
-  document.addEventListener('click', handleClickOutsideNav);
+}
 
+// Add event listener for click outside the nav
+document.addEventListener('click', handleClickOutsideNav);
 
+function validateForm() {
+    var searchInput = document.getElementById("search_home").value;
+    if (searchInput.trim() === "") {
+        alert("Please enter a search term.");
+        return false; // Prevent form submission
+    }
+    return true; // Allow form submission
+}

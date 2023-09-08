@@ -211,15 +211,19 @@
                                 Post post = postList.get(i);
                     %>
                     <div class="item-find">
+                        <%
+                            String postId = String.valueOf(post.getPostID());
+                            String encodedId = java.util.Base64.getEncoder().encodeToString(postId.getBytes());
+                        %>
                         <div class="row">
                             <div class="col-md-5 pic">
-                                <a href="./postDetail?id=<%=post.getPostID()%>">
+                                <a href="./postDetail?id=<%=encodedId%>">
                                     <img src="data:image/png;base64,<%= inputStreamToBase64(post.getUrl()) %>" alt="" class="img-item">
                                 </a>
                             </div>
                             <div class="col-md-7 des">
                                 <h4 class="title">
-                                    <a href="./postDetail?id=<%=post.getPostID()%>"><%=post.getTitle()%></a>
+                                    <a href="./postDetail?id=<%=encodedId%>"><%=post.getTitle()%></a>
                                 </h4>
                                 <div class="location">
                                     <p class="address"><%=post.getAddress()%></p>

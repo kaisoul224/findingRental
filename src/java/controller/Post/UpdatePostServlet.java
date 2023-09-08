@@ -19,6 +19,7 @@ import jakarta.servlet.http.Part;
 import java.io.InputStream;
 import java.text.Normalizer;
 import java.time.LocalDate;
+import java.util.Base64;
 import model.City;
 import model.Post;
 import model.User;
@@ -43,7 +44,7 @@ public class UpdatePostServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String id_raw = request.getParameter("id");
-        int id = Integer.parseInt(id_raw);
+        int id = Integer.parseInt(new String(Base64.getDecoder().decode(id_raw)));
         Post post = new Post();
         PostDAO pdb = new PostDAO();
         post = pdb.getPostByID(id);
@@ -165,7 +166,9 @@ public class UpdatePostServlet extends HttpServlet {
                             System.out.println("image " + is.toString());
                             pdb.updateImage_forUser(newP);
                         }
-                        response.sendRedirect(request.getContextPath() + "/postDetail?id=" + newP.getPostID());
+                        String encodedId = Base64.getEncoder().encodeToString(String.valueOf(newP.getPostID()).getBytes());
+                        request.setAttribute("updateStatus", "success");
+                        response.sendRedirect(request.getContextPath() + "/postDetail?id=" + encodedId);
                         break; // Exit the loop since we found the desired cookie
                     }
                 }
@@ -173,7 +176,7 @@ public class UpdatePostServlet extends HttpServlet {
         } catch (IOException | NumberFormatException e) {
             System.out.println("Could not save this post");
             System.out.println(e);
-            request.setAttribute("postStatus", "failure");
+            request.setAttribute("updateStatus", "failure");
             request.getRequestDispatcher("/post.jsp").forward(request, response);
         }
 

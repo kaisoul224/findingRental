@@ -39,23 +39,36 @@ function removeDiacritics(text) {
 function updatePost(postId) {
     // Perform the necessary logic to update the post
     // For example, you can redirect to an update page with the post ID
-    window.location.href = "updatePost?id=" + postId;
+    window.location.href = "updatePost?id=" + btoa(postId);
 }
 
 function deletePost(postId) {
     // Perform the necessary logic to update the post
     // For example, you can redirect to an update page with the post ID
-    window.location.href = "deletePost?id=" + postId;
+    window.location.href = "deletePost?id=" + btoa(postId);
 }
 
 function updateUser(userId) {
     // Perform the necessary logic to update the post
     // For example, you can redirect to an update page with the post ID
-    window.location.href = "changeInfo?id=" + userId;
+    window.location.href = "changeInfo?id=" + btoa(userId);
 }
 
 function deleteUser(userId) {
     // Perform the necessary logic to update the post
     // For example, you can redirect to an update page with the post ID
-    window.location.href = "deleteUser?id=" + userId;
+    window.location.href = "deleteUser?id=" + btoa(userId);
 }
+
+function addUser() {
+    // Perform the necessary logic to update the post
+    // For example, you can redirect to an update page with the post ID
+    window.location.href = "./addUser";
+}
+
+function addPost() {
+    // Perform the necessary logic to update the post
+    // For example, you can redirect to an update page with the post ID
+    window.location.href = "./post";
+}
+

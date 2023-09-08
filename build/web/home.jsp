@@ -113,8 +113,9 @@
                             <i class="fas fa-user"></i> <%= user %>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="./profile">Profile</a>
+                            <a class="dropdown-item" href="./profile">Profile</a>                       
                             <a class="dropdown-item" href="./post">Post</a>
+                            <a class="dropdown-item" href="./yourpost">Your Post</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="./login">Logout</a>
                         </div>
@@ -152,13 +153,12 @@
                             <div class="search-area">
 
                                 <div class="row contain" style="margin: 0;">
-                                    <form class="col-sm-12" style="width: 100%;"method="POST" action="home">
+                                    <form class="col-sm-12" style="width: 100%;" method="POST" action="home" onsubmit="return validateForm()">
                                         <div class="search-bar" style="height: 40px;">
                                             <input name="search_home" id="search_home" class="input-content" type="text" placeholder="Search">
                                             <button style="border: none; outline: none; background: none; padding: 0;" type="submit">
                                                 <i class="fa fa-search" style="color: #000000;"></i>
                                             </button>
-
                                         </div>
                                     </form>
 
@@ -187,12 +187,12 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="col-lg-5 col-sm-12">
+                                                        <div class="col-lg-4 col-sm-12">
                                                             <div class="container-holder">
                                                                 <div class="select-button">
                                                                     <input type="text" name="search_price" id="search_price" class="btn-text"
                                                                            value="Select Rental Price"
-                                                                           style="padding-left: 25px; outline: none; border: none; background: transparent;"
+                                                                           style="padding-left: 20px; outline: none; border: none; background: transparent;"
                                                                            readonly>
                                                                     <span class="arrow-dwn">
                                                                         <i class="fa fa-angle-down"></i>
@@ -228,9 +228,9 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="col-lg-2 col-sm-12">
-                                                            <div class="apply-box-container">
-                                                                <div class="apply-button">
+                                                        <div class="col-lg-3 col-sm-12">
+                                                            <div class="apply-box-container" >
+                                                                <div class="apply-button" style="width: 100%;">
                                                                     <button type="submit" class="btn">Search</button>
                                                                 </div>
                                                             </div>
@@ -273,9 +273,13 @@
                                                 <div class="col-md-5 popular-img">
                                                     <img src="data:image/png;base64,<%= inputStreamToBase64(post.getUrl()) %>" alt="" class="img-popular">
                                                 </div>
+                                                <%
+                                                    String postId = String.valueOf(post.getPostID());
+                                                    String encodedId = java.util.Base64.getEncoder().encodeToString(postId.getBytes());
+                                                %>
                                                 <div class="col-md-7 popular-des" style="display: flex; flex-wrap: wrap; align-items: flex-start;">
                                                     <h4 class="title" style="font-size: 18px;">
-                                                        <a href="./postDetail?id=<%=post.getPostID()%>"><%= post.getTitle() %></a>
+                                                        <a href="./postDetail?id=<%=encodedId%>"><%= post.getTitle() %></a>
                                                     </h4>
                                                     <div class="location">
                                                         <dl class="address">
@@ -287,7 +291,7 @@
                                                             <dt>Price: <%= formatCurrency(post.getPrice()) %></dt>
                                                         </dl>
                                                     </div>
-                                                    <div class="post-date">
+                                                    <div class="post-date" style="margin-top: 10px; margin-left: 5px;">
                                                         <p>Post Date: <%= post.getDate() %></p>
                                                     </div>
                                                     <% 
@@ -339,9 +343,13 @@
                                     <div class="col-md-5 picture" style="object-fit: contain;">
                                         <img src="data:image/png;base64,<%= inputStreamToBase64(post.getUrl()) %>" alt="" class="img-hot">
                                     </div>
+                                    <%
+                                        String postId = String.valueOf(post.getPostID());
+                                        String encodedId = java.util.Base64.getEncoder().encodeToString(postId.getBytes());
+                                    %>
                                     <div class="col-md-7 describe">
                                         <h4 class="title">
-                                            <a href="./postDetail?id=<%=post.getPostID()%>" style="font-size: 22px;" href="rental.html"><%= post.getTitle() %></a>
+                                            <a href="./postDetail?id=<%=encodedId%>" style="font-size: 22px;" href="rental.html"><%= post.getTitle() %></a>
                                         </h4>
                                         <div class="location">
                                             <dl  class="address">
@@ -450,23 +458,23 @@
         <script src="./assets/js/toast.js"></script>
 
         <script>
-            if ("${requestScope.deleteStatus}" === "failure") {
-                    showErrorDelete();
+                                                if ("${requestScope.deleteStatus}" === "failure") {
+                                                    showErrorDelete();
             <%
                 request.setAttribute("deleteStatus", null);
             %>
-                } else if ("${requestScope.deleteStatus}" === "success") {
-                    showSuccessDelete();
+                                                } else if ("${requestScope.deleteStatus}" === "success") {
+                                                    showSuccessDelete();
             <%
                 request.setAttribute("deleteStatus", null);
             %>
-                $(document).ready(function () {
-                    $('.dropdown').on('focusin mouseenter', function () {
-                        $(this).addClass('show').find('.dropdown-menu').addClass('show');
-                    }).on('focusout mouseleave', function () {
-                        $(this).removeClass('show').find('.dropdown-menu').removeClass('show');
-                    });
-                });
+                                                    $(document).ready(function () {
+                                                        $('.dropdown').on('focusin mouseenter', function () {
+                                                            $(this).addClass('show').find('.dropdown-menu').addClass('show');
+                                                        }).on('focusout mouseleave', function () {
+                                                            $(this).removeClass('show').find('.dropdown-menu').removeClass('show');
+                                                        });
+                                                    });
         </script>
     </body>
 

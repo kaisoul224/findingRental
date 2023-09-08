@@ -106,11 +106,17 @@
                         <div class="text-center">
                             <h3 style="margin-top:30px; color: #000; padding: 20px; padding-bottom: 20px;">Login</h3>
                         </div>
+                        <% 
+                            String user = null;
+                            if (session != null) {
+                                user = (String) session.getAttribute("username");
+                            } 
+                        %>
                         <form id="loginform" method="POST" action="login">
                             <div style="padding: 20px 48px;">
                                 <div class="row input-group mb-3">
                                     <span class="input-group-text" style="width: 36px; background: #000;"><i class="bi bi-person-plus-fill text-white mr-auto"></i></span>
-                                    <input name="username" type="text" class="col-lg-10 col-md-10 col-sm-8 form-control" placeholder="Username">
+                                    <input value="<%= user == null ? "" : user %>" name="username" type="text" class="col-lg-10 col-md-10 col-sm-8 form-control" placeholder="Username">
                                 </div>
                                 <div class="row input-group mb-3">
                                     <span class="input-group-text" style="width: 36px; background: #000;"><i class="bi bi-key-fill text-white"></i></span>

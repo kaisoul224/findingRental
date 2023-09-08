@@ -85,11 +85,21 @@ function displayDataOnCurrentPage() {
 function updatePost(postId) {
     // Perform the necessary logic to update the post
     // For example, you can redirect to an update page with the post ID
-    window.location.href = "updatePost?id=" + postId;
+    window.location.href = "updatePost?id=" + btoa(postId);
 }
 
 function deletePost(postId) {
     // Perform the necessary logic to update the post
     // For example, you can redirect to an update page with the post ID
-    window.location.href = "deletePost?id=" + postId;
+    window.location.href = "deletePost?id=" + btoa(postId);
+}
+
+
+function validateForm() {
+    var searchInput = document.getElementById("search_home").value;
+    if (searchInput.trim() === "") {
+        alert("Please enter a search term.");
+        return false; // Prevent form submission
+    }
+    return true; // Allow form submission
 }

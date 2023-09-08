@@ -13,6 +13,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.Base64;
 
 /**
  *
@@ -32,17 +33,17 @@ public class DeleteUserServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String PostID = request.getParameter("id");
-        int id = Integer.parseInt(PostID);
+        String id_raw = request.getParameter("id");
+        int id = Integer.parseInt(new String(Base64.getDecoder().decode(id_raw)));
         UserDAO udb = new UserDAO();
         String referer = request.getHeader("Referer");
 
         if (udb.delete(id)){
             request.setAttribute("deleteStatus", "success");
-            request.getRequestDispatcher(referer).forward(request, response);
+            response.sendRedirect(request.getContextPath() + "/admin");
         } else {
             request.setAttribute("deleteStatus", "failure");
-            request.getRequestDispatcher(referer).forward(request, response);
+            response.sendRedirect(request.getContextPath() + "/admin");
         }
     } 
 

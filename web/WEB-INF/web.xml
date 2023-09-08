@@ -64,6 +64,18 @@
         <servlet-name>UpdatePostServlet</servlet-name>
         <servlet-class>controller.Post.UpdatePostServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EnterOTPServlet</servlet-name>
+        <servlet-class>controller.User.EnterOTPServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EmailVerify</servlet-name>
+        <servlet-class>controller.Form.EmailVerify</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>YourPostServlet</servlet-name>
+        <servlet-class>controller.User.YourPostServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -128,6 +140,18 @@
     <servlet-mapping>
         <servlet-name>UpdatePostServlet</servlet-name>
         <url-pattern>/updatePost</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EnterOTPServlet</servlet-name>
+        <url-pattern>/EnterOTP</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EmailVerify</servlet-name>
+        <url-pattern>/emailverify</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>YourPostServlet</servlet-name>
+        <url-pattern>/yourpost</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
