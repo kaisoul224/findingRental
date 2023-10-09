@@ -65,8 +65,9 @@ public class FindRentalServlet extends HttpServlet {
 
 
         if (searchValue1 != null) {
+            System.out.println("########################DK 1 ########################");
             session.removeAttribute("postList_raw");
-            searchValue1 = searchValue1.toLowerCase();
+            searchValue1 = removeDiacritics(searchValue1.toLowerCase());
             ArrayList<Post> postList1 = pdb.getListPostByAddress(searchValue1);
             ArrayList<Post> postList2 = pdb.getListPostByTitle(searchValue1);
             System.out.println("postList1 " + postList1.size());
@@ -87,6 +88,7 @@ public class FindRentalServlet extends HttpServlet {
                 session.setAttribute("postList", postList2);
             }
         } else if (searchValue2 != null && searchValue3 != null) {
+            System.out.println("########################DK 2########################");
             session.removeAttribute("postList_raw");
             // Handle search by city and price
             ArrayList<Post> postList = pdb.getListPostByCityAndPrice(c.getID(searchValue2), searchValue3);
@@ -98,15 +100,20 @@ public class FindRentalServlet extends HttpServlet {
                 System.out.println("No posts found.");
             }
         } else if (searchValue2 != null) {
+            System.out.println("########################DK 3 ########################");
             
             session.removeAttribute("postList_raw");
             session.removeAttribute("postList");
             searchValue2= removeDiacritics(searchValue2);
+            System.out.println("searchValue2: "+ searchValue2);
             ArrayList<Post> postList = pdb.getListPostByCityAndPrice(c.getID(searchValue2),"all");
+            System.out.println("ArrayList: "+ postList.size());
             Collections.sort(postList, comparator);
             session.setAttribute("postList", postList);
             
         } else if (searchValue3 != null) {
+            System.out.println("########################DK 4 ########################");
+
             ArrayList<Post> postList_raw;
             if (session.getAttribute("postList_raw") != null && session.getAttribute("postList") != null) {
                 postList_raw = (ArrayList<Post>) session.getAttribute("postList_raw");

@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.Normalizer;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -106,6 +107,12 @@ public class PostDAO extends DBconnector {
         }
         return null;
     }
+    
+    // Method to remove diacritics from a Vietnamese string
+    public String removeDiacritics(String vietnameseString) {
+        String normalizedString = Normalizer.normalize(vietnameseString, Normalizer.Form.NFD);
+        return normalizedString.replaceAll("\\p{M}", "");
+    }
 
     public ArrayList<Post> getListPostByAddress(String infor) {
         String query = "SELECT * FROM `postes` WHERE 1";
@@ -131,7 +138,7 @@ public class PostDAO extends DBconnector {
     
                 while (iterator.hasNext()) {
                     Post post = iterator.next();
-                    if (!post.getAddress().toLowerCase().contains(infor)) {
+                    if (!removeDiacritics(post.getAddress().toLowerCase()).contains(infor)) {
                         iterator.remove();
                     }
                 }
@@ -148,7 +155,8 @@ public class PostDAO extends DBconnector {
 
     public ArrayList<Post> getListPostByCityAndPrice(int cityID, String price) {
         String query = "SELECT * FROM `postes` WHERE 1";
-
+//        System.out.println("City: " + cityID);
+//        System.out.println("price: " + price);
         // Prepare the price range variables
         int minPrice = 0;
         int maxPrice = Integer.MAX_VALUE;
@@ -181,11 +189,13 @@ public class PostDAO extends DBconnector {
                         postList.add(post);
                     }
                 }
+//                System.out.println("size: "+ postList.size());
                 Iterator<Post> iterator = postList.iterator();
     
                 while (iterator.hasNext()) {
                     Post post = iterator.next();
                     if (post.getCityID() != cityID) {
+//                        System.out.println("id" + post.getCityID());
                         iterator.remove();
                     }
                 }
@@ -285,7 +295,7 @@ public class PostDAO extends DBconnector {
     
                 while (iterator.hasNext()) {
                     Post post = iterator.next();
-                    if (!post.getTitle().toLowerCase().contains(infor)) {
+                    if (!removeDiacritics(post.getTitle().toLowerCase()).contains(infor)) {
                         iterator.remove();
                     }
                 }

@@ -380,43 +380,41 @@
         <script src="assets/js/custom.js"></script>
         <script src="assets/js/postDetail.js"></script>
         <script>
-    var address = '<%= post.getAddress().replaceAll("'", "\\\\'") %>';
+            var address = '<%= post.getAddress().replaceAll("'", "\\\\'") %>';
 
-    fetch('https://nominatim.openstreetmap.org/search?format=json&q=' + encodeURIComponent(address))
-            .then(response => response.json())
-            .then(data => {
-                if (data.length > 0) {
-                    var latitude = parseFloat(data[0].lat);
-                    var longitude = parseFloat(data[0].lon);
+            fetch('https://nominatim.openstreetmap.org/search?format=json&q=' + encodeURIComponent(address))
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.length > 0) {
+                            var latitude = parseFloat(data[0].lat);
+                            var longitude = parseFloat(data[0].lon);
 
-                    var map = L.map('map').setView([latitude, longitude], 14);
+                            var map = L.map('map').setView([latitude, longitude], 14);
 
-                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                        attribution: '&copy; OpenStreetMap contributors'
-                    }).addTo(map);
+                            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                                attribution: '&copy; OpenStreetMap contributors'
+                            }).addTo(map);
 
-                    L.marker([latitude, longitude]).addTo(map)
-                            .bindPopup('Your address')
-                            .openPopup();
-                } else {
-                    // Default location if address not found
-                    var defaultLatitude = 10.8231;
-                    var defaultLongitude =  106.6297;
+                            L.marker([latitude, longitude]).addTo(map)
+                                    .bindPopup('Your address')
+                                    .openPopup();
+                        } else {
+                            // Default location if address not found
+                            var defaultLatitude = 10.8231;
+                            var defaultLongitude =  106.6297;
 
-                    var map = L.map('map').setView([defaultLatitude, defaultLongitude], 14);
+                            var map = L.map('map').setView([defaultLatitude, defaultLongitude], 14);
 
-                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                        attribution: '&copy; OpenStreetMap contributors'
-                    }).addTo(map);
+                            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                                attribution: '&copy; OpenStreetMap contributors'
+                            }).addTo(map);
 
-                    console.log('No results found');
-                }
-            })
-            .catch(error => {
-                console.log('Error:', error);
-            });
-            
-            
+                            console.log('No results found');
+                        }
+                    })
+                    .catch(error => {
+                        console.log('Error:', error);
+                    });
         </script>
 
     </body>

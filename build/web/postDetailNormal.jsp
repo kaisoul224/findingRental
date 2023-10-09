@@ -380,7 +380,7 @@
                         } else {
                             // Default location if address not found
                             var defaultLatitude = 10.8231;
-                                var defaultLongitude =  106.6297;
+                            var defaultLongitude =  106.6297;
 
                             var map = L.map('map').setView([defaultLatitude, defaultLongitude], 14);
 
